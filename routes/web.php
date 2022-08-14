@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LoginController;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,10 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 
-Route::get('/', function () {
-    return view('front.index');
-})->name('home');
-
 Route::get('/clear', function () {
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
@@ -27,3 +24,8 @@ Route::get('/clear', function () {
     Artisan::call('route:clear');
     return redirect()->route('home');
 });
+
+Route::get('/matches', [\App\Http\Controllers\HomeController::class, 'matches'])->name('matches');
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'home'])->name('home');
+
+Route::get('/standing/{slug}', [\App\Http\Controllers\HomeController::class, 'standing'])->name('standing');

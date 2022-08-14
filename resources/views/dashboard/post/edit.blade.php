@@ -43,17 +43,33 @@
 
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-12">
                                     <label for="tags">التاجات</label>
                                     <input type="text" name="tags" value="{{$post->tags}}" class="form-control tagin">
-
                                 </div>
 
+                            </div>
+
+                        </div>
+                            <div class="form-group">
+                                <div class="row">
                                 <div class="col-6">
                                     <label for="category">تصنيف الخبر</label> <br>
                                     <select id="category" class="form-control" name="category_id">
+                                        <option>اختار التصنيف</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}"{{$post->category_id==$category->id?'selected':''}}>{{$category->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="category">الدوري</label> <br>
+                                    <select id="championship" class="form-control" name="championship[]">
+                                        <option>اختار الدوري</option>
+                                        @foreach(championship(null) as $x)
+                                            <option value="{{$x['name']}}">{{$x['name']}}</option>
+
                                         @endforeach
                                     </select>
                                 </div>
@@ -64,8 +80,9 @@
                                 </div>
 
                             </div>
+                            </div>
 
-                        </div>
+
 
 
 

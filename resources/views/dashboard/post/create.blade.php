@@ -34,6 +34,7 @@
                                    placeholder="ادخل عنوان الخبر">
 
                         </div>
+
                         <div class="form-group">
                             <label for="exampleInputPassword1">وصف الخبر</label>
                             <input type="text" class="form-control" name="description" id="description"
@@ -43,21 +44,40 @@
 
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-12">
                                     <label for="tags">التاجات</label>
                                     <input type="text" name="tags" class="form-control tagin">
 
                                 </div>
+                            </div>
+                        </div>
 
+                            <div class="form-group">
+                                <div class="row">
                                 <div class="col-6">
                                     <label for="category">تصنيف الخبر</label> <br>
-                                    <select id="category" class="form-control" name="category_id">
+                                    <select id="category"  class="form-control" name="category_id">
+                                        <option>اختار التصنيف</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
                                         @endforeach
                                     </select>
-                                </div>
 
+
+                                </div>
+                                <div class="col-6" >
+                                    <label for="category">الدوري</label> <br>
+                                    <select multiple id="championship" class="form-control col-lg-4" name="championship[]">
+                                        <option>اختار الدوري</option>
+                                        @foreach(championship(null) as $x)
+                                            <option value="{{$x['name']}}">{{$x['name']}}</option>
+                                        @endforeach
+                                    </select>
+
+
+                                </div>
+                            </div>
+                            </div>
 
                                 <div class="col-12 mt-3">
                                     <textarea id="summernote" name="details" ></textarea>
@@ -68,11 +88,9 @@
                         </div>
 
 
-
-
                     </div>
-                </div>
-            </div>
+
+
 
 
             <div class="col-xl-4 mb-30">

@@ -74,7 +74,10 @@ class PostController extends Controller
             'description' => 'required',
             'tags' => 'required',
             'image' => 'required',
+            'championship' => 'required',
         ]);
+
+        $ch=implode(",",$request->championship);
 
         if ($request->file('image')) {
             Post::create([
@@ -83,13 +86,13 @@ class PostController extends Controller
                 'details' => $request->details,
                 'description' => $request->description,
                 'tags' => $request->tags,
+                'championship' => $ch,
                 'image' => $this->saveImage($request->file('image'), null, null, 'posts'),
                 'slug' => str_slug($request->title)
             ]);
 
             return Redirect()->route('dashboard.post.index')->with(['message' => 'تمت اضافة الخبر بنجاح', 'alert-type' => 'success']);
         }
-
 
 
     }
@@ -115,6 +118,9 @@ class PostController extends Controller
 
 
     public function update($id,Request $request){
+
+        $ch=implode(",",$request->championship);
+
         $post=Post::findOrFail($id);
 
         if ($request->file('image')){
@@ -129,6 +135,7 @@ class PostController extends Controller
                 'details'=>$request->details,
                 'description'=>$request->description,
                 'tags'=>$request->tags,
+                'championship'=>$ch,
                 'image'=> $this->saveImage($request->file('image'),null,null,'posts'),
                 'slug'=>str_slug($request->title)
             ]);
@@ -143,6 +150,7 @@ class PostController extends Controller
                 'details'=>$request->details,
                 'description'=>$request->description,
                 'tags'=>$request->tags,
+                'championship'=>$ch,
                 'slug'=>str_slug($request->title)
             ]);
 

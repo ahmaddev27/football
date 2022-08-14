@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('tags');
             $table->string('slug');
+            $table->string('championship');
             $table->timestamps();
         });
     }

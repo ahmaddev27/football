@@ -439,19 +439,19 @@ a.left-topbar-item:hover {
   transform: scaleX(0);
 }
 
-.main-menu > li > a::after {
-  content: "\f2f9";
-  font-family: Material-Design-Iconic-Font;
-  font-size: 16px;
-  color: #045eff;
-  line-height: 1.5;
-  margin-right: 6px;
-  margin-bottom: 1px;
-  transition: all 0.3s;
-  -webkit-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-}
+/*.main-menu > li > a::after {*/
+/*  content: "\f2f9";*/
+/*  font-family: Material-Design-Iconic-Font;*/
+/*  font-size: 16px;*/
+/*  color: #045eff;*/
+/*  line-height: 1.5;*/
+/*  margin-right: 6px;*/
+/*  margin-bottom: 1px;*/
+/*  transition: all 0.3s;*/
+/*  -webkit-transition: all 0.3s;*/
+/*  -o-transition: all 0.3s;*/
+/*  -moz-transition: all 0.3s;*/
+/*}*/
 
 li.main-menu-active > a::before {
   -webkit-transform: scaleX(1);
@@ -1557,6 +1557,12 @@ span.carousel-control-next-icon {
 .size-h-4 {
   min-height: 80px;
 }
+html {
+    overflow-x: hidden;
+}
+.table {
+    overflow-x: hidden;
+}
 
 
 /*==================================================================
@@ -1575,6 +1581,9 @@ span.carousel-control-next-icon {
 .bg9 {background-color: #999;}
 .bg10 {background-color: #2468ce;}
 .bg11 {background-color: #151515;}
+.bg12 {background-color: #f7f7f7;}
+.bg13 {background-color: #f1f1f1
+;;}
 
 
 /*---------------------------------------------*/
