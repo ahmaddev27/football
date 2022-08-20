@@ -7,10 +7,10 @@
     <meta name="description" content="Webmin - Bootstrap 4 & Angular 5 Admin Dashboard Template" />
     <meta name="author" content="potenzaglobalsolutions.com" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>فوتبول - لوحة التحكم | {{@$title}}</title>
+    <title>{{setting('name')}} - لوحة التحكم | {{@$title}}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{asset('dashboard/images/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{setting('icon')}}" />
 
 
     <link rel="stylesheet" type="text/css" href="{{asset('dashboard/css/style.css')}}" />

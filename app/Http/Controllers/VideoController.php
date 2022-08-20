@@ -19,7 +19,6 @@ class VideoController extends Controller
         $videos =Video::orderBy('created_at', 'DESC')
             ->WhenSearch(request()->search)
             ->paginate(6);
-
         return view('dashboard.video.index',['videos'=>$videos,'categories'=>$categories]);
 
     }

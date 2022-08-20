@@ -188,6 +188,11 @@
 
                         </li>
 
+                        <li class="main-menu-item">
+                            <a href="{{route('matches')}}">المباريات</a>
+                        </li>
+
+
                         <li class="mega-menu-item">
                             <a href="category-01.html">البطولات</a>
 

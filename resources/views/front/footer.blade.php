@@ -7,165 +7,148 @@
                 <div class="col-lg-4 p-b-20">
                     <div class="size-h-3 flex-s-c">
                         <a href="index.html">
-                            <img class="max-s-full" src="{{asset('front/images/icons/logo-02.png')}}" alt="LOGO">
+                            <img class="max-s-full" src="{{asset(setting('image'))}}"  alt="{{asset(setting('name'))}} ">
                         </a>
                     </div>
 
                     <div>
                         <p class="f1-s-1 cl11 p-b-16">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor magna eget elit
-                            efficitur, at accumsan sem placerat. Nulla tellus libero, mattis nec molestie at, facilisis
-                            ut turpis. Vestibulum dolor metus, tincidunt eget odio
+                            {{(setting('description'))}}
                         </p>
 
                         <p class="f1-s-1 cl11 p-b-16">
-                            Any questions? Call us on (+1) 96 716 6879
+                          <i class="fa fa-phone ml-3"></i><strong> {{setting('number')}}</strong>
+                        </p>
+                        <p class="f1-s-1 cl11 p-b-16">
+                          <i class="fa fa-envelope ml-3"></i><strong> {{setting('email')}}</strong>
                         </p>
 
                         <div class="p-t-15">
-                            <a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+                            <a target="_blank" href="{{setting('facebook')}}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
                                 <span class="fab fa-facebook-f"></span>
                             </a>
 
-                            <a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+                            <a target="_blank" href="{{setting('twitter')}}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
                                 <span class="fab fa-twitter"></span>
                             </a>
 
-                            <a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-                                <span class="fab fa-pinterest-p"></span>
+
+                            <a target="_blank" href="{{@setting('instagram')}}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+                                <span class="fab fa-instagram"></span>
                             </a>
 
-                            <a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
-                                <span class="fab fa-vimeo-v"></span>
-                            </a>
-
-                            <a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+                            <a  target="_blank" href="{{@setting('youtube')}}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
                                 <span class="fab fa-youtube"></span>
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-sm-6 col-lg-4 p-b-20">
-                    <div class="size-h-3 flex-s-c">
+                <div class="col-sm-4 col-lg-4 p-b-20 text-center">
+                    <div class="size-h-2 ">
+                        <a href="#">
+                            <h5 class="f1-m-7 cl0">
+                                الاخبار
+                            </h5>
+
+                        </a>
+                    </div>
+                    <div class="size-h-2 ">
+
+                        <a href="#">
+                            <h5 class="f1-m-7 cl0">
+                                الانتقالات
+                            </h5>
+
+                        </a>
+                    </div>
+                    <div class="size-h-2 ">
+                        <a href="#">
                         <h5 class="f1-m-7 cl0">
-                            Popular Posts
+                           المباريات
                         </h5>
+
+                        </a>
                     </div>
 
-                    <ul>
-                        <li class="flex-wr-sb-s p-b-20">
-                            <a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
-                                <img src="images/popular-post-01.jpg" alt="IMG">
-                            </a>
+                    <div class="size-h-2 ">
 
-                            <div class="size-w-5">
-                                <h6 class="p-b-5">
-                                    <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
-                                        Donec metus orci, malesuada et lectus vitae
-                                    </a>
-                                </h6>
+                        <a href="#">
+                        <h5 class="f1-m-7 cl0">
 
-                                <span class="f1-s-3 cl6">
-										Feb 17
-									</span>
-                            </div>
-                        </li>
+                            فيديوهات
+                        </h5>
 
-                        <li class="flex-wr-sb-s p-b-20">
-                            <a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
-                                <img src="images/popular-post-02.jpg" alt="IMG">
-                            </a>
+                        </a>
+                    </div>
 
-                            <div class="size-w-5">
-                                <h6 class="p-b-5">
-                                    <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
-                                        Lorem ipsum dolor sit amet, consectetur
-                                    </a>
-                                </h6>
 
-                                <span class="f1-s-3 cl6">
-										Feb 16
-									</span>
-                            </div>
-                        </li>
+                    <div class="size-h-2 ">
 
-                        <li class="flex-wr-sb-s p-b-20">
-                            <a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
-                                <img src="images/popular-post-03.jpg" alt="IMG">
-                            </a>
+                        <a href="#">
+                            <h5 class="f1-m-7 cl0">
 
-                            <div class="size-w-5">
-                                <h6 class="p-b-5">
-                                    <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
-                                        Suspendisse dictum enim quis imperdiet auctor
-                                    </a>
-                                </h6>
+                                الصور
+                            </h5>
 
-                                <span class="f1-s-3 cl6">
-										Feb 15
-									</span>
-                            </div>
-                        </li>
-                    </ul>
+                        </a>
+                    </div>
+
+
                 </div>
 
-                <div class="col-sm-6 col-lg-4 p-b-20">
-                    <div class="size-h-3 flex-s-c">
-                        <h5 class="f1-m-7 cl0">
-                            Category
-                        </h5>
-                    </div>
 
+                <div class="col-sm-4 col-lg-4 p-b-20">
                     <ul class="m-t--12">
-                        <li class="how-bor1 p-rl-5 p-tb-10">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                Fashion (22)
-                            </a>
-                        </li>
 
+                       @foreach(categories() as $category)
                         <li class="how-bor1 p-rl-5 p-tb-10">
                             <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                Technology (29)
+                                {{$category->name}}
                             </a>
                         </li>
+                        @endforeach
 
-                        <li class="how-bor1 p-rl-5 p-tb-10">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                Street Style (15)
-                            </a>
-                        </li>
-
-                        <li class="how-bor1 p-rl-5 p-tb-10">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                Life Style (28)
-                            </a>
-                        </li>
-
-                        <li class="how-bor1 p-rl-5 p-tb-10">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                DIY & Crafts (16)
-                            </a>
-                        </li>
                     </ul>
+
+
                 </div>
+
+
             </div>
         </div>
     </div>
 
     <div class="bg11">
         <div class="container size-h-4 flex-c-c p-tb-15">
-				<span class="f1-s-1 cl0 txt-center">
-					Copyright © 2018
+{{--				<span class="f1-s-1 cl0 txt-center">--}}
+{{--					Copyright © 2018--}}
 
-					<a href="#" class="f1-s-1 cl10 hov-link1"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i
-                            class="fa fa-heart" aria-hidden="true"></i> by
-                        <a href="https://colorlib.com"
-                           target="_blank">Colorlib</a>
+{{--					<a href="#" class="f1-s-1 cl10 hov-link1"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->--}}
+{{--Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i--}}
+{{--                            class="fa fa-heart" aria-hidden="true"></i> by--}}
+{{--                        <a href="https://colorlib.com"--}}
+{{--                           target="_blank">Colorlib</a>--}}
 
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </a>
+{{--                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->--}}
+{{--                    </a>--}}
+{{--				</span>--}}
+
+            <span class="f1-s-1 cl0 ">
+					 <ul class="m-t--12 ">
+                        <li class=" p-rl-5 p-tb-10" style="display: inline">
+                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+                                سياسة الخصوصية</a>
+                        </li>
+
+                        <li class=" p-rl-5 p-tb-10"style="display: inline">
+                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+                               للاعلان معنا
+                            </a>
+                        </li>
+
+
+                    </ul>
 				</span>
 
         </div>

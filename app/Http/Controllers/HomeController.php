@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Gallery;
+use App\Models\Post;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Goutte\Client;
+use Illuminate\Support\Facades\Http;
 use Symfony\Component\BrowserKit\HttpBrowser;
 
 class HomeController extends Controller
@@ -131,9 +134,42 @@ class HomeController extends Controller
 
     }
 
+    public function MatchesBychampionshipId($championshipId){
+
+        $logo= championship($championshipId)['logo'];
+        $championship= championship($championshipId)['name'];
+
+        $p= Http::get('https://www.filgoal.com/matches/ajaxlist?teamId='.request()->team.'&championshipId='.$championshipId.'&week='.request()->week);
+          $x= array_reverse(json_decode($p));
+          $data=$this->paginate($x,10);
+          $data->withPath(route('standing.matches',$championshipId));
 
 
-    public function getTopScorers($slug){
+        $client = new Client();
+        $crawler = $client->request('GET', 'https://www.filgoal.com/championships/'.$championshipId);
+        $teams = [];
+        $index = 0;
+
+
+        $crawler->filter('.fg_team_slider ul')->each(function ($node)use(&$teams,&$index) {
+            $node->filter('li a')
+                ->each(function ($node) use (&$teams, &$index) {
+                    $teams[$index]['id'] = preg_replace('/[^0-9]+/', '', $node->attr('href'));
+                    $teams[$index]['name'] = $node->text();
+                    $index++;
+                });
+
+
+                    });
+
+          return view('front.championshipMatches',['data'=>$data, 'logo'=>$logo,
+            'slug'=>$championshipId,'championship'=>$championship,'teams'=>$teams]);
+
+    }
+
+
+
+    public function topScorers($slug){
 
         $championship= championship($slug)['name'];
         $client = new Client();
@@ -185,17 +221,31 @@ class HomeController extends Controller
 
 
 
-        $data2=$this->paginate($data,'15');
+        $data2=$this->paginate($data,20);
+        $data2->withPath(route('scorers',$slug));
 
         foreach($data2 as $key=>$row){
             if (($row['name']=='الإسم')){
                 unset($data2[$key]);
             }
         }
+        $logo= championship($slug)['logo'];
+        $championship= championship($slug)['name'];
+        $goals=$crawler->filter('#dhd ul.l > li:nth-child(1) ')->text();
+        $matches=$crawler->filter('#dhd ul.l > li:nth-child(2) ')->text();
+        $yellow=$crawler->filter('#dhd ul.l > li:nth-child(3) ')->text();
+        $red=$crawler->filter('#dhd ul.l > li:nth-child(4) ')->text();
 
+        return view('front.topScorers',['topScorers'=>$data2,'logo'=>$logo,'championship'=>$championship,
 
-        return $data2;
+            'goals'=>$goals,
+            'matches'=>$matches,
+            'yellow'=>$yellow,
+            'red'=>$red,
+            'slug'=>$slug,
+            'todaymatches'=>$this->standingMatches($slug),
 
+            ]) ;
 
     }
 
@@ -288,9 +338,12 @@ class HomeController extends Controller
 
 
     public function matches(){
-        $data=$this->getTodayMatches();
-        return view('front.matches',['data'=>$data]);
-    }
+
+        $data = $this->getTodayMatches();
+            return view('front.matches',['data'=>$data]);
+
+       }
+
 
 
     //standing matches table by name and id slug from [array] in helper (filgol.com)
@@ -403,15 +456,11 @@ class HomeController extends Controller
            'yellow'=>$yellow,
            'red'=>$red,
            'logo'=>$logo,
-           'topScorers'=>$this->getTopScorers($slug),
+           'slug'=>$slug,
            'todaymatches'=>$this->standingMatches($slug),
            ]);
 
     }
-
-
-
-
 
 
 
@@ -436,6 +485,22 @@ class HomeController extends Controller
         }
         $array = array_values($temp_array);
         return $array;
+
+    }
+
+
+
+
+    public function post($slug){
+        $post=Post::where('slug',$slug)->first();
+        return view('front.post',['post'=>$post]);
+    }
+
+
+
+    public function gallery($slug){
+        $gallery=Gallery::where('slug',$slug)->with('images')->first();
+        return view('front.gallery',['gallery'=>$gallery]);
 
     }
 

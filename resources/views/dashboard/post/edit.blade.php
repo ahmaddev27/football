@@ -65,7 +65,7 @@
 
                                 <div class="col-6">
                                     <label for="category">الدوري</label> <br>
-                                    <select id="championship" class="form-control" name="championship[]">
+                                    <select id="championship" class="form-control" multiple name="championship[]">
                                         <option>اختار الدوري</option>
                                         @foreach(championship(null) as $x)
                                             <option value="{{$x['name']}}">{{$x['name']}}</option>
@@ -81,9 +81,6 @@
 
                             </div>
                             </div>
-
-
-
 
 
 

@@ -5,12 +5,8 @@
 
 
 
-
     <section class="bg0 p-t-20">
         <div class="container">
-
-
-
             <div class="text-center row bg13 p-4 m-4 justify-content-center">
                 <ul class="nav justify-content-center">
                     <li class="nav-item">
@@ -43,6 +39,7 @@
             </div>
 
 
+
             <div class="text-center row bg13 p-4 mb-4">
                 <div class="col-sm ">
                     <span>
@@ -64,57 +61,70 @@
             </div>
 
 
+
             <div class="row justify-content-center">
 
                 <div class="col-md-8 col-sm col-lg-8 ">
 
-                    <table style=" overflow-x: hidden;" class="table table-striped text-center">
-                        <thead>
+                    <div class="p-b-35">
+                        <div class="how2 how2-cl5 flex-s-c">
+                            <h3 class="f1-m-2 cl17 tab01-title">
+                                قائمة الهدافين
+                            </h3>
+                        </div>
 
-                        <tr class="fs-15">
-                            <th scope="col">الترتيب</th>
-                            <th scope="col">*</th>
-                            <th scope="col">الفريق</th>
-                            <th scope="col">لعب</th>
-                            <th scope="col">داخل</th>
-                            <th scope="col">خارج</th>
-                            <th scope="col">فوز</th>
-                            <th scope="col">هزيمة</th>
-                            <th scope="col">تعادل</th>
-                            <th scope="col">له</th>
-                            <th scope="col">عليه</th>
-                            <th scope="col">نقاط</th>
-                        </tr>
+                        <ul class="p-t-35">
 
-                        </thead>
-                        <tbody>
-                        @foreach($data as $x)
+                            <table style=" overflow-x: hidden;" class="table table-striped text-center">
+                                <thead>
 
-                            @if($x['id']==1)
-                                <tr class="thead-dark">
-                            @else
-                                <tr class="">
-                                    @endif
-
-                                    <th scope="row"> {{$x['id']}}</th>
-                                    <td><img src="{{$x['image']}}" width="40px"></td>
-                                    <td>{{$x['team']}} </td>
-                                    <td>{{$x['play']}}</td>
-                                    <td>{{$x['home']}}</td>
-                                    <td>{{$x['away']}}</td>
-                                    <td>{{$x['win']}}</td>
-                                    <td>{{$x['lose']}}</td>
-                                    <td>{{$x['draw']}}</td>
-                                    <td>{{$x['goals']}}</td>
-                                    <td>{{$x['goals_in']}}</td>
-                                    <td>{{$x['points']}}</td>
+                                <tr class="fs-15">
+                                    <th scope="col">#</th>
+                                    <th scope="col">صورة اللاعب</th>
+                                    <th scope="col">اللاعب</th>
+                                    <th scope="col">المباريات</th>
+                                    <th scope="col">الاهداف</th>
+                                    <th scope="col">النسبة</th>
                                 </tr>
-                                @endforeach
-                        </tbody>
-                    </table>
+
+                                </thead>
+                                <tbody>
+
+                                @foreach($topScorers as $key=>$x)
+
+                                    @if($key==1)
+                                        <tr class="fs-15 thead-dark">
+                                    @else
+                                        <tr class="">
+                                            @endif
+
+                                            <th scope="row"> {{$key}}</th>
+                                            <td class=""><img src="{{$x['image']}}"width="70px"></td>
+                                            <td>{{$x['name']}} </td>
+                                            <td>{{$x['matches']}}</td>
+                                            <td>{{$x['goals']}}</td>
+
+                                            <td>
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" style="width:{{$x['percentage']}};" aria-valuenow=" {{$x['percentage']}}" aria-valuemin="0" >  {{$x['percentage']}}</div>
+                                                </div>
 
 
 
+                                            </td>
+
+                                        </tr>
+                                        @endforeach
+                                </tbody>
+                            </table>
+
+
+                            {{$topScorers->links('vendor.pagination.simple-tailwind')}}
+
+
+
+                        </ul>
+                    </div>
                 </div>
 
 
@@ -153,7 +163,7 @@
 
 
 
-                            </div>
+                                </div>
                             @endforeach
                         </div>
 
@@ -161,21 +171,22 @@
                         <div class="p-b-30">
                             <div class="how2 how2-cl6 flex-s-c">
                                 <h3 class="f1-m-2 cl18 tab01-title">
-                               اخر اخبار  {{$championship}}
+                                    اخر اخبار  {{$championship}}
                                 </h3>
                             </div>
 
                             <ul class="p-t-35">
                                 @foreach(posts('championship',$championship)->take(6) as $c)
-                                <li class="flex-wr-sb-s p-b-22">
-                                    <div class="size-a-8 flex-c-c borad-45 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                        <i class="fa fa-eye"></i>
-                                    </div>
+                                    <li class="flex-wr-sb-s p-b-22">
+                                        <div class="size-a-8 flex-c-c borad-45 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+                                            <i class="fa fa-eye"></i>
+                                        </div>
+                                        <a href="{{route('post',$c->slug)}}" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                                            {{str_limit($c->title,35)}}
+                                        </a>
+                                    </li>
 
-                                    <a href="{{route('post',$c->slug)}}" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                        {{str_limit($c->title,35)}}
-                                    </a>
-                                </li>
+
 
                                 @endforeach
 

@@ -63,7 +63,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-xl-12 mb-30">
                 <div class="card card-statistics h-100">
                 @if($gallery->images()->exists())
@@ -73,7 +72,7 @@
 
                                 @foreach($gallery->images as $key=>$image)
 
-                                    <div class="col-lg-4 mb-2  mt-5 mb-lg-0">
+                                    <div class="col-lg-2 mb-2  mt-5 mb-lg-0">
                                         <button class="btn btn-danger btn-sm m-1" id="delete" data-id="{{$image->id}}" ><i class="fa fa-trash"></i></button>
                                         <a data-fancybox="gallery" data-src="{{asset($image->image)}}">
                                             <img class="w-100 shadow-1-strong rounded mb-4"  style="height:80px; border-image: linear-gradient(green, blue) 27;" src="{{asset($image->image)}}" />
@@ -84,13 +83,13 @@
                             </div>
                         </div>
 
-                    </div>
-
                 @endif
-            </div>
-            </div>
 
 
+                </div>
+
+            </div>
+        </div>
 
 
     <!--=================================

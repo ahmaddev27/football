@@ -85,15 +85,17 @@ class SettingsController extends Controller
 
             }
 
-            foreach (array_except($request->toArray(), ['_token', 'banner', 'banner_two', 'banner_three', 'icon', 'image']) as $key => $req) {
-                $setting = Setting::where('key', $key)->first();
-                $setting->update(['value' => $req]);
-            }
 
-            return response()->json(['message' => 'تم تحديث البيانات بنجاح', 'status' => true, 'icon' => 'success'], 200);
 
         }
 
+
+        foreach (array_except($request->toArray(), ['_token', 'banner', 'banner_two', 'banner_three', 'icon', 'image']) as $key => $req) {
+            $setting = Setting::where('key', $key)->first();
+            $setting->update(['value' => $req]);
+        }
+
+        return response()->json(['message' => 'تم تحديث البيانات بنجاح', 'status' => true, 'icon' => 'success'], 200);
 
     }
 }

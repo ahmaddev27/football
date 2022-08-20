@@ -29,3 +29,9 @@ Route::get('/matches', [\App\Http\Controllers\HomeController::class, 'matches'])
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'home'])->name('home');
 
 Route::get('/standing/{slug}', [\App\Http\Controllers\HomeController::class, 'standing'])->name('standing');
+Route::get('/post/{slug}', [\App\Http\Controllers\HomeController::class, 'post'])->name('post');
+Route::get('/scorers/{slug}', [\App\Http\Controllers\HomeController::class, 'topScorers'])->name('scorers');
+
+Route::get('/gallery/{slug}', [\App\Http\Controllers\HomeController::class, 'gallery'])->name('gallery');
+
+Route::get('/matches/{slug}', [\App\Http\Controllers\HomeController::class, 'MatchesBychampionshipId'])->name('standing.matches');

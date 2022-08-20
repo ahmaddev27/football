@@ -74,11 +74,15 @@ class PostController extends Controller
             'description' => 'required',
             'tags' => 'required',
             'image' => 'required',
-            'championship' => 'required',
+//            'championship' => 'required',
         ]);
 
-        $ch=implode(",",$request->championship);
+        if ($request->championship){
+            $ch=implode(",",$request->championship);
 
+        }else{
+            $ch=null;
+        }
         if ($request->file('image')) {
             Post::create([
                 'category_id' => $request->category_id,
@@ -118,8 +122,10 @@ class PostController extends Controller
 
 
     public function update($id,Request $request){
+if ($request->championship){
+    $ch=implode(",",$request->championship);
 
-        $ch=implode(",",$request->championship);
+}
 
         $post=Post::findOrFail($id);
 
