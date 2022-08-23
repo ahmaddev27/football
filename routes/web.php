@@ -25,13 +25,26 @@ Route::get('/clear', function () {
     return redirect()->route('home');
 });
 
-Route::get('/matches', [\App\Http\Controllers\HomeController::class, 'matches'])->name('matches');
+
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'home'])->name('home');
-
-Route::get('/standing/{slug}', [\App\Http\Controllers\HomeController::class, 'standing'])->name('standing');
 Route::get('/post/{slug}', [\App\Http\Controllers\HomeController::class, 'post'])->name('post');
-Route::get('/scorers/{slug}', [\App\Http\Controllers\HomeController::class, 'topScorers'])->name('scorers');
+Route::get('/matches', [\App\Http\Controllers\HomeController::class, 'matches'])->name('matches');
 
-Route::get('/gallery/{slug}', [\App\Http\Controllers\HomeController::class, 'gallery'])->name('gallery');
 
-Route::get('/matches/{slug}', [\App\Http\Controllers\HomeController::class, 'MatchesBychampionshipId'])->name('standing.matches');
+
+
+
+
+Route::get('/gallery/{slug}', [\App\Http\Controllers\Front\GalleryController::class, 'gallery'])->name('gallery');
+Route::get('galleries', [\App\Http\Controllers\Front\GalleryController::class, 'galleries'])->name('galleries');
+
+Route::get('videos', [\App\Http\Controllers\Front\VideosController::class, 'videos'])->name('videos');
+Route::get('video/data', [\App\Http\Controllers\Front\VideosController::class, 'fetchdata'])->name('video.ajax.data');
+
+
+
+Route::get('/scorers/{slug}', [\App\Http\Controllers\Front\ChampionController::class, 'topScorers'])->name('scorers');
+Route::get('/standing/{slug}',[\App\Http\Controllers\Front\ChampionController::class, 'standing'])->name('standing');
+Route::get('/matches/{slug}', [\App\Http\Controllers\Front\ChampionController::class, 'MatchesBychampionshipId'])->name('standing.matches');
+
+

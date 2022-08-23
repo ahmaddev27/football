@@ -55,11 +55,6 @@ class VideoController extends Controller
 
     }
 
-    public function fetchdata(Request $request){
-        $v=Video::findOrFail($request->id);
-        return response()->json($v);
-
-    }
 
     public function edit($id){
         $video=Video::findOrFail($id);

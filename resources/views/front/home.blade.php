@@ -1,4 +1,4 @@
-@extends('front.index',['title'=>'الرئيسية'])
+@extends('front.layouts.index',['title'=>'الرئيسية'])
 <!-- Post -->
 @section('main')
     <!-- Feature post -->
@@ -414,19 +414,19 @@
                                     <div class="carousel-inner">
 
                                         @foreach(galleries() as $key=>$g)
-                                        <div class="carousel-item @if($key==0)  active @endif  ">
-                                            <img class="d-block w-100" src="{{asset(@$g->images[0]->image)}}"
-                                                 alt="First slide">
+                                            <div class="carousel-item {{$key==0?'active':''}} size-h-4">
+                                                <img class="d-block w-100" src="{{asset($g->images[0]->image)}}"
+                                                     alt="First slide">
 
-                                            <div class="carousel-caption d-none d-lg-block">
-                                                <h5 class="p-t-300 text-white">
-                                                    <a href="{{route('gallery',$g->slug)}}"
-                                                       class=" p-t-12 text-white f1-m-1 cl2 hov-cl10 trans-03 respon2">
-                                                        {{$g->description}}
-                                                    </a>
-                                                </h5>
+                                                <div class="p-tb-16 p-rl-25 bg3">
+                                                    <h5 class="p-b-5">
+                                                        <a href="{{route('gallery',$g->slug)}}" class="f1-m-3 cl0 hov-cl10 trans-03">
+                                                            {{str_limit($g->description,80)}}
+                                                        </a>
+                                                    </h5>
+
+                                                </div>
                                             </div>
-                                        </div>
                                         @endforeach
 
 
@@ -475,17 +475,7 @@
 
 
 
-        <div class="modal fade" id="modal-video-01" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document" data-dismiss="modal">
-                <div class="close-mo-video-01 trans-0-4" data-dismiss="modal" aria-label="Close">&times;</div>
 
-                <div class="wrap-video-mo-01">
-                    <div class="video-mo-01">
-                        <iframe src="https://www.youtube.com/embed/wJnBTPUQS5A?rel=0" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
         <div class="container">
@@ -806,53 +796,38 @@
 
                         <!-- فيديو -->
                         <div class="how2 how2-cl21 flex-s-c">
+                            <a href="{{route('videos')}}">
                             <h3 class="f1-m-2 cl21 tab01-title">
                                 مكتبة الفيديوهات
                             </h3>
+                            </a>
                         </div>
                         <div class="flex-wr-sb-s p-t-20 p-b-15 how-bor2">
                             <div class="flex-c-s">
                                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img class="d-block w-100" src="{{asset('front/images/post-11.jpg')}}"
+
+                                        @foreach(videos() as $key=>$v)
+
+                                        <div class="carousel-item {{$key==0?'active':''}}">
+                                            <img class="d-block w-100" src="{{asset($v->image)}}"
                                                  alt="First slide">
 
-                                            <div class="carousel-caption d-none d-lg-block">
-                                                <h5 class="p-t-300 text-white">
-                                                    <a href="blog-detail-01.html"
-                                                       class=" p-t-12 text-white f1-m-1 cl2 hov-cl10 trans-03 respon2">
-                                                        موسيماني في الأهلي..المبالغة فوق الجميع
-                                                    </a>
-                                                </h5>
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item ">
-                                            <img class="d-block w-100" src="{{asset('front/images/post-11.jpg')}}"
-                                                 alt="First slide">
+                                            <div class="p-tb-16 p-rl-25 bg3">
+                                                <h5 class="p-b-5">
+                                                    <a href="#" class="f1-m-3 cl0 hov-cl10 trans-03">
 
-                                            <div class="carousel-caption d-none d-lg-block">
-                                                <h5 class="p-t-300 text-white">
-                                                    <a href="blog-detail-01.html"
-                                                       class=" p-t-12 text-white f1-m-1 cl2 hov-cl10 trans-03 respon2">
-                                                        موسيماني في الأهلي..المبالغة فوق الجميع
+                                                        <button id="view" class="s-full ab-t-l flex-c-c fs-32 cl0 hov-cl10 trans-03"   data-toggle="modal" data-target="#modal-video-01" model_id="{{$v->id}}">
+                                                            <span class="fab fa-youtube"></span><div></div>
+                                                        </button>
+                                                        {{str_limit($v->title,80)}}
                                                     </a>
                                                 </h5>
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item ">
-                                            <img class="d-block w-100" src="{{asset('front/images/post-11.jpg')}}"
-                                                 alt="First slide">
 
-                                            <div class="carousel-caption d-none d-lg-block">
-                                                <h5 class="p-t-300 text-white">
-                                                    <a href="blog-detail-01.html"
-                                                       class=" p-t-12 text-white f1-m-1 cl2 hov-cl10 trans-03 respon2">
-                                                        موسيماني في الأهلي..المبالغة فوق الجميع
-                                                    </a>
-                                                </h5>
                                             </div>
                                         </div>
+                                        @endforeach
+
 
                                     </div>
                                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
@@ -863,6 +838,7 @@
 
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
@@ -887,6 +863,23 @@
 
     </section>
 
+
+
+    <!-- Modal Video 01-->
+    <div class="modal fade" id="modal-video-01" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document" data-dismiss="modal">
+            <div class="close-mo-video-01 trans-0-4" data-dismiss="modal" aria-label="Close">&times;</div>
+
+            <div class="wrap-video-mo-01">
+                <div class="video-mo-01">
+                    <iframe id="link-video" src="" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 @stop
 
 
@@ -894,4 +887,22 @@
 
 @push('js')
 
+    <script>
+        $(document).on('click', '#view', function(){
+            var id = $(this).attr("model_id");
+            $.ajax({
+                url:"{{route('video.ajax.data')}}",
+                method:'get',
+                data:{id:id},
+                dataType:'json',
+                success:function(data)
+                {
+
+                    $('#link-video').attr('src',data.link);
+
+
+                }
+            })
+        });
+    </script>
 @endpush

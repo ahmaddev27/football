@@ -1,4 +1,4 @@
-@extends('front.index',['title'=>$post->title])
+@extends('front.layouts.index',['title'=>$post->title])
 <!-- Post -->
 
 @section('main')

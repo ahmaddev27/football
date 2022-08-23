@@ -144,6 +144,15 @@
                     <a href="#">اخبار </a>
                 </li>
 
+
+                <li>
+                    <a href="{{route('galleries')}}">الصور </a>
+                </li>
+
+                <li>
+                    <a href="{{route('videos')}}">الفيديوهات </a>
+                </li>
+
             </ul>
         </div>
 
@@ -180,11 +189,11 @@
                         </li>
 
                         <li class="main-menu-item">
-                            <a href="category-01.html">الصور</a>
+                            <a href="{{route('galleries')}}">الصور</a>
                         </li>
 
                         <li class="main-menu-item">
-                            <a href="category-02.html">الفيديوهات</a>
+                            <a href="{{route('videos')}}">الفيديوهات</a>
 
                         </li>
 

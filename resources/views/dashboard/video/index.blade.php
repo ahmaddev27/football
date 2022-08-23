@@ -48,6 +48,14 @@
                                         @foreach($videos as $video)
                                             <div class="col-xl-4 mb-60">
                                                 <div class="pricing-table active">
+                                                    <div class="card-header">
+                                                        <a href="#" id="view"
+                                                           data-toggle="modal" data-target="#exampleModal" model_id="{{$video->id}}"
+                                                           title="عرض">
+                                                        <img class="img img-thumbnail" id="image"
+                                                             src="{{asset($video->image)}}">
+                                                        </a>
+                                                    </div>
                                                     <div class="pricing-top">
                                                         <div class="pricing-title">
                                                             <h6 class="mb-15">{{str_limit($video->title,80)    }}</h6>
@@ -61,9 +69,7 @@
                                                             <a href="#" id="view" class="x-small float-right mb-1"
                                                                data-toggle="modal" data-target="#exampleModal" model_id="{{$video->id}}"
                                                                title="عرض">
-                                                                <img class="img img-thumbnail" id="image"
-                                                                     src="{{asset($video->image)}}"
-                                                                     href="#"></a>
+                                                               </a>
                                                              <button id="delete" route="{{route('dashboard.video.destroy')}}" model_id="{{$video->id}}" class="btn btn-danger float-left"><i
                                                                     class="ti-trash"></i></button>
                                                             <a href="{{route('dashboard.video.edit',$video->id)}}" class="btn btn-info float-left"><i
@@ -108,7 +114,7 @@
                     </div>
 
                     <div class="modal-body ">
-                        <iframe id="link" width="100%" height="415" src="https://www.youtube-nocookie.com/embed/TENUlAdeEMU"
+                        <iframe id="link" width="100%" height="415" src=""
                                 title="YouTube video player" frameborder="5"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen>
@@ -198,7 +204,7 @@
             $(document).on('click', '#view', function(){
                 var id = $(this).attr("model_id");
                 $.ajax({
-                    url:"{{route('dashboard.video.ajax.data')}}",
+                    url:"{{route('video.ajax.data')}}",
                     method:'get',
                     data:{id:id},
                     dataType:'json',

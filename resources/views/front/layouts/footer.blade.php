@@ -63,7 +63,7 @@
                         </a>
                     </div>
                     <div class="size-h-2 ">
-                        <a href="#">
+                        <a href="{{route('matches')}}">
                         <h5 class="f1-m-7 cl0">
                            المباريات
                         </h5>
@@ -73,7 +73,7 @@
 
                     <div class="size-h-2 ">
 
-                        <a href="#">
+                        <a href="{{route('videos')}}">
                         <h5 class="f1-m-7 cl0">
 
                             فيديوهات
@@ -85,7 +85,7 @@
 
                     <div class="size-h-2 ">
 
-                        <a href="#">
+                        <a href="{{route('galleries')}}">
                             <h5 class="f1-m-7 cl0">
 
                                 الصور

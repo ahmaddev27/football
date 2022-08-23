@@ -1,4 +1,4 @@
-@extends('front.index',['title'=>'المباريات'])
+@extends('front.layouts.index',['title'=>$championship.' - المباريات'])
 <!-- Post -->
 @section('main')
 
@@ -61,7 +61,7 @@
                             </div>
 
                             <div class="col-3">
-                                <button type="submit" class="btn btn-primary"> <i class="fa fa-search"></i> تصفية </button>
+                                <button type="submit" class="btn btn-primary"> <i class="fa fa-search"></i> </button>
 
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                                                 <strong class="mb-3 cl17 mr-2 "style="font-size:20px">{{$x->AwayScore}}</strong>
                                               <br> <i class="fa fa-calendar mt-3 "> </i>  <br>
                                                  <p class="">
-                                                     {{  date('m-d-Y /  H:i', date( intval(substr(preg_replace('/[^0-9]+/', '', $x->Date ), 0, 10) )))}}
+                                                     {{  date('y-m-d /  H:i', date( intval(substr(preg_replace('/[^0-9]+/', '', $x->Date ), 0, 10) )))}}
                                                  </p>
                                             </div>
 
@@ -125,69 +125,69 @@
 
                             </div>
 
-                            <div class="modal-footer">
+                            <div class="modal-footer justify-content-center">
                                 {{$data->appends(request()->query())->links('vendor.pagination.simple-tailwind')}}
                             </div>
                         </div>
 
                         <div class="col-md-10 col-lg-4 p-b-100">
-                            <div class="p-b-35">
-                                <div class="how2 how2-cl5 flex-s-c">
-                                    <h3 class="f1-m-2 cl17 tab01-title">
-                                        سوشيال ميديا
+                            <!-- Most Popular -->
+
+                            <div class="flex-c-s p-t-8 p-b-65">
+                                <a href="#">
+                                    <img class="max-w-full"  src="{{asset(setting('banner_three'))}} " alt="IMG">
+                                </a>
+                            </div>
+
+                            <div class="p-b-30">
+                                <div class="how2 how2-cl6 flex-s-c">
+                                    <h3 class="f1-m-2 cl18 tab01-title">
+                                        اخر اخبار  {{$championship}}
                                     </h3>
                                 </div>
 
                                 <ul class="p-t-35">
-                                    <li class="flex-wr-sb-c p-b-20">
-                                        <a href="#" class="size-a-8 flex-c-c borad-49 size-a-8 bg-facebook fs-16 cl0 hov-cl0">
-                                            <span class="fab fa-facebook-f"></span>
-                                        </a>
+                                    @foreach(posts('championship',$championship)->take(6) as $c)
+                                        <li class="flex-wr-sb-s p-b-22">
+                                            <div class="size-a-8 flex-c-c borad-45 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+                                                <i class="fa fa-eye"></i>
+                                            </div>
 
-                                        <div class="size-w-3 flex-wr-sb-c">
-										<span class="f1-s-8 cl3 p-r-20">
-											6879 متابع
-										</span>
-
-                                            <a href="#" class="f1-s-9 text-uppercase cl3 hov-cl10 trans-03">
-                                                لايك
+                                            <a href="{{route('post',$c->slug)}}" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                                                {{str_limit($c->title,35)}}
                                             </a>
-                                        </div>
-                                    </li>
+                                        </li>
 
-                                    <li class="flex-wr-sb-c p-b-20">
-                                        <a href="#" class="size-a-8 flex-c-c borad-49 size-a-8 bg-twitter fs-16 cl0 hov-cl0">
-                                            <span class="fab fa-twitter"></span>
-                                        </a>
+                                    @endforeach
 
-                                        <div class="size-w-3 flex-wr-sb-c">
-										<span class="f1-s-8 cl3 p-r-20">
-											568 متابع
-										</span>
-
-                                            <a href="#" class="f1-s-9 text-uppercase cl3 hov-cl10 trans-03">
-                                                متابعة
-                                            </a>
-                                        </div>
-                                    </li>
-
-                                    <li class="flex-wr-sb-c p-b-20">
-                                        <a href="#" class="size-a-8 flex-c-c borad-49 size-a-8 bg-youtube fs-16 cl0 hov-cl0">
-                                            <span class="fab fa-youtube"></span>
-                                        </a>
-
-                                        <div class="size-w-3 flex-wr-sb-c">
-										<span class="f1-s-8 cl3 p-r-20">
-											5039 مشترك
-										</span>
-
-                                            <a href="#" class="f1-s-9 text-uppercase cl3 hov-cl10 trans-03">
-                                                اشتراك
-                                            </a>
-                                        </div>
-                                    </li>
                                 </ul>
                             </div>
+
+
+                            <div class="p-b-30">
+                                <div class="how2 how2-cl6 flex-s-c">
+                                    <h3 class="f1-m-2 cl18 tab01-title">
+                                        اخر الصور من  {{$championship}}
+                                    </h3>
+                                </div>
+
+                                <ul class="p-t-35">
+                                    @foreach(posts('championship',$championship)->take(6) as $c)
+                                        <li class="flex-wr-sb-s p-b-22">
+                                            <div class="size-a-8 flex-c-c borad-45 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+                                                <i class="fa fa-eye"></i>
+                                            </div>
+
+                                            <a href="{{route('post',$c->slug)}}" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                                                {{str_limit($c->title,35)}}
+                                            </a>
+                                        </li>
+
+                                    @endforeach
+
+                                </ul>
+                            </div>
+
 
                         </div>
 

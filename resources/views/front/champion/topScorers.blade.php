@@ -1,7 +1,6 @@
-@extends('front.index',['title'=>$championship])
+@extends('front.layouts.index',['title'=>$championship.' - الهدافون'])
 <!-- Post -->
 @section('main')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 
 
 
@@ -75,7 +74,7 @@
 
                         <ul class="p-t-35">
 
-                            <table style=" overflow-x: hidden;" class="table table-striped text-center">
+                            <table style=" overflow-x: hidden;" class="table text-center">
                                 <thead>
 
                                 <tr class="fs-15">
@@ -92,12 +91,8 @@
 
                                 @foreach($topScorers as $key=>$x)
 
-                                    @if($key==1)
-                                        <tr class="fs-15 thead-dark">
-                                    @else
-                                        <tr class="">
-                                            @endif
 
+                                        <tr class="{{$key%2==1 && $key!=1 ?'bg13':''}}{{$key==1?'bg10 text-white':''}}">
                                             <th scope="row"> {{$key}}</th>
                                             <td class=""><img src="{{$x['image']}}"width="70px"></td>
                                             <td>{{$x['name']}} </td>
@@ -119,8 +114,9 @@
                             </table>
 
 
+                            <div class="modal-footer justify-content-center">
                             {{$topScorers->links('vendor.pagination.simple-tailwind')}}
-
+                            </div>
 
 
                         </ul>

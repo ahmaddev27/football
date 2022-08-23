@@ -98,7 +98,6 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::get('/', [VideoController::class, 'index'])->name('index');
         Route::get('/create', [VideoController::class, 'create'])->name('create');
         Route::post('/store', [VideoController::class, 'store'])->name('store');
-        Route::get('/data', [VideoController::class, 'fetchdata'])->name('ajax.data');
         Route::post('/delete', [VideoController::class, 'destroy'])->name('destroy');
         Route::get('/edit/{id}', [VideoController::class, 'edit'])->name('edit');
         Route::POST('/update/{id}', [VideoController::class, 'update'])->name('update');

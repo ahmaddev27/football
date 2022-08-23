@@ -15,7 +15,7 @@ function championship($id){
         '1152'=>['id'=>1152,'name'=>'الدوري التركي','logo'=>'https://semedia.filgoal.com/Photos/Championship/Medium/1152.png'],
         '1142'=>['id'=>1142,'name'=>'الدوري الهولندي','logo'=>'https://semedia.filgoal.com/Photos/Championship/Medium/1142.png'],
     ];
-    if(!$id==null){
+    if(!$id==null && isset($data[$id])){
         return $data[$id];
     } else {
         return $data;
@@ -39,6 +39,8 @@ function status($s)
             return 'secondary';
         case'مباشر':
             return 'danger';
+            case'الشوط الاول':
+            return 'warning';
 
 
     }
@@ -69,6 +71,12 @@ function categories(){
 
 function galleries(){
     return \App\Models\Gallery::orderBy('created_at','DESC')->with('images')->get();
+
+}
+
+
+function videos(){
+    return \App\Models\Video::orderBy('created_at','DESC')->get();
 
 }
 ?>

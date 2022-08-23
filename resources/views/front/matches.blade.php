@@ -1,4 +1,4 @@
-@extends('front.index',['title'=>'المباريات'])
+@extends('front.layouts.index',['title'=>'المباريات'])
 <!-- Post -->
 @section('main')
 
@@ -20,61 +20,62 @@
                                 </div>
 
 
+                                @foreach ($collection as $ChampionshipName => $matches)
+                                    <h3 class="f1-m-2 cl10 tab01-title mt-5 mb-3">
+                                        <img src="{{championship($matches[0]->ChampionshipId)['logo']??''}}" style="width:60px" >
+                                        {{ $ChampionshipName}}
 
-                                @foreach($data as $x)
-                                    @if(@$x['l'])
-
-                                            <h3 class="f1-m-2 cl10 tab01-title mt-5 mb-3">
-                                                @if(@$x['logo'])
-
-                                                    @if(array_key_exists($x['logo'],championship(null)))
-                                                        <img src="{{championship($x['logo'])['logo']??''}}" style="width:60px" >
-
-                                                    @endif
+                                    </h3>
 
 
-                                                @endif
-                                                {{@$x['l']}}
+                                @foreach ($matches as $x)
 
-                                            </h3>
-
-                                        @endif
 
 
                                     <div class="shadow-none p-3 mb-2 bg-light rounded">
-                                    <div class="row">
-                                        <div class="col-sm-4 pr-5 p-3">
-                                            <div class="body text-center">
-                                                <h3 class="mb-1">{{$x['team1']}}</h3>
-                                            <img src="{{$x['img1']}}">
+
+                                            <div class="row">
+
+
+                                                <div class="col-sm-2 pr-5 p-3">
+                                                    <span style="font-size: 13px"> {{$x->WeekOrRound}}</span>
+                                                </div>
+
+                                                <div class="col-sm-3 pr-5 p-3">
+                                                    <div class="body text-center">
+                                                        <h3 class="mb-1">{{$x->HomeTeamName}}</h3>
+                                                        <img src="{{$x->HomeTeamLogoUrl}}">
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-sm-3 pr-5 p-3">
+
+                                                    <div class="body text-center">
+                                                        <strong class="mb-3 cl17 ml-2 " style="font-size: 20px"> {{$x->HomeScore}}</strong>
+                                                        <span class="badge badge-{{status($x->CurrentMatchStatus->MatchStatusName)}}"style="font-size: 13px"> {{$x->CurrentMatchStatus->MatchStatusName}}</span>
+                                                        <strong class="mb-3 cl17 mr-2 "style="font-size:20px">{{$x->AwayScore}}</strong>
+                                                        <br> <i class="fa fa-calendar mt-3 "> </i>  <br>
+                                                        <p class="">
+                                                            {{  date('y-m-d /  H:i', date( intval(substr(preg_replace('/[^0-9]+/', '', $x->Date ), 0, 10) )))}}
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-sm-4 pr-5 p-3">
+                                                    <div class="body text-center">
+                                                        <h3 class="mb-1">{{$x->AwayTeamName}}</h3>
+                                                        <img src="{{$x->AwayTeamLogoUrl}}">
+                                                    </div>
+                                                </div>
                                             </div>
+
                                         </div>
 
+                                    @endforeach
 
-
-                                        <div class="col-sm-4 pr-5 p-3">
-
-                                            <div class="body text-center">
-                                                <strong class="mb-3 cl17 ml-2 " style="font-size: 20px"> {{$x['team1_result']}}</strong>
-                                                    <span class="badge badge-{{status($x['status'])}}"style="font-size: 13px"> {{$x['status']}}</span>
-                                                <strong class="mb-3 cl17 mr-2 "style="font-size:20px">{{$x['team2_result']}}</strong>
-                                              <br> <i class="fa fa-calendar mt-3 "> </i>  <br>
-                                                 <p class="">
-                                                     {{$x['time']}}
-                                                 </p>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-sm-4 pr-5 p-3">
-                                            <div class="body text-center">
-                                                <h3 class="mb-1">{{$x['team2']}}</h3>
-                                                <img src="{{$x['img2']}}">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
                                 @endforeach
 
                             </div>

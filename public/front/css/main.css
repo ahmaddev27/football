@@ -1558,6 +1558,8 @@ span.carousel-control-next-icon {
 .size-h-4 {
   min-height: 80px;
 }
+
+
 html {
     overflow-x: hidden;
 }
@@ -1583,7 +1585,7 @@ html {
 .bg10 {background-color: #2468ce;}
 .bg11 {background-color: #151515;}
 .bg12 {background-color: #f7f7f7;}
-.bg13 {background-color: #f1f1f1
+.bg13 {background-color: #f1f1f1;
 ;;}
 
 
