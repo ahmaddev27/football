@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Traits\ImageTrait;
-use App\Models\Article;
 use App\Models\Category;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -32,7 +31,6 @@ class VideoController extends Controller
     public function store(Request $request){
 
         $request->validate([
-            'category_id' => 'required',
             'title' => 'required',
             'image' => 'required',
             'link' => 'required',
@@ -41,7 +39,7 @@ class VideoController extends Controller
 
         if ($request->file('image')) {
             Video::create([
-                'category_id' => $request->category_id,
+                'championship' => $request->championship,
                 'title' => $request->title,
                 'link' =>  str_replace('watch?v=','embed/',$request->link ),
                 'image' => $this->saveImage($request->file('image'), null, null, 'videos'),
@@ -72,7 +70,7 @@ class VideoController extends Controller
             }
 
             $video->update([
-                'category_id' => $request->category_id,
+                'championship' => $request->championship,
                 'title' => $request->title,
                 'link' =>  str_replace('watch?v=','embed/',$request->link ),
                 'image' => $this->saveImage($request->file('image'), null, null, 'videos'),
@@ -83,7 +81,7 @@ class VideoController extends Controller
 
         }else{
             $video->update([
-                'category_id' => $request->category_id,
+                'championship' => $request->championship,
                 'title' => $request->title,
                 'link' =>  str_replace('watch?v=','embed/',$request->link ),
                 'slug' => str_slug($request->title)

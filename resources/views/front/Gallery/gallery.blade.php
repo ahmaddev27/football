@@ -53,15 +53,35 @@
 
                             </div>
 
-
-
                     </div>
 
 
+                    <hr>
+                    <h2 class="f1-l-4 cl5 p-b-16  respon2">المزيد من صور {{$gallery->championship}}</h2>
 
 
+                    <div class="row p-t-35">
+                        @foreach(galleries('championship',$gallery->championship) as $g)
 
+                        <div class="col-sm-6 p-r-25 p-r-15-sr991">
+                            <!-- Item latest -->
+                            <div class="m-b-45">
+                                <a href="{{route('gallery',$g->slug)}}" class="wrap-pic-w hov1 trans-03">
+                                    <img src="{{$g->images[0]->image}}" alt="IMG">
+                                </a>
 
+                                <div class="p-t-16">
+                                    <h5 class="p-b-5">
+                                        <a href="{{route('gallery',$g->slug)}}" class="f1-m-3 cl2 hov-cl10 trans-03">
+                                            {{$g->description}}
+                                        </a>
+                                    </h5>
+
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
 
                 </div>
 
@@ -79,57 +99,30 @@
                             </a>
                         </div>
 
-
-                        <!-- Popular Posts -->
                         <div class="p-b-30">
-                            <div class="how2 how2-cl5 flex-s-c">
-                                <h3 class="f1-m-2 cl17 tab01-title">
-                                   أخر الصور
+                            <div class="how2 how2-cl4 flex-s-c">
+                                <h3 class="f1-m-2 cl3 tab01-title">
+                                    الأكثر قراءة
                                 </h3>
                             </div>
 
                             <ul class="p-t-35">
-                                @foreach(galleries()->take(4) as $x)
-                                <li class="flex-wr-sb-s p-b-30">
-                                    <a href="{{route('gallery',$x->slug)}}" class="size-w-10 wrap-pic-w hov1 trans-03">
-                                        <img src="{{asset($x->images[0]->image)}}" alt="IMG">
-                                    </a>
+                                @foreach(posts(null,null)->take(3) as $x)
+                                    <li class="flex-wr-sb-s p-b-30">
+                                        <a href="{{route('post',$x->slug)}}" class="size-w-10 wrap-pic-w hov1 trans-03">
+                                            <img src="{{asset($x->image)}}" alt="IMG">
+                                        </a>
 
-                                    <div class="size-w-11">
-                                        <h6 class="p-b-4">
-                                            <a href="{{route('gallery',$x->slug)}}" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                {{str_limit($x->description,50)}}
-                                            </a>
-                                        </h6>
+                                        <div class="size-w-11">
+                                            <h6 class="p-b-4">
+                                                <a href="{{route('post',$x->slug)}}"
+                                                   class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                    {{str_limit($x->title,50)}}
+                                                </a>
+                                            </h6>
 
-                                        <span class="cl8 txt-center p-b-24">
-                                            <span class="f1-s-3 " >{{$x->created_at->format('H:i')}}</span>
-
-											<span class="f1-s-3 m-rl-3">
-												-
-											</span>
-
-											<span class="f1-s-3">
-                                                {{$x->created_at->diffforhumans()}}
-
-											</span>
-										</span>
-                                    </div>
-                                </li>
-                                <li class="flex-wr-sb-s p-b-30">
-                                    <a href="{{route('gallery',$x->slug)}}" class="size-w-10 wrap-pic-w hov1 trans-03">
-                                        <img src="{{asset($x->images[0]->image)}}" alt="IMG">
-                                    </a>
-
-                                    <div class="size-w-11">
-                                        <h6 class="p-b-4">
-                                            <a href="{{route('gallery',$x->slug)}}" class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                {{str_limit($x->description,50)}}
-                                            </a>
-                                        </h6>
-
-                                        <span class="cl8 txt-center p-b-24">
-                                            <span class="f1-s-3 " >{{$x->created_at->format('H:i')}}</span>
+                                            <span class="cl8 txt-center p-b-24">
+                                            <span class="f1-s-3 ">{{$x->created_at->format('H:i')}}</span>
 
 											<span class="f1-s-3 m-rl-3">
 												-
@@ -140,13 +133,14 @@
 
 											</span>
 										</span>
-                                    </div>
-                                </li>
+                                        </div>
+                                    </li>
 
                                 @endforeach
 
                             </ul>
                         </div>
+
 
                         <!-- Tag -->
                         <div>

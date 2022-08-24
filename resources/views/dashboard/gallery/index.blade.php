@@ -37,6 +37,7 @@
                                 <td class="">#</td>
                                 <td class="w-50">الوصف</td>
                                 <td class="">عدد الصور</td>
+                                <td class="">الدوري</td>
                                 <td class="">المشاهدات</td>
                                 <td class="">خيارات</td>
                             </tr>
@@ -85,6 +86,7 @@
                         {data: 'DT_RowIndex', name: 'id',},
                         {data: 'description', name: 'description'},
                         {data: 'images', name: 'images'},
+                        {data: 'championship', name: 'championship'},
                         {data: 'views', name: 'views'},
                         {data: 'action', name: 'action', orderable: false, searchable: false},
                     ],

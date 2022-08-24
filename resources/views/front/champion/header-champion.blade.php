@@ -21,10 +21,10 @@
 
 
         <li class="nav-item mt-3">
-            <a class="nav-link " href="#">فيديوهات</a>
+            <a class="nav-link" href="{{route('videos')}}/?championship={{$championship}}">فيديوهات</a>
         </li>
         <li class="nav-item mt-3">
-            <a class="nav-link " href="#">صور</a>
+            <a class="nav-link " href="{{route('galleries')}}/?championship={{$championship}}">صور</a>
         </li>
     </ul>
 </div>

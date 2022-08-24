@@ -28,13 +28,22 @@
             <div class="col-xl-12 mb-30">
                 <div class="card card-statistics h-100">
                     <div class="card-body">
-
                         <div class="form-group">
                             <label for="exampleInputPassword1">عنوان الالبوم</label>
                             <input type="text" onchange="myChangeFunction(this)" class="form-control"
                                    name="description" id="input"
                                    placeholder="ادخل العنوان">
                         </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">الدوري او البطولة</label>
+                            <select  class="form-control" name="select" id="select">
+                                @foreach(championship(null) as $c)
+                                    <option value="{{$c['name']}}">{{$c['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
 
                         <div class="form-group">
                             <div class="row">
@@ -45,6 +54,8 @@
                                         action=" {{route('dashboard.gallery.images.upload')}}">
                                         @csrf
                                         <input type="hidden" name="description" id="description">
+                                        <input type="hidden" name="championship" id="championship">
+
                                         <div class="dz-message" data-dz-message>
                                           <span style="font-size:50px;color: #3371cd">
                                                  <i class="ti-gallery"></i>
@@ -76,17 +87,26 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.js"></script>
 
         <script type="text/javascript">
-            function myChangeFunction(input1) {
+            function myChangeFunction(input) {
                 var input2 = document.getElementById('description');
-                input2.value = input1.value;
+                input2.value = input.value;
             }
         </script>
 
-        <script type="text/javascript">
 
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('select[name="select"]').on('change', function () {
+                    var championship = document.getElementById('championship');
+                    championship.value = $(this).val();;
+                })
+            });
+        </script>
+
+
+        <script type="text/javascript">
             Dropzone.options.dropzone =
                 {
-
                     maxFilesize: 50,
                     acceptedFiles: ".jpeg,.jpg,.png,.gif",
                     timeout: 10000,
@@ -95,13 +115,12 @@
                     dictCancelUpload: "الغاء",
                     removedfile: function(file) {
                             var name = file.name;
-
                         var desc=document.getElementById('description').value;
+                        var championship=document.getElementById('championship').value;
                         $.ajax({
-
                             type: 'POST',
                             url: '{{ route("dashboard.gallery.images.delete") }}',
-                            data: {filename: name, description:desc, "_token": "{{ csrf_token() }}"},
+                            data: {filename: name, description:desc,championship:championship,"_token": "{{ csrf_token() }}"},
                             success: function (data){
                                 swal(
                                     'تم الحذف !',

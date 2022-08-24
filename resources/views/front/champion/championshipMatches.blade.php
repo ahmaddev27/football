@@ -5,50 +5,21 @@
     <section class="bg0 ">
         <div class="container">
 
-            <div class="text-center row bg13 p-4 m-4 justify-content-center">
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
-                    <img src="{{$logo}}"> <b>{{$championship}}</b>
-                </li>
-                <li class="nav-item mt-3">
-                    <a class="nav-link" href="{{route('standing',$slug)}}">التريب</a>
-                </li>
-                <li class="nav-item mt-3">
-                    <a class="nav-link" href="{{route('standing.matches',$slug)}}">المباريات</a>
-                </li>
-                <li class="nav-item mt-3">
-                    <a class="nav-link active" href="#">أخبار</a>
-                </li>
-                <li class="nav-item mt-3">
-                    <a class="nav-link active" href="{{route('scorers',$slug)}}">الهدافون</a>
-                </li>
-                <li class="nav-item mt-3">
-                    <a class="nav-link " href="#">فيديوهات</a>
-                </li>
-                <li class="nav-item mt-3">
-                    <a class="nav-link " href="#">صور</a>
-                </li>
-            </ul>
-            </div>
+            @include('front.champion.header-champion',['logo'=>$logo,'championship'=>$championship,
+               'slug'=>$slug,'goals'=>$goals,'matches'=>$matches,'yellow'=>$yellow,'red'=>$red])
 
 
             <div class="row justify-content-center">
-
                 <div class="container p-t-10">
-
                     <form>
                         <div class="row mb-2 pr-3">
-
                             <div class="col-3">
-
                                 <select class="form-control custom-select  " name="week">
                                     <option value="">جميع الاسابيع</option>
-
                                     @for($i=1;$i<40;$i++)
                                         <option value="{{$i}}" {{request()->week==$i ? 'selected':''}}>الأسبوع {{$i}} </option>
                                     @endfor
                                 </select>
-
                             </div>
                             <div class="col-3">
 
@@ -130,6 +101,8 @@
                             </div>
                         </div>
 
+
+                        <!-- sid bar -->
                         <div class="col-md-10 col-lg-4 p-b-100">
                             <!-- Most Popular -->
 
@@ -164,6 +137,26 @@
                             </div>
 
 
+
+
+                            <div class="bg10 p-rl-35 p-t-28 p-b-35 m-b-55">
+                                <h5 class="f1-m-5 cl0 p-b-10">
+                                    اشتراك
+                                </h5>
+
+                                <p class="f1-s-1 cl0 p-b-25">
+                                    اشترك في النشرة البريدية للحصول على اشعارات الاخبار والاحداث المهمة
+                                </p>
+
+                                <form class="size-a-9 pos-relative">
+                                    <input class="s-full f1-m-6 cl6 plh9 p-l-20 p-r-55" type="text" name="email" placeholder="البريد">
+
+                                    <button class="size-a-10 flex-c-c ab-t-l fs-16 cl9 hov-cl10 trans-03">
+                                        <i class="fa fa-arrow-left"></i>
+                                    </button>
+                                </form>
+                                <div></div></div>
+
                             <div class="p-b-30">
                                 <div class="how2 how2-cl6 flex-s-c">
                                     <h3 class="f1-m-2 cl18 tab01-title">
@@ -171,24 +164,38 @@
                                     </h3>
                                 </div>
 
-                                <ul class="p-t-35">
-                                    @foreach(posts('championship',$championship)->take(6) as $c)
-                                        <li class="flex-wr-sb-s p-b-22">
-                                            <div class="size-a-8 flex-c-c borad-45 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                                <i class="fa fa-eye"></i>
+                                <div class="flex-wr-sb-s p-t-20 p-b-15 how-bor2">
+                                    <div class="flex-c-s">
+                                        <div id="carousel2" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner">
+
+                                                @foreach(galleries('championship',$championship) as $key=>$g)
+                                                    <div class="carousel-item {{$key==0?'active':''}} size-h-4">
+                                                        <img class="d-block" style="width:390px;height: 233px"  src="{{asset($g->images[0]->image)}}"
+                                                             alt="First slide">
+
+                                                        <div class="p-tb-16 p-rl-25 bg3">
+                                                            <h5 class="p-b-5">
+                                                                <a href="{{route('gallery',$g->slug)}}" class="f1-m-3 cl0 hov-cl10 trans-03">
+                                                                    {{str_limit($g->description,80)}}
+                                                                </a>
+                                                            </h5>
+
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+
+
                                             </div>
-
-                                            <a href="{{route('post',$c->slug)}}" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                                {{str_limit($c->title,35)}}
+                                            <a class="carousel-control-prev" href="#carousel2" role="button" data-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
                                             </a>
-                                        </li>
 
-                                    @endforeach
-
-                                </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
-
                         </div>
 
 

@@ -39,6 +39,16 @@
                                    name="description" id="input"
                                    value="{{$gallery->description}}" placeholder="ادخل العنوان">
                         </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">الدوري او البطولة</label>
+                            <select  class="form-control" name="select" id="select">
+                                @foreach(championship(null) as $c)
+                                    <option value="{{$c['name']}}">{{$c['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-12 mt-3">
@@ -46,6 +56,8 @@
                                     <form class="dropzone" method="post" id="dropzone" enctype="multipart/form-data"
                                         action=" {{route('dashboard.gallery.images.edit-upload')}}">
                                         @csrf
+                                        <input type="hidden" name="championship" id="championship">
+
                                         <input type="hidden" name="description" id="description" value="{{$gallery->description}}">
                                         <input type="hidden" name="id" id="id" value="{{$gallery->id}}">
                                         <div class="dz-message" data-dz-message>
@@ -110,6 +122,19 @@
             }
         </script>
 
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                $('select[name="select"]').on('change', function () {
+                    var championship = document.getElementById('championship');
+                    championship.value = $(this).val();;
+
+
+                })
+            });
+        </script>
+
         <script type="text/javascript">
 
 
@@ -127,13 +152,14 @@
 
                     removedfile: function(file) {
                             var name = file.name;
+                        var championship=document.getElementById('championship').value;
 
                         var desc=document.getElementById('description').value;
                         $.ajax({
 
                             type: 'POST',
                             url: '{{ route("dashboard.gallery.images.delete") }}',
-                            data: {filename: name, description:desc, "_token": "{{ csrf_token() }}"},
+                            data: {filename: name, description:desc,championship:championship, "_token": "{{ csrf_token() }}"},
                             success: function (data){
                                 swal(
                                     'تم الحذف !',

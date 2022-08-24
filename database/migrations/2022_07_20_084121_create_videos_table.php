@@ -20,9 +20,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('link');
             $table->integer('views')->nullable();
-            $table->foreignId('category_id')
-                ->nullable()->references('id')
-                ->on('categories')->nullOnDelete();
+            $table->string('championship');
             $table->timestamps();
         });
     }

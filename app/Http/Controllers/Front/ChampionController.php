@@ -296,7 +296,6 @@ class ChampionController extends Controller
 
 
 
-
     public function MatchesBychampionshipId($championshipId){
 
         $logo= championship($championshipId)['logo'];
@@ -325,8 +324,25 @@ class ChampionController extends Controller
 
         });
 
-        return view('front.champion.championshipMatches',['data'=>$data, 'logo'=>$logo,
-            'slug'=>$championshipId,'championship'=>$championship,'teams'=>$teams]);
+
+
+        $client = new Client();
+        $crawler2 = $client->request('GET', 'https://www.filgoal.com/championships/'.$championshipId.'/scorers/'.str_replace(" ", "-", $championship));
+
+        $goals=$crawler2->filter('#dhd ul.l > li:nth-child(1) ')->text();
+        $matches=$crawler2->filter('#dhd ul.l > li:nth-child(2) ')->text();
+        $yellow=$crawler2->filter('#dhd ul.l > li:nth-child(3) ')->text();
+        $red=$crawler2->filter('#dhd ul.l > li:nth-child(4) ')->text();
+
+        return view('front.champion.championshipMatches', [
+            'data'=>$data,
+            'logo'=>$logo,
+            'slug'=>$championshipId,'championship'=>$championship,
+            'teams'=>$teams,'goals'=>$goals,
+            'matches'=>$matches,
+            'yellow'=>$yellow,
+            'red'=>$red
+        ]);
 
     }
 

@@ -43,18 +43,19 @@
                             <iframe width="100%"  height="300px" src="{{$video->link}}"></iframe>
                         </div>
 
-                        <div class="form-group">
 
-                            <label for="category">تصنيف الفيديو</label> <br>
-                            <select id="category" class="form-control" name="category_id" >
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}"{{$video->category_id==$category->id?'selected':''}}>{{$category->name}}</option>
-                                @endforeach
-                            </select>
+                            <div class="form-group">
+                                <label for="category">تصنيف الفيديو</label> <br>
+                                <select id="category" class="form-control" name="championship">
+                                    @foreach(championship(null) as $champion)
+                                        <option value="{{$champion['name']}}"{{$champion['name']==$video->champion?'selected':''}}>{{$champion['name']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+
+
                         </div>
-
-
-                    </div>
                 </div>
             </div>
 

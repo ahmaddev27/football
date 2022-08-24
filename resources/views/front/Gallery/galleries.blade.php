@@ -17,19 +17,32 @@
                                 معرض الصور
                             </h3>
 
+                            <form>
+                                <div class="row mb-2 pr-3">
+                                    <div class="col-8">
+                                        <select class="form-control custom-select  " name="championship">
+                                            <option value="">جميع الدوريات</option>
+                                            @foreach(championship(null,null) as $ch)
+                                                <option value="{{$ch['name']}}" {{request()->championship==$ch['name'] ? 'selected':''}}>{{$ch['name']}} </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <button type="submit" class="btn btn-primary"> <i class="fa fa-search"></i> </button>
+
+                                    </div>
+                                </div>
+                            </form>
+
+
                             <div class="flex-wr-s-s p-b-40">
-
-                                <div class="row justify-content-center">
-
-
-                                    @foreach(galleries() as $g)
-
+                                <div class="row ">
+                                    @foreach(galleries('championship',request()->championship) as $g)
                                         <div class="col-md-6 col-sm mb-5">
-
                                             <div class="">
-                                                <img class="d-block w-100" src="{{asset($g->images[0]->image)}}"
+                                                <img class="d-block w-100 wrap-pic-w hov1 trans-03"  src="{{asset($g->images[0]->image)}}"
                                                      alt="First slide">
-
                                                 <div class="p-tb-16 p-rl-25 bg3" style="min-height:150px">
                                                     <h5 class="p-b-5">
                                                         <a href="{{route('gallery',$g->slug)}}"
@@ -38,38 +51,30 @@
                                                             {{$g->description}}
                                                         </a>
                                                     </h5>
-                                                    <p>
-                                                              <span class="f1-s-3 cl8 m-r-15">
-									<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-										 <span>{{$g->created_at->format('H:i')}}</span>
+                                                    <p class="mt-5">
+                                                        <span class="f1-s-3 cl8 m-r-15">
+                                                            <a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
+                                                                <span>{{$g->created_at->format('H:i')}}</span>
+                                                            </a>
 
-									</a>
+                                                            <span class="m-rl-3">-</span>
 
-									<span class="m-rl-3">-</span>
+                                                            <span>
+                                                                {{$g->created_at->diffforhumans()}}
+                                                            </span>
+                                                            <span class="m-rl-3">-</span>
+                                                            <span class="f1-s-3 cl8 m-r-15">
+                                                                مشاهدات : {{$g->views}}
+                                                            </span>
 
-									<span>
-										{{$g->created_at->diffforhumans()}}
-									</span>
-                                                                  <span class="m-rl-3">-</span>
-                                                                  <span class="f1-s-3 cl8 m-r-15">
-                                                                      مشاهدات : {{$g->views}}
-                                                                  </span>
-
-                                                              </span>
+                                                        </span>
                                                     </p>
-
-
                                                 </div>
                                             </div>
                                         </div>
-
                                     @endforeach
                                 </div>
-
-
                             </div>
-
-
                         </div>
 
                     </div>

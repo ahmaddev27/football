@@ -413,9 +413,9 @@
                                 <div id="carousel2" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
 
-                                        @foreach(galleries() as $key=>$g)
+                                        @foreach(galleries(null,null) as $key=>$g)
                                             <div class="carousel-item {{$key==0?'active':''}} size-h-4">
-                                                <img class="d-block w-100" src="{{asset($g->images[0]->image)}}"
+                                                <img class="d-block w-50 wrap-pic-w hov1 trans-03"  src="{{asset($g->images[0]->image)}}"
                                                      alt="First slide">
 
                                                 <div class="p-tb-16 p-rl-25 bg3">
@@ -807,10 +807,10 @@
                                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
 
-                                        @foreach(videos() as $key=>$v)
+                                        @foreach(videos(null,null) as $key=>$v)
 
                                         <div class="carousel-item {{$key==0?'active':''}}">
-                                            <img class="d-block w-100" src="{{asset($v->image)}}"
+                                            <img class="d-block w-100 wrap-pic-w hov1 trans-03"  src="{{asset($v->image)}}"
                                                  alt="First slide">
 
                                             <div class="p-tb-16 p-rl-25 bg3">

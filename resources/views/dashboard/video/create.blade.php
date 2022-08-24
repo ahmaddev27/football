@@ -42,9 +42,9 @@
 
                         <div class="form-group">
                             <label for="category">تصنيف الفيديو</label> <br>
-                            <select id="category" class="form-control" name="category_id">
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                            <select id="category" class="form-control" name="championship">
+                                @foreach(championship(null) as $champion)
+                                    <option value="{{$champion['name']}}">{{$champion['name']}}</option>
                                 @endforeach
                             </select>
                         </div>

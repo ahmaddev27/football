@@ -21,8 +21,8 @@
                         <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="search">
                             <option value="">جميع التصنيفات</option>
 
-                            @foreach($categories as $category)
-                                <option value="{{$category->id}}"{{request()->search == $category->id ? 'selected' : ''}} value="{{request()->search}}">{{$category->name}}</option>
+                            @foreach(championship(null) as $c)
+                                <option value="{{$c['name']}}"{{request()->search ==$c['name'] ? 'selected' : ''}} value="{{request()->search}}">{{$c['name']}}</option>
                             @endforeach
                         </select>
 
@@ -59,7 +59,7 @@
                                                     <div class="pricing-top">
                                                         <div class="pricing-title">
                                                             <h6 class="mb-15">{{str_limit($video->title,80)    }}</h6>
-                                                            <p class="float-right">{{$video->category->name}} - <span><i
+                                                            <p class="float-right">{{$video->championship}} - <span><i
                                                                         class="ti-eye"></i></span> {{$video->views}}
                                                             </p>
 

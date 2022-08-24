@@ -69,14 +69,29 @@ function categories(){
 }
 
 
-function galleries(){
-    return \App\Models\Gallery::orderBy('created_at','DESC')->with('images')->get();
+function galleries($key,$value)
+{
+    if ($key == null || $value == null) {
+        return \App\Models\Gallery::orderBy('created_at', 'DESC')->with('images')->get();
 
+    }else{
+        return \App\Models\Gallery::orderBy('created_at', 'DESC')->where($key,'like','%'.$value.'%')->with('images')->get();
+
+    }
 }
 
+function videos($key,$value){
 
-function videos(){
-    return \App\Models\Video::orderBy('created_at','DESC')->get();
+
+    if ($key == null || $value == null) {
+        return \App\Models\Video::orderBy('created_at','DESC')->get();
+
+    }else{
+        return \App\Models\Video::orderBy('created_at', 'DESC')->where($key,'like','%'.$value.'%')->get();
+
+    }
+
+
 
 }
 ?>

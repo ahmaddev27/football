@@ -55,7 +55,7 @@ class GalleryController extends Controller
 
         $gallery = Gallery::where('description', $request->description)->first();
         if (!$gallery) {
-            $gallery = Gallery::create(['description' => $request->description,'slug'=>str_slug($request->description)]);
+            $gallery = Gallery::create(['description' => $request->description,'championship'=>$request->championship,'slug'=>str_slug($request->description)]);
         }
 
 
@@ -139,7 +139,7 @@ class GalleryController extends Controller
         }
 
        $gallery= Gallery::findOrFail($request->id);
-           $gallery->update(['description' => $request->description,'slug'=>str_slug($request->description)]);
+           $gallery->update(['description' => $request->description,'championship'=>$request->championship,'slug'=>str_slug($request->description)]);
 
 
         $file = $request->file('file');

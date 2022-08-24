@@ -17,16 +17,35 @@
                                 معرض الفيديوهات
                             </h3>
 
+                            <form>
+                                <div class="row mb-2 pr-3">
+                                    <div class="col-8">
+                                        <select class="form-control custom-select  " name="championship">
+                                            <option value="">جميع الدوريات</option>
+                                            @foreach(championship(null,null) as $ch)
+                                                <option value="{{$ch['name']}}" {{request()->championship==$ch['name'] ? 'selected':''}}>{{$ch['name']}} </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <button type="submit" class="btn btn-primary"> <i class="fa fa-search"></i> </button>
+
+                                    </div>
+                                </div>
+                            </form>
+
+
                             <div class="flex-wr-s-s p-b-40">
 
-                                <div class="row justify-content-center">
+                                <div class="row">
 
-                                    @foreach(videos() as $v)
+                                    @foreach(videos('championship',request()->championship) as $v)
 
                                         <div class="col-md-6 col-sm mb-5">
 
                                             <div class="">
-                                                <img class="d-block w-100" src="{{asset($v->image)}}"
+                                                <img class="d-block w-100 wrap-pic-w hov1 trans-03"  src="{{asset($v->image)}}"
                                                      alt="First slide">
 
                                                 <div class="p-tb-16 p-rl-25 bg3" style="min-height:150px">
@@ -39,7 +58,7 @@
                                                             {{$v->title}}
                                                         </a>
                                                     </h5>
-                                                    <p>
+                                                    <p class="mt-5">
                                                               <span class="f1-s-3 cl8 m-r-15">
 									<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
 										 <span>{{$v->created_at->format('H:i')}}</span>
@@ -93,7 +112,7 @@
                         <div class="p-b-30">
                             <div class="how2 how2-cl4 flex-s-c">
                                 <h3 class="f1-m-2 cl3 tab01-title">
-                                    الأكثر مشاهدة
+                                    الأكثر قراءة
                                 </h3>
                             </div>
 
@@ -132,56 +151,45 @@
                             </ul>
                         </div>
 
-                        <!-- Tag -->
-                        <div>
+                        <div class="p-b-55">
                             <div class="how2 how2-cl4 flex-s-c m-b-30">
                                 <h3 class="f1-m-2 cl3 tab01-title">
-                                    Tags
+                                    تاجات
                                 </h3>
                             </div>
 
                             <div class="flex-wr-s-s m-rl--5">
-                                <a href="#"
-                                   class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Fashion
+                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    ابطال اوروبا
                                 </a>
 
-                                <a href="#"
-                                   class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Lifestyle
+                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    كأس العالم
                                 </a>
 
-                                <a href="#"
-                                   class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Denim
+                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    انجلترا
                                 </a>
 
-                                <a href="#"
-                                   class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Streetstyle
+                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    اسبانيا
+                                </a>
+                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    ايطاليا
                                 </a>
 
-                                <a href="#"
-                                   class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Crafts
+                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    المانيا
                                 </a>
 
-                                <a href="#"
-                                   class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Magazine
+                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    فرنسا
                                 </a>
 
-                                <a href="#"
-                                   class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    News
-                                </a>
 
-                                <a href="#"
-                                   class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Blogs
-                                </a>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

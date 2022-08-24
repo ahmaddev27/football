@@ -11,15 +11,10 @@ class Video extends Model
     use HasFactory;
 
 
-    public function category(){
-        return $this->belongsTo(Category::class,'category_id');
-    }
-
-
     public function scopeWhenSearch($query,$search){
 
         return $query->when($search, function ($q) use ($search) {
-            return $q->where('category_id', 'like', "%$search%");
+            return $q->where('championship', 'like', "%$search%");
         });
     }
 
