@@ -122,6 +122,26 @@
 <!-- plugins-jquery -->
 <script src="{{asset('dashboard/js/plugins-jquery.js')}}"></script>
 
+
+<script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+
+<script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('6932c3caa23271edb2a1', {
+        cluster: 'ap2',
+        encrypted: true
+    });
+
+    var channel = pusher.subscribe('notification');
+
+
+</script>
+
+<script src="{{asset('dashboard/pusherNotifications.js')}}"> </script>
+
 <!-- plugin_path -->
 <script>
     var plugin_path = '{{asset('dashboard/js')}}'+'/';

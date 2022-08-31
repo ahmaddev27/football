@@ -19,17 +19,14 @@
         <li class="nav-item fullscreen">
             <a id="btnFullscreen" href="#" class="nav-link" ><i class="ti-fullscreen"></i></a>
         </li>
-        <li class="nav-item dropdown ">
+        <li class="nav-item dropdown hh">
             <a class="nav-link top-nav" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <i class="ti-bell"></i>
+                <span class="badge badge-pill badge-warning" data-count="5" id="notif-count">05</span>
                 <span class="badge badge-danger notification-status"> </span>
             </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-big dropdown-notifications">
-                <div class="dropdown-header notifications">
-                    <strong>Notifications</strong>
-                    <span class="badge badge-pill badge-warning">05</span>
-                </div>
-                <div class="dropdown-divider"></div>
+            <div class="dropdown-menu dropdown-menu-right dropdown-big dropdown-notifications" id="ahmed">
+
                 <a href="#" class="dropdown-item">New registered user <small class="float-right text-muted time">Just now</small> </a>
                 <a href="#" class="dropdown-item">New invoice received <small class="float-right text-muted time">22 mins</small> </a>
                 <a href="#" class="dropdown-item">Server error report<small class="float-right text-muted time">7 hrs</small> </a>
