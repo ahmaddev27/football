@@ -9,8 +9,9 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Carbon;
 
-class NewNotification implements ShouldBroadcast
+class NewNotification  implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,14 +21,17 @@ class NewNotification implements ShouldBroadcast
      * @return void
      */
 
-    public $title,$details,$created_at,$category_id ;
+    public $title,$created_at,$url_route,$date,$time;
 
     public function __construct($data)
     {
-        $this->title=$data['title'];
-        $this->details=$data['details'];
-        $this->category_id=$data['category_id'];
-        $this->created_at= $data['created_at']->diffforhumans();
+        $this->title='خبر جديد : '.str_limit($data['title'],50);
+        $this->url_route=$data['url_route'];
+        $this->created_at= $data['created_at'];
+        $this->date = date("Y-m-d", strtotime(Carbon::now()));
+        $this->time = date("h:i A", strtotime(Carbon::now()));
+
+
     }
 
     /**
@@ -37,6 +41,6 @@ class NewNotification implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return['notification'];
+        return ['notification'];
     }
 }

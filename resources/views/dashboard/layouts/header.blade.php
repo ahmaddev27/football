@@ -22,17 +22,39 @@
         <li class="nav-item dropdown hh">
             <a class="nav-link top-nav" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <i class="ti-bell"></i>
-                <span class="badge badge-pill badge-warning" data-count="5" id="notif-count">05</span>
-                <span class="badge badge-danger notification-status"> </span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-big dropdown-notifications" id="ahmed">
 
-                <a href="#" class="dropdown-item">New registered user <small class="float-right text-muted time">Just now</small> </a>
-                <a href="#" class="dropdown-item">New invoice received <small class="float-right text-muted time">22 mins</small> </a>
-                <a href="#" class="dropdown-item">Server error report<small class="float-right text-muted time">7 hrs</small> </a>
-                <a href="#" class="dropdown-item">Database report<small class="float-right text-muted time">1 days</small> </a>
-                <a href="#" class="dropdown-item">Order confirmation<small class="float-right text-muted time">2 days</small> </a>
+                <span class="badge badge-pill badge-warning" data-count="{{auth()->user()->unreadNotifications->count()}}" id="notif-count"> {{auth()->user()->unreadNotifications->count()}}</span>
+
+                    <span class="badge badge-danger notification-status"> </span>
+
+
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-big dropdown-notifications"  id="ahmed">
+
+
+                <div class="dropdown-header notifications">
+                    <strong>التنبيهات</strong>
+                    <span class="badge badge-pill badge-warning"><a id="" href="#">  تحديد الكل كمقروء  </a></span>
+                </div>
+
+                <div class="dropdown-divider"></div>
+
+
+
+            @foreach(auth()->user()->unreadNotifications as $notification)
+                <a target="_blank" href="{{$notification->data['url']}}" class="dropdown-item">
+                  <small> {{ $notification->data['title'] }}</small>
+                    <small class="float-right text-muted time">
+                        {{$notification->data['date']}} - {{$notification->data['time']}} </small>
+                </a>
+                    <div class="dropdown-divider"></div>
+
+                @endforeach
+
+
             </div>
+
+
         </li>
 
 

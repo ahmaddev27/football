@@ -5,8 +5,11 @@ use App\Events\NewNotification;
 use App\Http\Traits\ImageTrait;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
+
 use Illuminate\Http\Request;
-use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\CreatePost;
 use Yajra\DataTables\DataTables;
 
 class PostController extends Controller
@@ -95,12 +98,14 @@ class PostController extends Controller
 
            $data=[
                'title'=>$post->title,
-               'details'=>$post->details,
                'created_at'=>$post->created_at,
-               'category_id'=>$post->category_id,
-               ];
+               'url_route'=>'post/'.$post->slug,
+            ];
 
+
+            auth()->user()->notify(new CreatePost($post));
             event(new NewNotification($data));
+
             return Redirect()->route('dashboard.post.index')->with(['message' => 'تمت اضافة الخبر بنجاح', 'alert-type' => 'success']);
         }
 

@@ -10,21 +10,33 @@ var channel = pusher.subscribe('notification');
 // Bind a function to a Event (the full Laravel class)
 channel.bind('App\\Events\\NewNotification', function (data) {
     var existingNotifications = notifications.html();
-//     var newNotificationHtml = `<a href="`+data.title+`">
-//      <div class="media-body">
-//      <h6 class="media-heading text-right">` + data.user_name + `</h6>
-//      <p class="notification-text font-small-3 text-muted text-right">
-//
-//     ` + data.comment + `</p><small style="direction: ltr;">
-//      <p class="media-meta text-muted text-right" style="direction: ltr;">
-// ` + data.date + data.time + `</p> </small></div></div></a>`
-//     ;
 
-    var newNotificationHtml=`<a href="#" class="dropdown-item">`+ data.title +` تم اضافة خبر جديد  <small class="float-right text-muted time">` + data.created_at +`</small> </a>`;
+    var newNotificationHtml=`<a href="`+data.url_route +`" class="dropdown-item"><small>`+ data.title +`</small> <small class="float-right text-muted time">` + data.date +`</small> </a>
+    <div class="dropdown-divider"></div>`;
 
     notifications.html(newNotificationHtml + existingNotifications);
     notificationsCount += 1;
     notificationsCountElem.attr('data-count', notificationsCount);
     notificationsWrapper.find('#notif-count').text(notificationsCount);
     notificationsWrapper.show();
+
+    playAudio();
+
+
 });
+
+
+function playAudio() {
+    var x = new Audio('https://assets.mixkit.co/sfx/download/mixkit-software-interface-start-2574.wav');
+    // Show loading animation.
+    var playPromise = x.play();
+
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            x.play();
+        })
+            .catch(error => {
+            });
+
+    }
+}
