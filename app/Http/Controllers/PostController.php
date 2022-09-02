@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Events\NewNotification;
 use App\Http\Traits\ImageTrait;
+use App\Models\Admin;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -97,15 +98,20 @@ class PostController extends Controller
 
 
            $data=[
-               'title'=>$post->title,
+
+               'title'=>'خبر جديد : '.str_limit($post->title,50),
                'created_at'=>$post->created_at,
                'url_route'=>'post/'.$post->slug,
+               'sound'=>'https://assets.mixkit.co/sfx/download/mixkit-software-interface-start-2574.wav'
             ];
 
 
-            auth()->user()->notify(new CreatePost($post));
-            event(new NewNotification($data));
+            $admins = Admin::all();
+            foreach ($admins as $admin) {
+                $admin->notify(new CreatePost($post));
+            }
 
+            event(new NewNotification($data));
             return Redirect()->route('dashboard.post.index')->with(['message' => 'تمت اضافة الخبر بنجاح', 'alert-type' => 'success']);
         }
 

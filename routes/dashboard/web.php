@@ -116,6 +116,10 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     });
 
+    Route::get('/notifications/MarkReadAll',[AdminController::class,'MarkReadAll'])->name('notifications.MarkReadAll');
+    Route::get('/notifications/all',[AdminController::class,'notificationsAll'])->name('notifications.all');
+    Route::post('/notifications/read',[AdminController::class,'read'])->name('notification.read');
+
 
 });
 

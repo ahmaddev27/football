@@ -32,7 +32,6 @@
                 {data: 'DT_RowIndex', name: 'id',},
                 {data: 'name', name: 'name'},
                 {data: 'posts', name: 'posts',orderable: false, searchable: false},
-                {data: 'videos', name: 'videos',orderable: false, searchable: false},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ],
         });

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewNotification;
+use App\Models\Admin;
 use App\Models\Category;
+use App\Notifications\CrateCategory;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -21,11 +24,6 @@ class CategoryController extends Controller
             ->editColumn('posts', function ($iteam) {
 
                 return $iteam->posts()->count();
-
-            })
-            ->editColumn('videos', function ($iteam) {
-
-                return $iteam->videos()->count();
 
             })
 
@@ -55,7 +53,23 @@ class CategoryController extends Controller
     }
 
     public function store(Request $request){
-        Category::create(['name'=>$request->name,'slug'=>str_slug($request->name)]);
+      $category = Category::create(['name'=>$request->name,'slug'=>str_slug($request->name)]);
+
+        $data=[
+            'title'=>'تصنيف جديد  : '.str_limit($category->name,50),
+            'created_at'=>$category->created_at,
+            'url_route'=>'dashboard/category',
+            'sound'=>'https://assets.mixkit.co/sfx/download/mixkit-wrong-answer-fail-notification-946.wav'
+        ];
+
+
+        $admins = Admin::all();
+        foreach ($admins as $admin) {
+            $admin->notify(new CrateCategory($category));
+        }
+
+        event(new NewNotification($data));
+
         return response()->json(['message'=>'تم حفظ البيانات بنجاح','status'=>true],200);
     }
 

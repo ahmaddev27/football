@@ -21,15 +21,16 @@ class NewNotification  implements ShouldBroadcast
      * @return void
      */
 
-    public $title,$created_at,$url_route,$date,$time;
+    public $title,$created_at,$url_route,$date,$time,$sound;
 
     public function __construct($data)
     {
-        $this->title='خبر جديد : '.str_limit($data['title'],50);
+        $this->title=$data['title'];
         $this->url_route=$data['url_route'];
-        $this->created_at= $data['created_at'];
         $this->date = date("Y-m-d", strtotime(Carbon::now()));
         $this->time = date("h:i A", strtotime(Carbon::now()));
+        $this->sound=$data['sound'];
+
 
 
     }

@@ -39,7 +39,7 @@
                                 <td class="">#</td>
                                 <td class="w-50">العنوان</td>
                                 <td class="">عدد الاخبار</td>
-                                <td class="">عدد الفيديوهات</td>
+
                                 <td class="w-25">خيارات</td>
                             </tr>
 

@@ -193,6 +193,58 @@
     @endif
 </script>
 
+
+<script>
+
+    $(document).on("click", "#markReadAll", function(e){
+
+        var route =  $(this).attr('data-route');
+
+        $.ajax({
+
+            url: route,
+            type: "get",
+            dataType: "JSON",
+
+            success: function (data) {
+                swal("تمت العملية", data.message, data.icon);
+                setTimeout(function()
+                {
+                    location.reload();
+                }, 1000);
+
+            },
+
+
+
+
+
+        })
+
+    });
+</script>
+
+<script>
+
+    $(document).on("click", "#read", function(e){
+        var route =  $(this).attr('data-route');
+        var id =  $(this).attr('data-id');
+        $.ajax({
+            data: {
+                "_token": "{{ csrf_token() }}",
+                'id': id,
+            },
+            url: route,
+            type: "post",
+            dataType: "JSON",
+        })
+
+    });
+</script>
+
+
+
+
 @stack('js')
 
 

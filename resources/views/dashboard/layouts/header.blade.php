@@ -29,20 +29,29 @@
 
 
             </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-big dropdown-notifications"  id="ahmed">
+            <div class="dropdown-menu dropdown-menu-right dropdown-big dropdown-notifications"  id="notifications-push">
+
 
 
                 <div class="dropdown-header notifications">
                     <strong>التنبيهات</strong>
-                    <span class="badge badge-pill badge-warning"><a id="" href="#">  تحديد الكل كمقروء  </a></span>
+                    <span class="badge badge-pill badge-warning"><a id="markReadAll" data-route="{{route('dashboard.notifications.MarkReadAll')}}" href="#">  تحديد الكل كمقروء  </a></span>
+
                 </div>
 
                 <div class="dropdown-divider"></div>
+                <div id="new">
 
 
 
-            @foreach(auth()->user()->unreadNotifications as $notification)
-                <a target="_blank" href="{{$notification->data['url']}}" class="dropdown-item">
+                </div>
+
+
+
+
+
+            @foreach(auth()->user()->unreadNotifications->take(8) as $notification)
+                <a target="_blank" href="/{{$notification->data['url']}}" class="dropdown-item" id="read" data-id="{{$notification->id}}" data-route="{{route('dashboard.notification.read')}}">
                   <small> {{ $notification->data['title'] }}</small>
                     <small class="float-right text-muted time">
                         {{$notification->data['date']}} - {{$notification->data['time']}} </small>
@@ -51,8 +60,15 @@
 
                 @endforeach
 
+                <div class="dropdown-header notifications">
+                    <strong></strong>
+                    <span class="badge badge-pill badge-dark"><a  href="{{route('dashboard.notifications.all')}}"> جميع الاشعارات </a></span>
+
+                </div>
+
 
             </div>
+
 
 
         </li>
