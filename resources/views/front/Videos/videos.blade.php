@@ -159,31 +159,38 @@
                             </div>
 
                             <div class="flex-wr-s-s m-rl--5">
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                <a href="{{route('search')}}/?search=ابطال اوروبا"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
                                     ابطال اوروبا
                                 </a>
 
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    كأس العالم
+                                {{--                                <a href="{{route('search')}}/?search=كأس العالم"--}}
+                                {{--                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">--}}
+                                {{--                                    كأس العالم--}}
+                                {{--                                </a>--}}
+
+                                <a href="{{route('search')}}/?search=الدوري الانجليزي"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    الانجليزي
                                 </a>
 
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    انجلترا
+                                <a href="{{route('search')}}/?search=الدوري الاسباني"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    الاسباني
+                                </a>
+                                <a href="{{route('search')}}/?search=الدوري الايطالي"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    الايطالي
                                 </a>
 
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    اسبانيا
-                                </a>
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    ايطاليا
+                                <a href="{{route('search')}}/?search=الدوري الالماني"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    الالماني
                                 </a>
 
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    المانيا
-                                </a>
-
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    فرنسا
+                                <a href="{{route('search')}}/?search=الدوري الفرنسي"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    الفرنسي
                                 </a>
 
 

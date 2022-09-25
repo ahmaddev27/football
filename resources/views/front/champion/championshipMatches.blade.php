@@ -14,7 +14,7 @@
                     <form>
                         <div class="row mb-2 pr-3">
                             <div class="col-3">
-                                <select class="form-control custom-select  " name="week">
+                                <select class="form-control custom-select " name="week">
                                     <option value="">جميع الاسابيع</option>
                                     @for($i=1;$i<40;$i++)
                                         <option value="{{$i}}" {{request()->week==$i ? 'selected':''}}>الأسبوع {{$i}} </option>
@@ -26,13 +26,13 @@
                                 <select class="form-control custom-select " name="team">
                                     <option value="">جميع الفرق</option>
                                     @foreach($teams as $team)
-                                        <option value="{{$team['id']}}" {{request()->team==$team['id'] ? 'selected':''}}>{{$team['name']}} </option>
+                                        <option  value="{{$team['id']}}" {{request()->team==$team['id'] ? 'selected':''}}>{{$team['name']}} </option>
                                     @endforeach
                                 </select>
                             </div>
 
                             <div class="col-3">
-                                <button type="submit" class="btn btn-primary"> <i class="fa fa-search"></i> </button>
+                                <button type="submit" class="col-4 bg10 text-white btn btn-outline-primary"> <i class="fa fa-search"></i> </button>
 
                             </div>
                         </div>
@@ -50,46 +50,68 @@
 
                                 @foreach($data as $x)
 
+
                                     <div class="shadow-none p-3 mb-2 bg-light rounded">
-
-                                    <div class="row">
-
-                                        <div class="col-sm-2 pr-5 p-3">
+                                        <div class="col-sm">
                                             <span style="font-size: 13px"> {{$x->WeekOrRound}}</span>
                                         </div>
 
-                                        <div class="col-sm-3 pr-5 p-3">
-                                            <div class="body text-center">
-                                                <h3 class="mb-1">{{$x->HomeTeamName}}</h3>
-                                            <img src="{{$x->HomeTeamLogoUrl}}">
+                                        <div class="row justify-content-center text-center">
+
+                                            <div class="col-sm">
+                                                <div class="body text-center">
+                                                    <h3>{{$x->HomeTeamName}}
+                                                        <img src="{{$x->HomeTeamLogoUrl}}">
+                                                    </h3>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="col-sm">
+                                                <div class=" mt-4 body text-center">
+                                                    <strong class=" cl17 ml-2 " style="font-size: 20px"> {{$x->HomeScore??'-'}}</strong>
+                                                    <span class=" col-12  {{status($x->CurrentMatchStatus->MatchStatusName)}} text-white">{{$x->CurrentMatchStatus->MatchStatusName}}</span>
+                                                    <strong class=" cl17 mr-2 "style="font-size:20px">{{$x->AwayScore??'-'}}</strong>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm">
+                                                <div class="body text-center">
+                                                    <h3><img src="{{$x->AwayTeamLogoUrl}}"class="ml-2">{{$x->AwayTeamName}}</h3>
+
+                                                </div>
                                             </div>
                                         </div>
 
 
 
-                                        <div class="col-sm-3 pr-5 p-3">
+                                        <div class="row justify-content-center text-center mt-3 mb-3">
+                                            @if($x->StadiumName)
+                                                <div class="col-auto">
+                                                    <h6 class="f1-s-12 cl8 m-r-12"> <img src="{{asset('front/images/st.png')}}" class="ml-2" style="max-width: 22px"> {{$x->StadiumName}}</h6>
+                                                </div>
+                                            @endif
 
-                                            <div class="body text-center">
-                                                <strong class="mb-3 cl17 ml-2 " style="font-size: 20px"> {{$x->HomeScore}}</strong>
-                                                    <span class="badge badge-{{status($x->CurrentMatchStatus->MatchStatusName)}}"style="font-size: 13px"> {{$x->CurrentMatchStatus->MatchStatusName}}</span>
-                                                <strong class="mb-3 cl17 mr-2 "style="font-size:20px">{{$x->AwayScore}}</strong>
-                                              <br> <i class="fa fa-calendar mt-3 "> </i>  <br>
-                                                 <p class="">
-                                                     {{  date('y-m-d /  H:i', date( intval(substr(preg_replace('/[^0-9]+/', '', $x->Date ), 0, 10) )))}}
-                                                 </p>
+                                            <div class="col-auto">
+                                                @foreach($x->TvCoverage as $item)
+                                                    <h6 class="f1-s-12 cl8 m-r-12"><i class="fa fa-tv ml-2"> </i> {{$item->TvChannelName}} </h6>
+                                                @endforeach
                                             </div>
 
-                                        </div>
-
-                                        <div class="col-sm-4 pr-5 p-3">
-                                            <div class="body text-center">
-                                                <h3 class="mb-1">{{$x->AwayTeamName}}</h3>
-                                                <img src="{{$x->AwayTeamLogoUrl}}">
+                                            <div class="col-auto">
+                                                <h6 class="f1-s-12 cl8 m-r-12">
+                                                    <i class="fa fa-calendar ml-2"> </i>  {{  date('y-m-d -  H:i', date( intval(substr(preg_replace('/[^0-9]+/', '', $x->Date ), 0, 10) )))}}
+                                                </h6>
                                             </div>
                                         </div>
+
+
+
                                     </div>
 
-                                </div>
+
+
                                 @endforeach
 
 
@@ -201,10 +223,10 @@
 
                     </div>
 
-                    </div>
-
                 </div>
+
             </div>
+        </div>
 
     </section>
 

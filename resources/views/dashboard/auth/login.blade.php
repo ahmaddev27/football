@@ -62,7 +62,7 @@ login-->
                     <div class="login-fancy pb-40 clearfix">
                         <h3 class="mb-30">تسجيل الدخول</h3>
 
-                        <form id="form" method="POST" action="{{route('dashboard.admin.login')}}">
+                        <form id="form" method="POST" action="{{route('dashboard.login')}}">
                             @csrf
                             <div class="section-field mb-20">
                                 <label class="mb-10" for="name">البريدالالكتروني*</label>

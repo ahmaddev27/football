@@ -7,12 +7,14 @@ use App\Models\Category;
 use App\Models\Video;
 use Illuminate\Http\Request;
 
-class VideoController extends Controller
+class VideoController extends Controller{
 
-{
+    public function __construct(){
+        $this->middleware('auth:admin');
+    }
+
 
     use ImageTrait;
-
     public function index(){
         $categories=Category::all();
         $videos =Video::orderBy('created_at', 'DESC')

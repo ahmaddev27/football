@@ -5,53 +5,69 @@
         <div class="topbar">
             <div class="content-topbar container h-100">
                 <div class="left-topbar">
-						<span class="left-topbar-item flex-wr-s-c">
-							<span>
-								New York, NY
-							</span>
 
-							<img class="m-b-1 m-rl-8" src="{{asset('front/images/icons/icon-night.png')}}" alt="IMG">
+                    @auth
+                        <a href="{{route('profile')}}" class="left-topbar-item m-3">
+                            <span class="fa fa-user"></span>
+                        </a>
 
-							<span>
-								HI 58° LO 56°
-							</span>
-						</span>
+                        <a href="{{route('article')}}" class="left-topbar-item m-3">
+                            كتابة مقال
+                        </a>
 
-                    <a href="#" class="left-topbar-item">
-                        About
+                    @else
+
+                        <a href="{{route('login')}}" class="left-topbar-item m-3">
+                            <span class="fa fa-user"></span>
+                        </a>
+
+                    @endauth
+
+
+
+
+                    <a href="#" class="left-topbar-item m-3">
+                        سياسية الخصوصية
                     </a>
 
-                    <a href="#" class="left-topbar-item">
-                        Contact
+
+                    <a href="#" class="left-topbar-item m-3">
+                        من نحن
                     </a>
 
-                    <a href="#" class="left-topbar-item">
-                        Sing up
+                    <a href="#" class="left-topbar-item m-3">
+                       تواصل معنا
                     </a>
 
-                    <a href="#" class="left-topbar-item">
-                        Log in
-                    </a>
+
+
+
+
+
+
+
+
+
                 </div>
 
                 <div class="right-topbar">
-                    <a href="#">
+                    <a href="{{setting('facebook')}}">
                         <span class="fab fa-facebook-f"></span>
                     </a>
 
-                    <a href="#">
+                    <a href="{{setting('twitter')}}">
                         <span class="fab fa-twitter"></span>
                     </a>
 
                     <a href="#">
-                        <span class="fab fa-pinterest-p"></span>
+                        <span class="fab fa-telegram"></span>
                     </a>
 
-                    <a href="#">
-                        <span class="fab fa-vimeo-v"></span>
+                    <a href="">
+                        <span class="fab fa-instagram"></span>
                     </a>
 
-                    <a href="#">
+                    <a  href="">
                         <span class="fab fa-youtube"></span>
                     </a>
                 </div>
@@ -62,7 +78,7 @@
         <div class="wrap-header-mobile">
             <!-- Logo moblie -->
             <div class="logo-mobile ">
-                <a href="index.html"><img src="{{asset(setting('image'))}}" alt="IMG-LOGO"></a>
+                <a href="{{route('home')}}"><img src="{{asset(setting('image'))}}" alt="IMG-LOGO"></a>
             </div>
 
             <!-- Button show menu -->
@@ -169,7 +185,7 @@
             <div class="main-nav">
                 <!-- Menu desktop -->
                 <nav class="menu-desktop">
-                    <a class="logo-stick" href="index.html">
+                    <a class="logo-stick" href="{{route('home')}}">
                         <img src="{{asset(setting('image'))}}" alt="LOGO">
                     </a>
 
@@ -179,14 +195,14 @@
                         </li>
 
                         <li class="main-menu{{request()->routeIs('news') ? '-active' : '' }}">
-                            <a href="category-01.html">الاخبار</a>
+                            <a href="{{route('search')}}">الاخبار</a>
 
                         </li>
 
-                        <li class="main-menu-item">
-                            <a href="category-02.html">الانتقالات </a>
+{{--                        <li class="main-menu-item">--}}
+{{--                            <a href="category-02.html">الانتقالات </a>--}}
 
-                        </li>
+{{--                        </li>--}}
 
                         <li class="main-menu-item">
                             <a href="{{route('galleries')}}">الصور</a>

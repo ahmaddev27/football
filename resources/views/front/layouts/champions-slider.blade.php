@@ -48,11 +48,11 @@
     }
 
     .MultiCarousel .leftLst {
-        left: 0;
+        right: 0;
     }
 
     .MultiCarousel .rightLst {
-        right : 0;
+        left : 0;
     }
 
     .MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over {
@@ -73,15 +73,17 @@
                             <div class="pad15" style="background-color:#f1f1f1;">
                                 <a href="{{route('standing',$i)}}" style="color: #1B1C1D;text-decoration: none">
                                     <p class="lead"><img src=" {{@$value['logo']}}"style="width:60px"></p>
-                                    <p class="lead">{{$value['name']}}</p>
+                                    <p class="f1-m-1 cl2 hov-cl10 trans-03">{{$value['name']}}</p>
+
                                 </a>
                             </div>
                         </div>
                     @endforeach
 
                 </div>
-                <button class="btn btn-primary leftLst  mr-5">></button>
-                <button class="btn btn-primary rightLst  ml-5 "><</button>
+                <button class="btn btn-primary rightLst  mr-5 "> > </button>
+                <button class="btn btn-primary leftLst  ml-5"> < </button>
+
 
             </div>
         </div>

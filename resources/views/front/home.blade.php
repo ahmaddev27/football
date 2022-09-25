@@ -5,7 +5,7 @@
     <section class="bg0 text-center">
         <div class="container">
 
-            <div class="row bg13 mt-3">
+            <div class="row bg13 mt-3 justify-content-center text-center">
 
                 @foreach($data as $x)
 
@@ -16,7 +16,7 @@
                         <div class="p-t-16">
 
                             <h6  class="f1-s-10 cl2 hov-cl10 text-right">
-                                <span class="badge badge-{{status($x['status'])}}"> <b class="text-end" >{{$x['status']}}</b></span>
+                                <span class=" col-12 text-center {{status($x['status'])}} text-white">{{$x['status']}}</span>
                             </h6>
 
                                     <h6  class="f1-s-10 cl2 hov-cl10 trans-03">
@@ -32,7 +32,13 @@
                 </div>
 
                 @endforeach
+
+
             </div>
+            <a href="{{route('matches')}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03 float-left">
+               جميع المبارايات
+                <i class="fs-12 m-l-5 fa fa-caret-left"></i>
+            </a>
             </div>
 
 
@@ -51,7 +57,7 @@
                                 </h3>
 
 
-                                <a href="category-01.html" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+                                <a href="{{route('search')}}/?search={{(category('اوروبي'))}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
                                     المزيد
                                     <i class="fs-12 m-l-5 fa fa-caret-left"></i>
                                 </a>
@@ -132,7 +138,7 @@
                                         أسيوي
                                     </h3>
 
-                                    <a href="category-01.html" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+                                    <a href="{{route('search')}}/?search={{(category('أسيوي'))}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
                                         المزيد
                                         <i class="fs-12 m-l-5 fa fa-caret-left"></i>
                                     </a>
@@ -202,7 +208,7 @@
                                         لاتيني
                                     </h3>
 
-                                    <a href="category-01.html" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+                                    <a href="{{route('search')}}/?search={{(category('لاتيني'))}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
                                         المزيد
                                         <i class="fs-12 m-l-5 fa fa-caret-left"></i>
                                     </a>
@@ -278,7 +284,7 @@
                                 </h3>
 
 
-                                <a href="category-01.html" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+                                <a href="{{route('search')}}/?search={{(category('افريقي'))}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
                                     المزيد
                                     <i class="fs-12 m-l-5 fa fa-caret-left"></i>
                                 </a>
@@ -415,8 +421,8 @@
 
                                         @foreach(galleries(null,null) as $key=>$g)
                                             <div class="carousel-item {{$key==0?'active':''}} size-h-4">
-                                                <img class="d-block w-50 wrap-pic-w hov1 trans-03"  src="{{asset($g->images[0]->image)}}"
-                                                     alt="First slide">
+                                                <img class="d-block w-100 wrap-pic-w hov1 "  src="{{asset($g->images[0]->image)}}"
+                                                    alt="First slide">
 
                                                 <div class="p-tb-16 p-rl-25 bg3">
                                                     <h5 class="p-b-5">
@@ -497,32 +503,24 @@
                     </div>
                     <div class="row p-t-35">
 
+                        @foreach(articles()->take(10) as $article)
                         <div class="col-sm-6 p-r-25 p-r-15-sr991">
                             <!-- Item latest -->
                             <div class="m-b-45">
-                                <a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-                                    <img src="{{asset('front/images/latest-02.jpg')}}" alt="IMG">
-                                </a>
 
                                 <div class="p-t-16">
                                     <h5 class="p-b-5">
                                         <a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
-                                            1 موسيماني في الأهلي..المبالغة فوق الجميع
+                                            {{$article->title}}
                                         </a>
                                     </h5>
 
                                     <span class="cl8">
 										<a href="#" class="f1-s-4 cl14 hov-cl10 trans-03">
-											ضياء نصار
+											{{$article->user->name}}
 										</a>
+                                        <span href="#" class="f1-s-4 cl8 hov-cl10 trans-03">{{$article->created_at->format('d M')}}</span>
 
-										<span class="f1-s-3 m-rl-3">
-											-
-										</span>
-
-										<span class="f1-s-3">
-											Feb 09
-										</span>
 									</span>
                                 </div>
                             </div>
@@ -530,29 +528,20 @@
                         <div class="col-sm-6 p-r-25 p-r-15-sr991">
                             <!-- Item latest -->
                             <div class="m-b-45">
-                                <a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-                                    <img src="{{asset('front/images/latest-01.jpg')}}" alt="IMG">
-                                </a>
 
                                 <div class="p-t-16">
                                     <h5 class="p-b-5">
                                         <a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
-                                            موسيماني في الأهلي..المبالغة فوق الجميع
+                                            {{$article->title}}
                                         </a>
                                     </h5>
 
                                     <span class="cl8">
 										<a href="#" class="f1-s-4 cl14 hov-cl10 trans-03">
-											ضياء نصار
+											{{$article->user->name}}
 										</a>
+                                        <span href="#" class="f1-s-4 cl8 hov-cl10 trans-03">{{$article->created_at->format('d M')}}</span>
 
-										<span class="f1-s-3 m-rl-3">
-											-
-										</span>
-
-										<span class="f1-s-3">
-											Feb 09
-										</span>
 									</span>
                                 </div>
                             </div>
@@ -560,29 +549,20 @@
                         <div class="col-sm-6 p-r-25 p-r-15-sr991">
                             <!-- Item latest -->
                             <div class="m-b-45">
-                                <a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-                                    <img src="{{asset('front/images/latest-03.jpg')}}" alt="IMG">
-                                </a>
 
                                 <div class="p-t-16">
                                     <h5 class="p-b-5">
                                         <a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
-                                            موسيماني في الأهلي..المبالغة فوق الجميع
+                                            {{$article->title}}
                                         </a>
                                     </h5>
 
                                     <span class="cl8">
 										<a href="#" class="f1-s-4 cl14 hov-cl10 trans-03">
-											ضياء نصار
+											{{$article->user->name}}
 										</a>
+                                        <span href="#" class="f1-s-4 cl8 hov-cl10 trans-03">{{$article->created_at->format('d M')}}</span>
 
-										<span class="f1-s-3 m-rl-3">
-											-
-										</span>
-
-										<span class="f1-s-3">
-											Feb 09
-										</span>
 									</span>
                                 </div>
                             </div>
@@ -590,29 +570,20 @@
                         <div class="col-sm-6 p-r-25 p-r-15-sr991">
                             <!-- Item latest -->
                             <div class="m-b-45">
-                                <a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-                                    <img src="{{asset('front/images/latest-04.jpg')}}" alt="IMG">
-                                </a>
 
                                 <div class="p-t-16">
                                     <h5 class="p-b-5">
                                         <a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
-                                            موسيماني في الأهلي..المبالغة فوق الجميع
+                                            {{$article->title}}
                                         </a>
                                     </h5>
 
                                     <span class="cl8">
 										<a href="#" class="f1-s-4 cl14 hov-cl10 trans-03">
-											ضياء نصار
+											{{$article->user->name}}
 										</a>
+                                        <span href="#" class="f1-s-4 cl8 hov-cl10 trans-03">{{$article->created_at->format('d M')}}</span>
 
-										<span class="f1-s-3 m-rl-3">
-											-
-										</span>
-
-										<span class="f1-s-3">
-											Feb 09
-										</span>
 									</span>
                                 </div>
                             </div>
@@ -620,123 +591,25 @@
                         <div class="col-sm-6 p-r-25 p-r-15-sr991">
                             <!-- Item latest -->
                             <div class="m-b-45">
-                                <a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-                                    <img src="{{asset('front/images/latest-05.jpg')}}" alt="IMG">
-                                </a>
 
                                 <div class="p-t-16">
                                     <h5 class="p-b-5">
                                         <a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
-                                            موسيماني في الأهلي..المبالغة فوق الجميع
+                                            {{$article->title}}
                                         </a>
                                     </h5>
 
                                     <span class="cl8">
 										<a href="#" class="f1-s-4 cl14 hov-cl10 trans-03">
-											ضياء نصار
+											{{$article->user->name}}
 										</a>
+                                        <span href="#" class="f1-s-4 cl8 hov-cl10 trans-03">{{$article->created_at->format('d M')}}</span>
 
-										<span class="f1-s-3 m-rl-3">
-											-
-										</span>
-
-										<span class="f1-s-3">
-											Feb 09
-										</span>
 									</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 p-r-25 p-r-15-sr991">
-                            <!-- Item latest -->
-                            <div class="m-b-45">
-                                <a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-                                    <img src="{{asset('front/images/latest-01.jpg')}}" alt="IMG">
-                                </a>
-
-                                <div class="p-t-16">
-                                    <h5 class="p-b-5">
-                                        <a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
-                                            موسيماني في الأهلي..المبالغة فوق الجميع
-                                        </a>
-                                    </h5>
-
-                                    <span class="cl8">
-										<a href="#" class="f1-s-4 cl14 hov-cl10 trans-03">
-											ضياء نصار
-										</a>
-
-										<span class="f1-s-3 m-rl-3">
-											-
-										</span>
-
-										<span class="f1-s-3">
-											Feb 09
-										</span>
-									</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 p-r-25 p-r-15-sr991">
-                            <!-- Item latest -->
-                            <div class="m-b-45">
-                                <a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-                                    <img src="{{asset('front/images/latest-01.jpg')}}" alt="IMG">
-                                </a>
-
-                                <div class="p-t-16">
-                                    <h5 class="p-b-5">
-                                        <a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
-                                            موسيماني في الأهلي..المبالغة فوق الجميع
-                                        </a>
-                                    </h5>
-
-                                    <span class="cl8">
-										<a href="#" class="f1-s-4 cl14 hov-cl10 trans-03">
-											ضياء نصار
-										</a>
-
-										<span class="f1-s-3 m-rl-3">
-											-
-										</span>
-
-										<span class="f1-s-3">
-											Feb 09
-										</span>
-									</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 p-r-25 p-r-15-sr991">
-                            <!-- Item latest -->
-                            <div class="m-b-45">
-                                <a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-                                    <img src="{{asset('front/images/latest-01.jpg')}}" alt="IMG">
-                                </a>
-
-                                <div class="p-t-16">
-                                    <h5 class="p-b-5">
-                                        <a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
-                                            موسيماني في الأهلي..المبالغة فوق الجميع
-                                        </a>
-                                    </h5>
-
-                                    <span class="cl8">
-										<a href="#" class="f1-s-4 cl14 hov-cl10 trans-03">
-											ضياء نصار
-										</a>
-
-										<span class="f1-s-3 m-rl-3">
-											-
-										</span>
-
-										<span class="f1-s-3">
-											Feb 09
-										</span>
-									</span>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
 
                 </div>
@@ -753,38 +626,38 @@
                         </div>
 
                         <div class="flex-wr-s-s m-rl--5">
-                            <a href="#"
+                            <a href="{{route('search')}}/?search=ابطال اوروبا"
                                class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
                                 ابطال اوروبا
                             </a>
 
-                            <a href="#"
+                            {{--                                <a href="{{route('search')}}/?search=كأس العالم"--}}
+                            {{--                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">--}}
+                            {{--                                    كأس العالم--}}
+                            {{--                                </a>--}}
+
+                            <a href="{{route('search')}}/?search=الدوري الانجليزي"
                                class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                كأس العالم
+                                الانجليزي
                             </a>
 
-                            <a href="#"
+                            <a href="{{route('search')}}/?search=الدوري الاسباني"
                                class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                انجلترا
+                                الاسباني
+                            </a>
+                            <a href="{{route('search')}}/?search=الدوري الايطالي"
+                               class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                الايطالي
                             </a>
 
-                            <a href="#"
+                            <a href="{{route('search')}}/?search=الدوري الالماني"
                                class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                اسبانيا
-                            </a>
-                            <a href="#"
-                               class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                ايطاليا
+                                الالماني
                             </a>
 
-                            <a href="#"
+                            <a href="{{route('search')}}/?search=الدوري الفرنسي"
                                class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                المانيا
-                            </a>
-
-                            <a href="#"
-                               class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                فرنسا
+                                الفرنسي
                             </a>
 
 
@@ -810,7 +683,7 @@
                                         @foreach(videos(null,null) as $key=>$v)
 
                                         <div class="carousel-item {{$key==0?'active':''}}">
-                                            <img class="d-block w-100 wrap-pic-w hov1 trans-03"  src="{{asset($v->image)}}"
+                                            <img class="d-block w-100 wrap-pic-w hov1 "  src="{{asset($v->image)}}"
                                                  alt="First slide">
 
                                             <div class="p-tb-16 p-rl-25 bg3">
@@ -842,19 +715,8 @@
                         </div>
                     </div>
 
-                    <div class="p-l-10 p-rl-0-sr991  mt-5">
-
-                        <div class="p-l-10 p-rl-0-sr991">
-                            <!-- Banner -->
-                            <div class="flex-c-s">
-                                <a href="#">
-                                    <img class="max-w-full" src="{{asset(setting('banner_three'))}} " alt="IMG">
-                                </a>
-                            </div>
-                        </div>
 
 
-                    </div>
 
                 </div>
 

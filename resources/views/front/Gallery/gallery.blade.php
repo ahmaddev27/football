@@ -95,7 +95,7 @@
                         <!-- Category -->
                         <div class="p-b-60">
                             <a href="#">
-                                <img class="max-w-full"  src="{{asset(setting('banner'))}} " alt="IMG">
+                                <img class="max-w-full" src="{{asset(setting('banner'))}} " alt="IMG">
                             </a>
                         </div>
 
@@ -110,7 +110,7 @@
                                 @foreach(posts(null,null)->take(3) as $x)
                                     <li class="flex-wr-sb-s p-b-30">
                                         <a href="{{route('post',$x->slug)}}" class="size-w-10 wrap-pic-w hov1 trans-03">
-                                            <img src="{{asset($x->image)}}" alt="IMG">
+                                            <img src="{{asset($x->image)}}" class="d-block w-100 wrap-pic-w hov1 trans-03" alt="IMG">
                                         </a>
 
                                         <div class="size-w-11">
@@ -142,48 +142,52 @@
                         </div>
 
 
-                        <!-- Tag -->
-                        <div>
+                        <div class="p-b-55">
                             <div class="how2 how2-cl4 flex-s-c m-b-30">
                                 <h3 class="f1-m-2 cl3 tab01-title">
-                                    Tags
+                                    تاجات
                                 </h3>
                             </div>
 
                             <div class="flex-wr-s-s m-rl--5">
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Fashion
+                                <a href="{{route('search')}}/?search=ابطال اوروبا"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    ابطال اوروبا
                                 </a>
 
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Lifestyle
+{{--                                <a href="{{route('search')}}/?search=كأس العالم"--}}
+{{--                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">--}}
+{{--                                    كأس العالم--}}
+{{--                                </a>--}}
+
+                                <a href="{{route('search')}}/?search=الدوري الانجليزي"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                     الانجليزي
                                 </a>
 
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Denim
+                                <a href="{{route('search')}}/?search=الدوري الاسباني"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                     الاسباني
+                                </a>
+                                <a href="{{route('search')}}/?search=الدوري الايطالي"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                     الايطالي
                                 </a>
 
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Streetstyle
+                                <a href="{{route('search')}}/?search=الدوري الالماني"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                     الالماني
                                 </a>
 
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Crafts
+                                <a href="{{route('search')}}/?search=الدوري الفرنسي"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                     الفرنسي
                                 </a>
 
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Magazine
-                                </a>
 
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    News
-                                </a>
-
-                                <a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                    Blogs
-                                </a>
                             </div>
                         </div>
+
                     </div>
                 </div>
 

@@ -1,20 +1,15 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Front\GalleryController;
+use App\Http\Controllers\Front\VideosController;
+use App\Http\Controllers\Front\ChampionController;
+use App\Http\Controllers\Front\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
+
 Auth::routes();
 
 Route::get('/clear', function () {
@@ -26,25 +21,43 @@ Route::get('/clear', function () {
 });
 
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'home'])->name('home');
-Route::get('/post/{slug}', [\App\Http\Controllers\HomeController::class, 'post'])->name('post');
-Route::get('/matches', [\App\Http\Controllers\HomeController::class, 'matches'])->name('matches');
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/',  'home')->name('home');
+    Route::get('/post/{slug}',  'post')->name('post');
+    Route::get('/matches', 'matches')->name('matches');
+
+    Route::get('search',  'search')->name('search');
+
+
+});
+
+
+Route::controller(GalleryController::class)->group(function () {
+    Route::get('/gallery/{slug}',  'gallery')->name('gallery');
+    Route::get('galleries',  'galleries')->name('galleries');
+});
+
+
+Route::controller(VideosController::class)->group(function () {
+    Route::get('videos',  'videos')->name('videos');
+    Route::get('video/data',  'fetchdata')->name('video.ajax.data');
+});
 
 
 
+Route::controller(ChampionController::class)->group(function () {
+    Route::get('/scorers/{slug}','topScorers')->name('scorers');
+    Route::get('/standing/{slug}', 'standing')->name('standing');
+    Route::get('/matches/{slug}',  'MatchesBychampionshipId')->name('standing.matches');
+});
 
 
 
-Route::get('/gallery/{slug}', [\App\Http\Controllers\Front\GalleryController::class, 'gallery'])->name('gallery');
-Route::get('galleries', [\App\Http\Controllers\Front\GalleryController::class, 'galleries'])->name('galleries');
+Route::controller(ProfileController::class)->group(function () {
+    Route::get('/profile','profile')->name('profile');
+    Route::get('/article','article')->name('article');
+    Route::post('/article','articlePost')->name('article');
 
-Route::get('videos', [\App\Http\Controllers\Front\VideosController::class, 'videos'])->name('videos');
-Route::get('video/data', [\App\Http\Controllers\Front\VideosController::class, 'fetchdata'])->name('video.ajax.data');
-
-
-
-Route::get('/scorers/{slug}', [\App\Http\Controllers\Front\ChampionController::class, 'topScorers'])->name('scorers');
-Route::get('/standing/{slug}',[\App\Http\Controllers\Front\ChampionController::class, 'standing'])->name('standing');
-Route::get('/matches/{slug}', [\App\Http\Controllers\Front\ChampionController::class, 'MatchesBychampionshipId'])->name('standing.matches');
+});
 
 

@@ -101,9 +101,9 @@
                 <div class="col-sm-4 col-lg-4 p-b-20">
                     <ul class="m-t--12">
 
-                       @foreach(categories() as $category)
+                       @foreach(categories()->take(5) as $category)
                         <li class="how-bor1 p-rl-5 p-tb-10">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+                            <a href="{{route('search')}}/?search={{$category->id}}" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
                                 {{$category->name}}
                             </a>
                         </li>
@@ -121,18 +121,8 @@
 
     <div class="bg11">
         <div class="container size-h-4 flex-c-c p-tb-15">
-{{--				<span class="f1-s-1 cl0 txt-center">--}}
-{{--					Copyright © 2018--}}
 
-{{--					<a href="#" class="f1-s-1 cl10 hov-link1"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->--}}
-{{--Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i--}}
-{{--                            class="fa fa-heart" aria-hidden="true"></i> by--}}
-{{--                        <a href="https://colorlib.com"--}}
-{{--                           target="_blank">Colorlib</a>--}}
 
-{{--                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->--}}
-{{--                    </a>--}}
-{{--				</span>--}}
 
             <span class="f1-s-1 cl0 ">
 					 <ul class="m-t--12 ">

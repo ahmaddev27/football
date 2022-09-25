@@ -92,7 +92,7 @@
 
                 <a class="dropdown-item" href="#"><i class="text-info ti-settings"></i>البروفايل</a>
 
-                <a class="dropdown-item" href="{{route('dashboard.admin.logout')}}"><i class="text-danger ti-unlock"></i>تسجيل الخروج</a>
+                <a class="dropdown-item" href="{{route('dashboard.logout')}}"><i class="text-danger ti-unlock"></i>تسجيل الخروج</a>
             </div>
         </li>
     </ul>

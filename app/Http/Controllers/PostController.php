@@ -6,15 +6,21 @@ use App\Http\Traits\ImageTrait;
 use App\Models\Admin;
 use App\Models\Category;
 use App\Models\Post;
-use App\Models\User;
+
 
 use Illuminate\Http\Request;
-use Illuminate\Notifications\Notifiable;
 use App\Notifications\CreatePost;
 use Yajra\DataTables\DataTables;
 
-class PostController extends Controller
-{
+class PostController extends Controller{
+
+
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+
+    }
+
     use ImageTrait;
     public function index(){
         return view('dashboard.post.index');

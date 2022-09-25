@@ -103,8 +103,15 @@ class ChampionController extends Controller
         foreach($data as $key=>$row){
             if (($row['id']=='الترتيب')){
                 unset($data[$key]);
+
             }
         }
+
+
+        krsort($data, SORT_NUMERIC );
+          $dataUnice=$this->super_unique($data,'team');
+        krsort($dataUnice, SORT_NUMERIC );
+
 
         $goals=$crawler->filter('#dhd ul.l > li:nth-child(1) ')->text();
         $matches=$crawler->filter('#dhd ul.l > li:nth-child(2) ')->text();
@@ -113,7 +120,7 @@ class ChampionController extends Controller
 
         return view('front.champion.championship',[
             'championship'=>$championship,
-            'data'=>$data,
+            'data'=>$dataUnice,
             'goals'=>$goals,
             'matches'=>$matches,
             'yellow'=>$yellow,
@@ -293,6 +300,8 @@ class ChampionController extends Controller
         ]) ;
 
     }
+
+
 
 
 

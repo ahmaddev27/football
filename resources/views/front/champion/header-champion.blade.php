@@ -1,30 +1,32 @@
 <div class="text-center row bg13 p-4 m-4 justify-content-center">
     <ul class="nav justify-content-center">
-        <li class="nav-item">
+        <li class="nav-item f1-m-1 cl2 hov-cl10 trans-03">
             <img src="{{$logo}}"> <b>{{$championship}}</b>
         </li>
         <li class="nav-item mt-3">
-            <a class="nav-link" href="{{route('standing',$slug)}}">التريب</a>
+            <a class="nav-link f1-m-1 cl2 hov-cl10 trans-03" href="{{route('standing',$slug)}}">التريب</a>
         </li>
 
         <li class="nav-item mt-3">
-            <a class="nav-link" href="{{route('standing.matches',$slug)}}">المباريات</a>
+            <a class="nav-link f1-m-1 cl2 hov-cl10 trans-03" href="{{route('standing.matches',$slug)}}">المباريات</a>
         </li>
 
         <li class="nav-item mt-3">
-            <a class="nav-link active" href="#">أخبار</a>
+
+            <a class="nav-link f1-m-1 cl2 hov-cl10 trans-03 " href="{{route('search')}}/?search={{$championship}}">أخبار</a>
         </li>
 
         <li class="nav-item mt-3">
-            <a class="nav-link active" href="{{route('scorers',$slug)}}">الهدافون</a>
+            <a class="nav-link f1-m-1 cl2 hov-cl10 trans-03 " href="{{route('scorers',$slug)}}">الهدافون</a>
         </li>
 
 
+
         <li class="nav-item mt-3">
-            <a class="nav-link" href="{{route('videos')}}/?championship={{$championship}}">فيديوهات</a>
+            <a class="nav-link f1-m-1 cl2 hov-cl10 trans-03" href="{{route('videos')}}/?championship={{$championship}}">فيديوهات</a>
         </li>
         <li class="nav-item mt-3">
-            <a class="nav-link " href="{{route('galleries')}}/?championship={{$championship}}">صور</a>
+            <a class="nav-link f1-m-1 cl2 hov-cl10 trans-03" href="{{route('galleries')}}/?championship={{$championship}}">صور</a>
         </li>
     </ul>
 </div>

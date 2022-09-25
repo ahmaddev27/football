@@ -59,7 +59,6 @@ class LoginController extends Controller
         ]);
 
 
-
         $credentials = $request->except(['_token']);
         $user= Admin::where('email',$request->email)->first();
         if ($user){

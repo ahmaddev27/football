@@ -9,7 +9,16 @@ use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 class SettingsController extends Controller
+
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+
+    }
+
     use ImageTrait;
 
     public function index()

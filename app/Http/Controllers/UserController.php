@@ -7,7 +7,16 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
+
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+
+    }
+
     public function index()
     {
         return view('dashboard.user.index');

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
+
+
     /**
      * Create a new controller instance.
      *
@@ -152,7 +154,7 @@ class HomeController extends Controller
 
         return  $dataUnice=$this->super_unique($data,'team1');
 
-        //        $ss= $this->paginate($dataUnice);
+//                $ss= $this->paginate($dataUnice);
 
 
     }
@@ -164,6 +166,16 @@ class HomeController extends Controller
         return view('front.post',['post'=>$post]);
     }
 
+
+    public function search(){
+
+        $posts =Post::orderBy('created_at', 'DESC')
+            ->WhenSearch(request()->search)
+            ->paginate(12);
+        return view('front.search',[
+            'posts'=>$posts
+        ]);
+    }
 
 
 }

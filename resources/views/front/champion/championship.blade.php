@@ -2,6 +2,34 @@
 <!-- Post -->
 @section('main')
 
+
+    @php  if(championship($slug)['type']=='1'){
+
+    $t=1;
+            foreach($data as $key=>$x){
+                 $data[$key]['gro']=$t;
+                if ($x['id']==4){
+                    $t++;
+                }
+            }
+
+
+
+
+
+$arr = array();
+
+foreach ($data as $key => $item) {
+   $arr[$item['gro']][$key] = $item;
+}
+
+
+ksort($arr, SORT_NUMERIC);
+
+}
+
+
+ @endphp
     <section class="bg0 p-t-20">
         <div class="container">
 
@@ -13,11 +41,11 @@
             <div class="row justify-content-center">
 
                 <div class="col-md-8 col-sm col-lg-8 ">
+               @if(championship($slug)['type']==0)
+                    <table style=" overflow-x: hidden;" class="table text-center justify-content-center">
+                        <thead class="fs-15 bg10 text-white p-4 m-4 h-75">
 
-                    <table style=" overflow-x: hidden;" class="table text-center">
-                        <thead>
-
-                        <tr class="fs-15">
+                        <tr class="fs-15 bg10 text-white p-4 m-4">
                             <th scope="col">الترتيب</th>
                             <th scope="col">*</th>
                             <th scope="col">الفريق</th>
@@ -36,10 +64,9 @@
                         <tbody>
                         @foreach($data as $key=>$x)
 
+                            <tr class="{{$key%2==1 && $key!=1 ?'bg13':''}}">
 
-                            <tr class="{{$key%2==1 && $key!=1 ?'bg13':''}}{{$key==1?'bg10 text-white':''}}">
-
-                                    <th scope="row"> {{$x['id']}}</th>
+                                    <th scope="row" >  {{ $x['id']}}</th>
                                     <td><img src="{{$x['image']}}" width="40px"></td>
                                     <td>{{$x['team']}} </td>
                                     <td>{{$x['play']}}</td>
@@ -58,6 +85,66 @@
 
 
 
+
+
+                   @elseif(championship($slug)['type']==1)
+
+
+
+                        @foreach  ($arr as $group => $teams)
+                        <table style=" overflow-x: hidden;" class="table text-center ">
+                            <thead class="bg10 text-white">
+                            <tr class="fs-15">
+                                <th scope="col">الترتيب</th>
+                                <th scope="col">*</th>
+                                <th scope="col">الفريق</th>
+                                <th scope="col">لعب</th>
+                                <th scope="col">داخل</th>
+                                <th scope="col">خارج</th>
+                                <th scope="col">فوز</th>
+                                <th scope="col">هزيمة</th>
+                                <th scope="col">تعادل</th>
+                                <th scope="col">له</th>
+                                <th scope="col">عليه</th>
+                                <th scope="col">نقاط</th>
+                            </tr>
+
+                            </thead>
+                            <tbody>
+
+
+
+                                   @foreach ($teams as $team)
+
+
+                                   <tr class="{{$key%2==1 && $key!=1 ?'bg13':''}}{{$key==1?'bg10 text-white':''}}">
+
+                                       <th scope="row"> {{$team['id']}}</th>
+                                       <td><img src="{{$team['image']}}" width="40px"></td>
+                                       <td>{{$team['team']}} </td>
+                                       <td>{{$team['play']}}</td>
+                                       <td>{{$team['home']}}</td>
+                                       <td>{{$team['away']}}</td>
+                                       <td>{{$team['win']}}</td>
+                                       <td>{{$team['lose']}}</td>
+                                       <td>{{$team['draw']}}</td>
+                                       <td>{{$team['goals']}}</td>
+                                       <td>{{$team['goals_in']}}</td>
+                                       <td>{{$team['points']}}</td>
+                                   </tr>
+
+                                   @endforeach
+
+
+
+
+
+                                @endforeach
+                            </tbody>
+
+                        </table>
+
+                    @endif
                 </div>
 
 
@@ -76,7 +163,8 @@
                                         <div class="p-t-16">
 
                                             <h6 class="f1-s-10 cl2 hov-cl10 text-right">
-                                                <span class="badge badge-{{status($x['status'])}}"> <b class="text-end">{{$x['status']}}</b></span>
+                                                <span class=" col-12 text-center {{status($x['status'])}} text-white">{{$x['status']}}</span>
+
 
                                             </h6>
 

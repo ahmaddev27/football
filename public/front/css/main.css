@@ -221,7 +221,7 @@ a.left-topbar-item:hover {
   height: 10px;
   background-color: #fff;
   opacity: 0.1;
-  left: 0;
+  right: 0;
   top: calc(50% - 5px);
 }
 
@@ -1585,7 +1585,13 @@ html {
 .bg10 {background-color: #2468ce;}
 .bg11 {background-color: #151515;}
 .bg12 {background-color: #f7f7f7;}
-.bg13 {background-color: #f1f1f1;
+.bg13 {background-color: #f1f1f1;}
+.bg14 {background-color: #d79d0c;}
+.bg15 {background-color: #e10839;}
+.bg16 {background-color: #07b13f;}
+.bg17 {background-color: #0789b1;}
+.bg18 {background-color: #af620d;
+
 ;;}
 
 
