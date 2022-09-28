@@ -118,5 +118,18 @@ function videos($key,$value){
 function articles(){
     return \App\Models\Article::orderBy('created_at','DESC')->where('status','منشور')->get();
 }
+
+function pages(){
+    return \App\Models\Page::orderBy('created_at','DESC')->get();
+
+}
+
+
+
+
+
+
+
+
 ?>
 

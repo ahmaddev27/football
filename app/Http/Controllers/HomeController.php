@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\inbox;
+use App\Models\Page;
 use App\Models\Post;
 use Goutte\Client;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
@@ -177,5 +180,15 @@ class HomeController extends Controller
         ]);
     }
 
+    public function pages($id){
+        $page=Page::findOrFail($id);
+        return view('front.page',['page'=>$page]);
+    }
+
+    public function contact(Request $request){
+        inbox::create($request->all());
+        return response()->json(['message' => 'تم ارسال رسالتك بنجاح  سيتم الرد قريبا شكرا لتواصلك معنا', 'status' => true], 200);
+
+    }
 
 }

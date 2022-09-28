@@ -149,7 +149,6 @@ if ($request->championship){
     $ch=implode(",",$request->championship);
 
 }
-
         $post=Post::findOrFail($id);
 
         if ($request->file('image')){

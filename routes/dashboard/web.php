@@ -130,6 +130,20 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     });
 
+    Route::group(['as' => 'page.', 'prefix' => 'page'], function () {
+        Route::controller(PagesController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/list', 'list')->name('list');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/data', 'fetchdata')->name('ajax.data');
+            Route::post('/delete', 'destroy')->name('destroy');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::POST('/update/{id}', 'update')->name('update');
+        });
+
+    });
+
 });
 
 

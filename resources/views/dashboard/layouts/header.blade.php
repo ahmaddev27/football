@@ -1,9 +1,9 @@
 <nav class="admin-header header-dark navbar navbar-default col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <!-- logo -->
     <div class="text-left navbar-brand-wrapper">
-        <a class="navbar-brand brand-logo" href="index.html"><img src="{{asset(\App\Models\Setting::where('key','image')->first()->value)}}" alt=""></a>
+        <a class="navbar-brand brand-logo" href="{{route('home')}}"><img src="{{asset(\App\Models\Setting::where('key','image')->first()->value)}}" alt=""></a>
 
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{asset(\App\Models\Setting::where('key','icon')->first()->value)}}" alt=""></a>
+        <a class="navbar-brand brand-logo-mini" href="{{route('home')}}"><img src="{{asset(\App\Models\Setting::where('key','icon')->first()->value)}}" alt=""></a>
     </div>
     <!-- Top bar left -->
     <ul class="nav navbar-nav mr-auto">
@@ -26,7 +26,6 @@
                 <span class="badge badge-pill badge-warning" data-count="{{auth()->user()->unreadNotifications->count()}}" id="notif-count"> {{auth()->user()->unreadNotifications->count()}}</span>
 
                     <span class="badge badge-danger notification-status"> </span>
-
 
             </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-big dropdown-notifications"  id="notifications-push">
@@ -76,7 +75,7 @@
 
 
         <li class="nav-item dropdown mr-30">
-            <a class="nav-link nav-pill user-avatar" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link nav-pill user-avatar" data-toggle="dropdown" href="{{route('home')}}" role="button" aria-haspopup="true" aria-expanded="false">
                 <img src="{{asset(\App\Models\Setting::where('key','icon')->first()->value)}}" class="bg-light" alt="avatar">
             </a>
             <div class="dropdown-menu dropdown-menu-right">

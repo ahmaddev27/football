@@ -124,18 +124,29 @@
 
 
 
-            <span class="f1-s-1 cl0 ">
-					 <ul class="m-t--12 ">
-                        <li class=" p-rl-5 p-tb-10" style="display: inline">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                سياسة الخصوصية</a>
-                        </li>
 
-                        <li class=" p-rl-5 p-tb-10"style="display: inline">
-                            <a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+
+            <span class="f1-s-1 cl0 ">
+
+
+
+
+                <ul class="m-t--12 ">
+
+                       <li class=" p-rl-5 p-tb-10"style="display: inline">
+                            <a href="{{route('contact')}}" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
                                للاعلان معنا
                             </a>
                         </li>
+
+                          @foreach(pages() as $page)
+                        <li class=" p-rl-5 p-tb-10" style="display: inline">
+                            <a href="{{route('pages',$page->id)}}" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+                              {{$page->title}} </a>
+                        </li>
+
+                         @endforeach
+
 
 
                     </ul>

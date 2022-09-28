@@ -20,32 +20,22 @@
                         <a href="{{route('login')}}" class="left-topbar-item m-3">
                             <span class="fa fa-user"></span>
                         </a>
-
                     @endauth
 
 
-
-
-                    <a href="#" class="left-topbar-item m-3">
-                        سياسية الخصوصية
+                    <a href="{{route('contact')}}" class="left-topbar-item m-3">
+                        تواصل معنا
                     </a>
 
+                    @foreach(pages() as $page)
 
-                    <a href="#" class="left-topbar-item m-3">
-                        من نحن
-                    </a>
+                        <a href="{{route('pages',$page->id)}}" class="left-topbar-item m-3">
 
-                    <a href="#" class="left-topbar-item m-3">
-                       تواصل معنا
-                    </a>
+                            {{$page->title}}
+                        </a>
 
 
-
-
-
-
-
-
+                    @endforeach
 
 
                 </div>
@@ -67,7 +57,7 @@
                         <span class="fab fa-instagram"></span>
                     </a>
 
-                    <a  href="">
+                    <a href="">
                         <span class="fab fa-youtube"></span>
                     </a>
                 </div>
@@ -199,10 +189,10 @@
 
                         </li>
 
-{{--                        <li class="main-menu-item">--}}
-{{--                            <a href="category-02.html">الانتقالات </a>--}}
+                        {{--                        <li class="main-menu-item">--}}
+                        {{--                            <a href="category-02.html">الانتقالات </a>--}}
 
-{{--                        </li>--}}
+                        {{--                        </li>--}}
 
                         <li class="main-menu-item">
                             <a href="{{route('galleries')}}">الصور</a>

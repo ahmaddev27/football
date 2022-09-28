@@ -145,6 +145,28 @@ ksort($arr, SORT_NUMERIC);
                         </table>
 
                     @endif
+
+
+                            <div class="row m-rl--1 mt-2 mb-2">
+
+                                @foreach(posts('championship',$championship)->take(8) as $post)
+                                <div class="col-sm-6 col-md-3 p-rl-1 p-b-2 mb-3">
+                                    <div class="bg-img1 size-a-14 how1 pos-relative" style="background-image: url({{asset($post->image)}});">
+                                        <a href="{{route('post',$post->slug)}}" class="dis-block how1-child1 trans-03"></a>
+
+                                        <div class="flex-col-e-s s-full p-rl-25 p-tb-20">
+
+
+                                            <h3 class="how1-child2 m-t-14">
+                                                <a href="{{route('post',$post->slug)}}" class="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
+                                                  {{str_limit($post->title,150)}}
+                                                </a>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
                 </div>
 
 
@@ -185,6 +207,8 @@ ksort($arr, SORT_NUMERIC);
                         </div>
 
                         <!-- Most Popular -->
+
+                        @if(championship($slug)['type']=='1')
                         <div class="p-b-30">
                             <div class="how2 how2-cl6 flex-s-c">
                                 <h3 class="f1-m-2 cl18 tab01-title">
@@ -208,6 +232,7 @@ ksort($arr, SORT_NUMERIC);
 
                             </ul>
                         </div>
+                        @endif
 
                         <!--  -->
                         <div class="flex-c-s p-t-8 p-b-65">

@@ -20,6 +20,7 @@ Route::get('/clear', function () {
     return redirect()->route('home');
 });
 
+Route::view('contact','front.contact')->name('contact');
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/',  'home')->name('home');
@@ -27,6 +28,9 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/matches', 'matches')->name('matches');
 
     Route::get('search',  'search')->name('search');
+
+    Route::get('pages/{id}',  'pages')->name('pages');
+    Route::post('contact',  'contact')->name('contact.store');
 
 
 });

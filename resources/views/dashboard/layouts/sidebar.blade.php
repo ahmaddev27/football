@@ -39,8 +39,13 @@
             </li>
 
             <li>
+                <a href="{{route('dashboard.page.index')}}"><i class="ti-file"></i><span class="right-nav-text">صفحات الموقع </span> </a>
+            </li>
+
+            <li>
                 <a href="{{route('dashboard.settings.index')}}"><i class="ti-settings"></i><span class="right-nav-text">اعدادات الموقع</span> </a>
             </li>
+
 
 
         </ul>

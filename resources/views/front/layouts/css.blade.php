@@ -35,4 +35,9 @@
         text-decoration:none;
     }
 
+    .error{
+        color:#f25555;
+        margin-bottom: 10px;
+    }
+
 </style>
