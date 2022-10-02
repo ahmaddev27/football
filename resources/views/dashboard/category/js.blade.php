@@ -55,13 +55,7 @@
                 },
                 action: "required"
             },
-            messages: {
-                pName: {
-                    required: "Please enter some data",
-                    minlength: "Your data must be at least 8 characters"
-                },
-                action: "Please provide some data"
-            },
+
             submitHandler: function(form){
 
                 let name = $('#name').val();
@@ -200,14 +194,7 @@
                     required: true,
                     minlength: 4
                 },
-                action: "required"
-            },
-            messages: {
-                pName: {
-                    required: "Please enter some data",
-                    minlength: "Your data must be at least 8 characters"
-                },
-                action: "Please provide some data"
+
             },
             submitHandler: function(form){
 

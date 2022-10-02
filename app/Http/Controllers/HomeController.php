@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewNotification;
+use App\Models\Admin;
 use App\Models\inbox;
 use App\Models\Page;
 use App\Models\Post;
+use App\Notifications\ContactNotification;
+use App\Notifications\NewPage;
 use Goutte\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -186,7 +190,25 @@ class HomeController extends Controller
     }
 
     public function contact(Request $request){
-        inbox::create($request->all());
+
+
+
+      $inbox=inbox::create($request->all());
+
+        $data=[
+            'title'=>'رسالة جديدة : '.str_limit($inbox->title,50),
+            'created_at'=>$inbox->created_at,
+            'sound'=>'https://assets.mixkit.co/sfx/download/mixkit-software-interface-start-2574.wav',
+            'url_route'=>'../dashboard/inbox/'.$inbox->id,
+        ];
+
+        $admins = Admin::all();
+        foreach ($admins as $admin) {
+            $admin->notify(new ContactNotification($inbox));
+        }
+
+        event(new NewNotification($data));
+
         return response()->json(['message' => 'تم ارسال رسالتك بنجاح  سيتم الرد قريبا شكرا لتواصلك معنا', 'status' => true], 200);
 
     }

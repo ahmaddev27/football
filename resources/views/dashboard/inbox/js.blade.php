@@ -10,10 +10,14 @@
 
 
 
+
+
+
+
 {{--Data Table--}}
 <script type="text/javascript">
 
-    var url = "{{ route('dashboard.user.list') }}";
+    var url = "{{ route('dashboard.inbox.list') }}";
     $(document).ready(function () {
 
 
@@ -31,10 +35,11 @@
             columns:[
                 {data: 'DT_RowIndex', name: 'id',},
 
-                {data: 'email', name: 'email'},
+
                 {data: 'name', name: 'name'},
-                {data: 'comments', name: 'comments'},
-                {data: 'articles', name: 'articles'},
+                {data: 'title', name: 'title'},
+                {data: 'msg', name: 'msg'},
+                {data: 'email', name: 'email'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ],
         });
@@ -44,9 +49,6 @@
 
 
 </script>
-
-
-
 
 
 
@@ -105,6 +107,7 @@
     });
 
 </script>
+
 
 
 

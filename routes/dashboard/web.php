@@ -121,8 +121,6 @@ Route::group(['middleware' => 'auth:admin'], function () {
             Route::get('/', 'index')->name('index');
             Route::get('/list', 'list')->name('list');
             Route::get('/create', 'create')->name('create');
-            Route::post('/store', 'store')->name('store');
-            Route::get('/data', 'fetchdata')->name('ajax.data');
             Route::post('/delete', 'destroy')->name('destroy');
             Route::get('/edit/{id}', 'edit')->name('edit');
             Route::POST('/update/{id}', 'update')->name('update');
@@ -144,6 +142,18 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     });
 
+
+    Route::group(['as' => 'inbox.', 'prefix' => 'inbox'], function () {
+        Route::controller(InboxController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/list', 'list')->name('list');
+            Route::get('/show/{id}', 'show')->name('show');
+            Route::post('/send/{id}', 'send')->name('send');
+            Route::post('/delete', 'destroy')->name('destroy');
+
+        });
+
+    });
 });
 
 
