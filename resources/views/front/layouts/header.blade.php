@@ -7,6 +7,18 @@
                 <div class="left-topbar">
 
                     @auth
+
+
+
+                        <a onclick="event.preventDefault();
+      document.getElementById('logout-form').submit();"  class="left-topbar-item m-3">
+                            <span class="fa fa-power-off"></span>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+
+                        </a>
+
                         <a href="{{route('profile')}}" class="left-topbar-item m-3">
                             <span class="fa fa-user"></span>
                         </a>

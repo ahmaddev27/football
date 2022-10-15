@@ -88,11 +88,6 @@ class AdminController extends Controller
 //        return response()->json(['message'=>'Admin Deleted Successfully','status'=>true],200);
 //    }
 
-//    public function index()
-//    {
-//        return view('admin.home');
-//    }
-
 
 //
 //    public function ChangePassword()
@@ -131,7 +126,7 @@ class AdminController extends Controller
     public function logout()
     {
         Auth::logout();
-        return Redirect()->route('dashboard.admin.login')
+        return Redirect()->route('dashboard.login')
                  ->with(['message'=>'تم تسجيل الخروج بنجاح', 'alert-type'=>'success']);
     }
 
@@ -165,5 +160,29 @@ class AdminController extends Controller
             $userUnreadNotification->markAsRead();
         }
     }
+
+    public function updateProfile(Request $request,$id){
+
+
+            $admin= Admin::findOrFail($id);
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required',
+                'password' => ['confirmed'],
+            ]);
+
+            if ($request->password) {
+                $admin->update(['password' => Hash::make($request->password)] + $request->except('password'));
+            }else{
+                $admin->update($request->except('password'));
+
+            }
+
+            return Redirect()->route('dashboard.index')->with(['message' => 'تم حفظ البيانات بنجاح', 'alert-type' => 'success']);
+
+
+        }
+
+
 
 }

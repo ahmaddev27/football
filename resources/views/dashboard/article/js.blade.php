@@ -185,7 +185,8 @@
             {
                 $('#title').val(data.title);
                 $('#by').val(data.user.name);
-                $('#details').val(data.details);
+                $('#details').val(data.details.replace(/(<([^>]+)>)/gi, ""));
+                // $('#details').val(data.details);
 
             }
         })

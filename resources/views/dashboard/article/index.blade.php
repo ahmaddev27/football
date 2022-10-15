@@ -89,7 +89,7 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-3 col-form-label">التفاصيل</label>
                             <div class="col-sm-9">
-                               <textarea  readonly class="form-control"  name="details" id="details">
+                               <textarea  rows="8" readonly class="form-control"  name="details" id="details">
                                </textarea>
                             </div>
                         </div>

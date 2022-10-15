@@ -20,7 +20,7 @@ return new class extends Migration
                 ->on('categories')->nullOnDelete();
 
             $table->string('image');
-            $table->integer('views')->nullable();
+            $table->integer('views')->default(0);
             $table->string('title');
             $table->longText('details');
             $table->string('description');

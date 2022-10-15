@@ -61,52 +61,51 @@
 
 
                             <!-- Tag -->
-                            <div class="p-b-55">
-                                <div class="how2 how2-cl4 flex-s-c m-b-30">
-                                    <h3 class="f1-m-2 cl3 tab01-title">
-                                        تاجات
-                                    </h3>
-                                </div>
-
-                                <div class="flex-wr-s-s m-rl--5">
-                                    <a href="#"
-                                       class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                        ابطال اوروبا
-                                    </a>
-
-                                    <a href="#"
-                                       class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                        كأس العالم
-                                    </a>
-
-                                    <a href="#"
-                                       class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                        انجلترا
-                                    </a>
-
-                                    <a href="#"
-                                       class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                        اسبانيا
-                                    </a>
-                                    <a href="#"
-                                       class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                        ايطاليا
-                                    </a>
-
-                                    <a href="#"
-                                       class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                        المانيا
-                                    </a>
-
-                                    <a href="#"
-                                       class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                        فرنسا
-                                    </a>
-
-
-                                </div>
+                        <div class="p-b-55">
+                            <div class="how2 how2-cl4 flex-s-c m-b-30">
+                                <h3 class="f1-m-2 cl3 tab01-title">
+                                    تاجات
+                                </h3>
                             </div>
 
+                            <div class="flex-wr-s-s m-rl--5">
+                                <a href="{{route('search')}}/?search=ابطال اوروبا"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    ابطال اوروبا
+                                </a>
+
+                                {{--                                <a href="{{route('search')}}/?search=كأس العالم"--}}
+                                {{--                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">--}}
+                                {{--                                    كأس العالم--}}
+                                {{--                                </a>--}}
+
+                                <a href="{{route('search')}}/?search=الدوري الانجليزي"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    الانجليزي
+                                </a>
+
+                                <a href="{{route('search')}}/?search=الدوري الاسباني"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    الاسباني
+                                </a>
+                                <a href="{{route('search')}}/?search=الدوري الايطالي"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    الايطالي
+                                </a>
+
+                                <a href="{{route('search')}}/?search=الدوري الالماني"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    الالماني
+                                </a>
+
+                                <a href="{{route('search')}}/?search=الدوري الفرنسي"
+                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                    الفرنسي
+                                </a>
+
+
+                            </div>
+                        </div>
 
                             <div class="p-l-10 p-rl-0-sr991  mt-5">
 
@@ -186,9 +185,7 @@
                                 @foreach(posts(null,null)->take(6) as $post)
                                     <li class="flex-wr-sb-s p-b-22">
                                         <div class="size-a-8 flex-c-c borad-45 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                            <i class="fa fa-eye"></i>
-                                        </div>
-
+                                            <i class="fa fa-eye"></i></div>
                                         <a href="{{route('post',$post->slug)}}" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
                                             {{str_limit($post->title,50)}}
                                         </a>
@@ -233,6 +230,18 @@
 
 
 
+    <!-- Modal Video 01-->
+    <div class="modal fade" id="modal-video-01" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document" data-dismiss="modal">
+            <div class="close-mo-video-01 trans-0-4" data-dismiss="modal" aria-label="Close">&times;</div>
+
+            <div class="wrap-video-mo-01">
+                <div class="video-mo-01">
+                    <iframe id="link-video" src="" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @stop
 
@@ -245,6 +254,23 @@
 @push('js')
 
 
+    <script>
+        $(document).on('click', '#view', function(){
+            var id = $(this).attr("model_id");
+            $.ajax({
+                url:"{{route('video.ajax.data')}}",
+                method:'get',
+                data:{id:id},
+                dataType:'json',
+                success:function(data)
+                {
 
+                    $('#link-video').attr('src',data.link);
+
+
+                }
+            })
+        });
+    </script>
 
 @endpush

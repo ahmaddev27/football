@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Goutte\Client;
 use Illuminate\Support\Facades\Http;
+use Symfony\Component\BrowserKit\HttpBrowser;
 
 
 class ChampionController extends Controller
@@ -11,125 +12,128 @@ class ChampionController extends Controller
 
     //standing matches table by name and id slug from [array] in helper (filgol.com)
     public function standing($slug){
+        if (isset(championship($slug)['logo'])) {
+            $championship = championship($slug)['name'];
+            $logo = championship($slug)['logo'];
+            $client = new Client();
+            $crawler = $client->request('GET', 'https://www.filgoal.com/championships/' . $slug . '/standings/' . str_replace(" ", "-", $championship));
+            $data = [];
+            $index = 0;
 
-        $championship= championship($slug)['name'];
-        $logo= championship($slug)['logo'];
-        $client = new Client();
-        $crawler = $client->request('GET', 'https://www.filgoal.com/championships/'.$slug.'/standings/'.str_replace(" ", "-", $championship));
-        $data = [];
-        $index = 0;
+            $crawler->filter('.fg_tbl .fg_rw ')->each(function ($node) use (&$data, &$index) {
+                $node->filter('.fg_cl.t1')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['id'] = $node->text();
 
-        $crawler->filter('.fg_tbl .fg_rw ')->each(function ($node)use(&$data,&$index) {
-            $node->filter('.fg_cl.t1')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['id']=$node->text();
-
-                });
-
-
-            $node->filter('.fg_cl.t2')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['team']=$node->text();
-
-                });
-
-            $node->filter('.fg_cl.t2 img')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['image']='https:'.$node->attr('data-src');
-
-                });
+                    });
 
 
+                $node->filter('.fg_cl.t2')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['team'] = $node->text();
 
-            $node->filter('div.fg_cl.t3:nth-child(3)')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['play']=$node->text();
+                    });
 
-                });
+                $node->filter('.fg_cl.t2 img')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['image'] = 'https:' . $node->attr('data-src');
 
-            $node->filter('div.fg_cl.t3:nth-child(4)')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['home']=$node->text();
-
-                });
-
-            $node->filter('div.fg_cl.t3:nth-child(5)')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['away']=$node->text();
-
-                });
-
-            $node->filter('div.fg_cl.t3:nth-child(6)')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['win']=$node->text();
-
-                });
-
-            $node->filter('div.fg_cl.t3:nth-child(7)')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['lose']=$node->text();
-
-                });
-
-            $node->filter('div.fg_cl.t3:nth-child(8)')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['draw']=$node->text();
-
-                });
+                    });
 
 
-            $node->filter('div.fg_cl.t3:nth-child(9)')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['goals']=$node->text();
+                $node->filter('div.fg_cl.t3:nth-child(3)')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['play'] = $node->text();
 
-                });
+                    });
 
-            $node->filter('div.fg_cl.t3:nth-child(10)')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['goals_in']=$node->text();
+                $node->filter('div.fg_cl.t3:nth-child(4)')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['home'] = $node->text();
 
-                });
+                    });
 
-            $node->filter('.fg_cl.t3')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['points']=$node->text();
+                $node->filter('div.fg_cl.t3:nth-child(5)')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['away'] = $node->text();
 
-                });
+                    });
 
-            $index++;
+                $node->filter('div.fg_cl.t3:nth-child(6)')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['win'] = $node->text();
 
-        });
+                    });
 
-        foreach($data as $key=>$row){
-            if (($row['id']=='الترتيب')){
-                unset($data[$key]);
+                $node->filter('div.fg_cl.t3:nth-child(7)')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['lose'] = $node->text();
 
+                    });
+
+                $node->filter('div.fg_cl.t3:nth-child(8)')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['draw'] = $node->text();
+
+                    });
+
+
+                $node->filter('div.fg_cl.t3:nth-child(9)')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['goals'] = $node->text();
+
+                    });
+
+                $node->filter('div.fg_cl.t3:nth-child(10)')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['goals_in'] = $node->text();
+
+                    });
+
+                $node->filter('.fg_cl.t3')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['points'] = $node->text();
+
+                    });
+
+                $index++;
+
+            });
+
+            foreach ($data as $key => $row) {
+                if (($row['id'] == 'الترتيب')) {
+                    unset($data[$key]);
+
+                }
             }
+
+
+            krsort($data, SORT_NUMERIC);
+            $dataUnice = $this->super_unique($data, 'team');
+            krsort($dataUnice, SORT_NUMERIC);
+
+
+            $goals = $crawler->filter('#dhd ul.l > li:nth-child(1) ')->text();
+            $matches = $crawler->filter('#dhd ul.l > li:nth-child(2) ')->text();
+            $yellow = $crawler->filter('#dhd ul.l > li:nth-child(3) ')->text();
+            $red = $crawler->filter('#dhd ul.l > li:nth-child(4) ')->text();
+
+            return view('front.champion.championship', [
+                'championship' => $championship,
+                'data' => $dataUnice,
+                'goals' => $goals,
+                'matches' => $matches,
+                'yellow' => $yellow,
+                'red' => $red,
+                'logo' => $logo,
+                'slug' => $slug,
+                'todaymatches' => $this->standingMatches($slug),
+            ]);
+
+
+        }else{
+            abort(404);
         }
-
-
-        krsort($data, SORT_NUMERIC );
-          $dataUnice=$this->super_unique($data,'team');
-        krsort($dataUnice, SORT_NUMERIC );
-
-
-        $goals=$crawler->filter('#dhd ul.l > li:nth-child(1) ')->text();
-        $matches=$crawler->filter('#dhd ul.l > li:nth-child(2) ')->text();
-        $yellow=$crawler->filter('#dhd ul.l > li:nth-child(3) ')->text();
-        $red=$crawler->filter('#dhd ul.l > li:nth-child(4) ')->text();
-
-        return view('front.champion.championship',[
-            'championship'=>$championship,
-            'data'=>$dataUnice,
-            'goals'=>$goals,
-            'matches'=>$matches,
-            'yellow'=>$yellow,
-            'red'=>$red,
-            'logo'=>$logo,
-            'slug'=>$slug,
-            'todaymatches'=>$this->standingMatches($slug),
-        ]);
-
     }
 
 
@@ -223,136 +227,140 @@ class ChampionController extends Controller
 
     public function topScorers($slug){
 
-        $championship= championship($slug)['name'];
-        $client = new Client();
-        $crawler = $client->request('GET', 'https://www.filgoal.com/championships/'.$slug.'/scorers/'.str_replace(" ", "-", $championship));
-        $data = [];
-        $index = 0;
+        if (isset(championship($slug)['logo'])) {
+            $championship = championship($slug)['name'];
+            $client = new Client();
+            $crawler = $client->request('GET', 'https://www.filgoal.com/championships/' . $slug . '/scorers/' . str_replace(" ", "-", $championship));
+            $data = [];
+            $index = 0;
 
-        $crawler->filter('.fg_tbl .fg_rw ')->each(function ($node)use(&$data,&$index) {
-            $node->filter('.t1  img')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['image']='https:'.$node->attr('data-src');
+            $crawler->filter('.fg_tbl .fg_rw ')->each(function ($node) use (&$data, &$index) {
+                $node->filter('.t1  img')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['image'] = 'https:' . $node->attr('data-src');
 
-                });
-
-
-            $node->filter('div.fg_cl.t1 ')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['name']=$node->text();
-
-                });
+                    });
 
 
-            $node->filter('div.fg_cl.t2:nth-child(2)')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['goals']=$node->text();
+                $node->filter('div.fg_cl.t1 ')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['name'] = $node->text();
 
-                });
-
-
-            $node->filter('div.fg_cl.t2:nth-child(3)')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['matches']=$node->text();
-
-                });
+                    });
 
 
+                $node->filter('div.fg_cl.t2:nth-child(2)')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['goals'] = $node->text();
+
+                    });
 
 
+                $node->filter('div.fg_cl.t2:nth-child(3)')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['matches'] = $node->text();
 
-            $node->filter('.fg_cl.t3')
-                ->each(function ($node) use(&$data,&$index) {
-                    $data[$index]['percentage']=$node->text();
-
-                });
-
-            $index++;
-
-        });
+                    });
 
 
+                $node->filter('.fg_cl.t3')
+                    ->each(function ($node) use (&$data, &$index) {
+                        $data[$index]['percentage'] = $node->text();
 
-        $data2=$this->paginate($data,20);
-        $data2->withPath(route('scorers',$slug));
+                    });
 
-        foreach($data2 as $key=>$row){
-            if (($row['name']=='الإسم')){
-                unset($data2[$key]);
+                $index++;
+
+            });
+
+
+            $data2 = $this->paginate($data, 20);
+            $data2->withPath(route('scorers', $slug));
+
+            foreach ($data2 as $key => $row) {
+                if (($row['name'] == 'الإسم')) {
+                    unset($data2[$key]);
+                }
             }
+            $logo = championship($slug)['logo'];
+            $championship = championship($slug)['name'];
+            $goals = $crawler->filter('#dhd ul.l > li:nth-child(1) ')->text();
+            $matches = $crawler->filter('#dhd ul.l > li:nth-child(2) ')->text();
+            $yellow = $crawler->filter('#dhd ul.l > li:nth-child(3) ')->text();
+            $red = $crawler->filter('#dhd ul.l > li:nth-child(4) ')->text();
+
+            return view('front.champion.topScorers', ['topScorers' => $data2, 'logo' => $logo, 'championship' => $championship,
+
+                'goals' => $goals,
+                'matches' => $matches,
+                'yellow' => $yellow,
+                'red' => $red,
+                'slug' => $slug,
+                'todaymatches' => $this->standingMatches($slug),
+
+            ]);
+
+        } else{
+            abort(404);
         }
-        $logo= championship($slug)['logo'];
-        $championship= championship($slug)['name'];
-        $goals=$crawler->filter('#dhd ul.l > li:nth-child(1) ')->text();
-        $matches=$crawler->filter('#dhd ul.l > li:nth-child(2) ')->text();
-        $yellow=$crawler->filter('#dhd ul.l > li:nth-child(3) ')->text();
-        $red=$crawler->filter('#dhd ul.l > li:nth-child(4) ')->text();
-
-        return view('front.champion.topScorers',['topScorers'=>$data2,'logo'=>$logo,'championship'=>$championship,
-
-            'goals'=>$goals,
-            'matches'=>$matches,
-            'yellow'=>$yellow,
-            'red'=>$red,
-            'slug'=>$slug,
-            'todaymatches'=>$this->standingMatches($slug),
-
-        ]) ;
-
     }
 
 
 
 
-
-    public function MatchesBychampionshipId($championshipId){
-
-        $logo= championship($championshipId)['logo'];
-        $championship= championship($championshipId)['name'];
-
-        $p= Http::get('https://www.filgoal.com/matches/ajaxlist?teamId='.request()->team.'&championshipId='.$championshipId.'&week='.request()->week);
-        $x= array_reverse(json_decode($p));
-        $data=$this->paginate($x,10);
-        $data->withPath(route('standing.matches',$championshipId));
+    public function MatchesBychampionshipId($championshipId)
+    {
 
 
-        $client = new Client();
-        $crawler = $client->request('GET', 'https://www.filgoal.com/championships/'.$championshipId);
-        $teams = [];
-        $index = 0;
+        if (isset(championship($championshipId)['logo'])) {
+            $logo = championship($championshipId)['logo'];
+            $championship = championship($championshipId)['name'];
+
+            $p = Http::get('https://www.filgoal.com/matches/ajaxlist?teamId=' . request()->team . '&championshipId=' . $championshipId . '&week=' . request()->week );
+            $x = array_reverse(json_decode($p));
+            $data = $this->paginate($x, 10);
+            $data->withPath(route('standing.matches', $championshipId));
 
 
-        $crawler->filter('.fg_team_slider ul')->each(function ($node)use(&$teams,&$index) {
-            $node->filter('li a')
-                ->each(function ($node) use (&$teams, &$index) {
-                    $teams[$index]['id'] = preg_replace('/[^0-9]+/', '', $node->attr('href'));
-                    $teams[$index]['name'] = $node->text();
-                    $index++;
-                });
+            $client = new Client();
+            $crawler = $client->request('GET', 'https://www.filgoal.com/championships/' . $championshipId);
+            $teams = [];
+            $index = 0;
 
 
-        });
+            $crawler->filter('.fg_team_slider ul')->each(function ($node) use (&$teams, &$index) {
+                $node->filter('li a')
+                    ->each(function ($node) use (&$teams, &$index) {
+                        $teams[$index]['id'] = preg_replace('/[^0-9]+/', '', $node->attr('href'));
+                        $teams[$index]['name'] = $node->text();
+                        $index++;
+                    });
 
 
+            });
 
-        $client = new Client();
-        $crawler2 = $client->request('GET', 'https://www.filgoal.com/championships/'.$championshipId.'/scorers/'.str_replace(" ", "-", $championship));
 
-        $goals=$crawler2->filter('#dhd ul.l > li:nth-child(1) ')->text();
-        $matches=$crawler2->filter('#dhd ul.l > li:nth-child(2) ')->text();
-        $yellow=$crawler2->filter('#dhd ul.l > li:nth-child(3) ')->text();
-        $red=$crawler2->filter('#dhd ul.l > li:nth-child(4) ')->text();
+            $client = new Client();
+            $crawler2 = $client->request('GET', 'https://www.filgoal.com/championships/' . $championshipId . '/scorers/' . str_replace(" ", "-", $championship));
 
-        return view('front.champion.championshipMatches', [
-            'data'=>$data,
-            'logo'=>$logo,
-            'slug'=>$championshipId,'championship'=>$championship,
-            'teams'=>$teams,'goals'=>$goals,
-            'matches'=>$matches,
-            'yellow'=>$yellow,
-            'red'=>$red
-        ]);
+            $goals = $crawler2->filter('#dhd ul.l > li:nth-child(1) ')->text();
+            $matches = $crawler2->filter('#dhd ul.l > li:nth-child(2) ')->text();
+            $yellow = $crawler2->filter('#dhd ul.l > li:nth-child(3) ')->text();
+            $red = $crawler2->filter('#dhd ul.l > li:nth-child(4) ')->text();
 
+            return view('front.champion.championshipMatches', [
+                'data' => $data,
+                'logo' => $logo,
+                'slug' => $championshipId, 'championship' => $championship,
+                'teams' => $teams, 'goals' => $goals,
+                'matches' => $matches,
+                'yellow' => $yellow,
+                'red' => $red
+            ]);
+
+        } else {
+            abort(404);
+
+        }
     }
-
 }

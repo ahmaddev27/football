@@ -26,9 +26,11 @@
                                     </h3>
 
 
+
                                 @foreach ($matches as $x)
 
-                                    <div class="shadow-none p-3 mb-2 bg-light rounded">
+                                        <div class="row">
+                                    <div class=" col-lg shadow-none p-3 mb-2 bg-light rounded">
                                         <div class="col-sm">
                                             <span style="font-size: 13px"> {{$x->WeekOrRound}}</span>
                                         </div>
@@ -89,6 +91,7 @@
 
 
 
+                                </div>
 
                                     @endforeach
 
@@ -154,6 +157,73 @@
                                         </div>
                                     </li>
                                 </ul>
+                            </div>
+                            <div class="p-b-35">
+                                <div class="how2 how2-cl6 flex-s-c">
+                                    <h3 class="f1-m-2 cl18 tab01-title">
+                                        الاكثر قراءة
+                                    </h3>
+                                </div>
+
+                                <ul class="p-t-35">
+                                    @foreach(posts(null,null)->take(6) as $post)
+                                        <li class="flex-wr-sb-s p-b-22">
+                                            <div class="size-a-8 flex-c-c borad-45 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+                                                <i class="fa fa-eye"></i>
+                                            </div>
+
+                                            <a href="{{route('post',$post->slug)}}" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                                                {{str_limit($post->title,50)}}
+                                            </a>
+                                        </li>
+                                    @endforeach
+
+                                </ul>
+                            </div>
+                            <div class="p-b-35">
+                                <div class="how2 how2-cl4 flex-s-c m-b-30">
+                                    <h3 class="f1-m-2 cl3 tab01-title">
+                                        تاجات
+                                    </h3>
+                                </div>
+
+                                <div class="flex-wr-s-s m-rl--5">
+                                    <a href="{{route('search')}}/?search=ابطال اوروبا"
+                                       class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                        ابطال اوروبا
+                                    </a>
+
+                                    {{--                                <a href="{{route('search')}}/?search=كأس العالم"--}}
+                                    {{--                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">--}}
+                                    {{--                                    كأس العالم--}}
+                                    {{--                                </a>--}}
+
+                                    <a href="{{route('search')}}/?search=الدوري الانجليزي"
+                                       class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                        الانجليزي
+                                    </a>
+
+                                    <a href="{{route('search')}}/?search=الدوري الاسباني"
+                                       class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                        الاسباني
+                                    </a>
+                                    <a href="{{route('search')}}/?search=الدوري الايطالي"
+                                       class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                        الايطالي
+                                    </a>
+
+                                    <a href="{{route('search')}}/?search=الدوري الالماني"
+                                       class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                        الالماني
+                                    </a>
+
+                                    <a href="{{route('search')}}/?search=الدوري الفرنسي"
+                                       class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                        الفرنسي
+                                    </a>
+
+
+                                </div>
                             </div>
 
                         </div>

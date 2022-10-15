@@ -25,6 +25,14 @@
         .error{
             color:#f25555;
         }
+
+        .center {
+            text-align: center;
+        }
+
+        .toast.toast-success{
+            background-color: #00a8fd;
+        }
     </style>
 </head>
 

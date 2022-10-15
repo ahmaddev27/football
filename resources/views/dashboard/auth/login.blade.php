@@ -24,6 +24,17 @@
         .error{
             color:#f25555;
         }
+
+
+
+        .center {
+            text-align: center;
+        }
+
+        .toast.toast-success{
+            background-color: #00a8fd;
+        }
+
     </style>
     <!-- css -->
     <link href="{{asset('dashboard/css/style.css') }}" rel="stylesheet">

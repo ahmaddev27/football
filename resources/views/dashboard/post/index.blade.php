@@ -36,11 +36,23 @@
                             <thead>
 
                             <tr>
-                                <td class="">#</td>
-                                <td class="">العنوان</td>
-                                <td class="w-50">الوصف</td>
-                                <td class="">التصنيف</td>
-                                <td class="">المشاهدات</td>
+                                <th class="w-5">
+
+                                    <input type="checkbox" id="checkAll" >
+
+                                    <a href="#" type="button" class='btn btn-danger btn-sm text-center'
+                                       id='delete_record'
+                                    ><i class="fa fa-trash"></i>
+
+                                    </a>
+
+
+                                </th>
+
+                                <td class="w-25">العنوان</td>
+                                <td class="w-25">الوصف</td>
+                                <td class="w-5">التصنيف</td>
+                                <td class="w-5">المشاهدات</td>
                                 <td class="">خيارات</td>
                             </tr>
 
@@ -69,6 +81,9 @@
         <!-- plugins-jquery -->
         <script src="{{asset('dashboard/js/bootstrap-datatables/dataTables.bootstrap4.min.js')}}"></script>
         {{--Data Table--}}
+
+
+
         <script type="text/javascript">
 
             var url = "{{ route('dashboard.post.list') }}";
@@ -87,12 +102,12 @@
                     },
 
                     columns:[
-                        {data: 'DT_RowIndex', name: 'id',},
-                        {data: 'title', name: 'title'},
-                        {data: 'description', name: 'description'},
-                        {data: 'category', name: 'category',orderable: false, searchable: false},
-                        {data: 'views', name: 'views'},
-                        {data: 'action', name: 'action', orderable: false, searchable: false},
+                        {data: 'check', name: 'checkbox',searchable:false ,orderable: false,"className": "text-center",},
+                        {data: 'title', name: 'title',"className": "text-center",},
+                        {data: 'description',"className": "text-center", name: 'description'},
+                        {data: 'category', name: 'category',orderable: false, searchable: false,"className": "text-center",},
+                        {data: 'views', name: 'views',"className": "text-center",},
+                        {data: 'action', name: 'action', orderable: false, searchable: false,"className": "text-center",},
                     ],
                 });
 
@@ -155,6 +170,89 @@
                         )
                     }
                 });
+            });
+
+        </script>
+
+
+
+
+        {{-- delete all selected--}}
+
+
+        <script type="text/javascript">
+
+
+                $('#checkAll').on('click', function(e) {
+
+                   $(".checkbox").prop('checked',$(this).prop('checked'));
+                });
+
+        </script>
+
+
+        <script>
+
+            $(document).on("click",'#delete_record',function (){
+                var id=[];
+
+                $('.checkbox:checked').each(function (){
+                    id.push($(this).val());
+                });
+
+
+                if (id.length <= 0){
+                    swal(
+                        'حدد عنصر واحد على الاقل',
+                        'لم يتم الحذف ',
+                        'info',
+
+                    )
+
+            } else   swal({
+                    title: 'هل انت متأكد ؟',
+                    text: "لن تكون قادر على استعادته !",
+                    type: 'warning',
+                    confirmButtonText: 'حذف',
+                    confirmButtonColor: '#f4516c',
+                    showCancelButton: true,
+                    cancelButtonText: 'الغاء',
+                    cancelButtonColor: '#343a40',
+                }).then(function(result){
+                    if (result.value) {
+
+                        $.ajax({
+                            data: {
+                                "_token": "{{ csrf_token() }}",
+                                'id': id,
+                            },
+
+                            url:'{{route('dashboard.post.destroyall')}}',
+                            type: "json",
+                            method: "post",
+
+                            success: function (data) {
+                                swal(
+                                    'تم الحذف !',
+                                    data.message,
+                                    'success'
+
+                                )
+
+                                $('#datatable').DataTable().ajax.reload();
+
+
+                            },
+                        })
+
+
+                    }
+              });
+
+
+
+
+
             });
 
         </script>

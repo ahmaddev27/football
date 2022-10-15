@@ -47,6 +47,11 @@ class PostController extends Controller{
 
             })
 
+
+            ->addColumn('check',function ($help){
+                return '<input type="checkbox" class="checkbox" name="item[]" id="checkItem" value="'.$help->id.'">';
+            })
+
             ->editColumn('action', function ($iteam) {
 
 
@@ -61,7 +66,7 @@ class PostController extends Controller{
                         ';
             })
 
-            ->rawColumns(['action','category','description','title'])
+            ->rawColumns(['action','category','description','title','check'])
             ->make(true);
     }
 
@@ -144,11 +149,24 @@ class PostController extends Controller{
     }
 
 
-    public function update($id,Request $request){
-if ($request->championship){
-    $ch=implode(",",$request->championship);
 
-}
+
+    public function update($id,Request $request){
+        $request->validate([
+            'category_id' => 'required',
+            'title' => 'required',
+            'details' => 'required',
+            'description' => 'required',
+            'tags' => 'required',
+//            'image' => 'required',
+//            'championship' => 'required',
+        ]);
+
+        if ($request->championship){
+            $ch=implode(",",$request->championship);
+        }else{
+            $ch=null;
+        }
         $post=Post::findOrFail($id);
 
         if ($request->file('image')){
@@ -185,6 +203,21 @@ if ($request->championship){
             return Redirect()->route('dashboard.post.index')->with(['message' => 'تم تعديل الخبر بنجاح', 'alert-type' => 'success']);
 
         }
+    }
+
+
+    public function destroyall(Request $request)
+    {
+        $ids = $request->id;
+        foreach ($ids as $id){
+            $post=Post::findOrFail($id);
+            if(file_exists(public_path().$post->image)){
+                unlink(public_path().$post->image);
+            }
+            $post->delete();
+        }
+        return response()->json(['message'=>'تم الحذف بنجاح','status'=>true],200);
+
     }
 
 

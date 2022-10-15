@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
         Route::get('/notifications/MarkReadAll', 'MarkReadAll')->name('notifications.MarkReadAll');
         Route::get('/notifications/all','notificationsAll')->name('notifications.all');
         Route::post('/notifications/read', 'read')->name('notification.read');
+        Route::view('/profile', 'dashboard.profile')->name('profile');
+        Route::post('profile/update/{id}', 'updateProfile')->name('profile.update');
 
 
 });
@@ -52,6 +54,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
             Route::post('/store', 'store')->name('store');
             Route::get('/list', 'list')->name('list');
             Route::post('/delete', 'destroy')->name('destroy');
+            Route::post('/destroyall', 'destroyall')->name('destroyall');
             Route::get('/edit/{id}', 'edit')->name('edit');
             Route::POST('/update/{id}', 'update')->name('update');
         });

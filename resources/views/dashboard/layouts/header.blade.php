@@ -23,7 +23,7 @@
             <a class="nav-link top-nav" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <i class="ti-bell"></i>
 
-                <span class="badge badge-pill badge-warning" data-count="{{auth()->user()->unreadNotifications->count()}}" id="notif-count"> {{auth()->user()->unreadNotifications->count()}}</span>
+                <span class="badge badge-pill badge-warning" data-count="{{\Illuminate\Support\Facades\Auth::guard('admin')->user()->unreadNotifications->count()}}" id="notif-count">  {{\Illuminate\Support\Facades\Auth::guard('admin')->user()->unreadNotifications->count()}}</span>
 
                     <span class="badge badge-danger notification-status"> </span>
 
@@ -49,7 +49,7 @@
 
 
 
-            @foreach(auth()->user()->unreadNotifications->take(8) as $notification)
+            @foreach(\Illuminate\Support\Facades\Auth::guard('admin')->user()->unreadNotifications->take(8) as $notification)
                 <a target="_blank" href="/{{$notification->data['url']}}" class="dropdown-item" id="read" data-id="{{$notification->id}}" data-route="{{route('dashboard.notification.read')}}">
                   <small> {{ $notification->data['title'] }}</small>
                     <small class="float-right text-muted time">
@@ -82,14 +82,14 @@
                 <div class="dropdown-header">
                     <div class="media">
                         <div class="media-body">
-                            <h5 class="mt-0 mb-0">{{auth()->user()->name}}</h5>
-                            <span>{{auth()->user()->email}}</span>
+                            <h5 class="mt-0 mb-0">{{\Illuminate\Support\Facades\Auth::guard('admin')->user()->name}}</h5>
+                            <span>{{\Illuminate\Support\Facades\Auth::guard('admin')->user()->email}}</span>
                         </div>
                     </div>
                 </div>
                 <div class="dropdown-divider"></div>
 
-                <a class="dropdown-item" href="#"><i class="text-info ti-settings"></i>البروفايل</a>
+                <a class="dropdown-item" href="{{route('dashboard.profile')}}"><i class="text-info ti-settings"></i>البروفايل</a>
 
                 <a class="dropdown-item" href="{{route('dashboard.logout')}}"><i class="text-danger ti-unlock"></i>تسجيل الخروج</a>
             </div>

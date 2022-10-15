@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('image');
             $table->string('link');
-            $table->integer('views')->nullable();
+            $table->integer('views')->default(0);
             $table->string('championship');
             $table->timestamps();
         });

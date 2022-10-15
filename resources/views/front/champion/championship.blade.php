@@ -208,31 +208,6 @@ ksort($arr, SORT_NUMERIC);
 
                         <!-- Most Popular -->
 
-                        @if(championship($slug)['type']=='1')
-                        <div class="p-b-30">
-                            <div class="how2 how2-cl6 flex-s-c">
-                                <h3 class="f1-m-2 cl18 tab01-title">
-                               اخر اخبار  {{$championship}}
-                                </h3>
-                            </div>
-
-                            <ul class="p-t-35">
-                                @foreach(posts('championship',$championship)->take(6) as $c)
-                                <li class="flex-wr-sb-s p-b-22">
-                                    <div class="size-a-8 flex-c-c borad-45 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                        <i class="fa fa-eye"></i>
-                                    </div>
-
-                                    <a href="{{route('post',$c->slug)}}" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                        {{str_limit($c->title,35)}}
-                                    </a>
-                                </li>
-
-                                @endforeach
-
-                            </ul>
-                        </div>
-                        @endif
 
                         <!--  -->
                         <div class="flex-c-s p-t-8 p-b-65">

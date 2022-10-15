@@ -13,6 +13,7 @@
                 <div class="container p-t-10">
                     <form>
                         <div class="row mb-2 pr-3">
+                            @if(championship($slug)['type']=='0')
                             <div class="col-3">
                                 <select class="form-control custom-select " name="week">
                                     <option value="">جميع الاسابيع</option>
@@ -21,6 +22,7 @@
                                     @endfor
                                 </select>
                             </div>
+                        @endif
                             <div class="col-3">
 
                                 <select class="form-control custom-select " name="team">

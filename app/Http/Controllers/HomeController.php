@@ -11,6 +11,7 @@ use App\Notifications\ContactNotification;
 use App\Notifications\NewPage;
 use Goutte\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
@@ -170,6 +171,11 @@ class HomeController extends Controller
 
     public function post($slug){
         $post=Post::where('slug',$slug)->first();
+        if (!Cookie::get('post_view_'.$post->id)) {
+            Cookie::queue('post_view_' . $post->id, 30);
+            $post->increment('views', 1);
+        }
+
         return view('front.post',['post'=>$post]);
     }
 

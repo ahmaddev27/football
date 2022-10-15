@@ -11,10 +11,11 @@ function championship($id){
         '1141'=>['id'=>1141,'name'=>'الدوري الفرنسي','type'=>'0','logo'=>'https://semedia.filgoal.com/Photos/Championship/Medium/1141.png'],
 
         '1147'=>['id'=>1147,'name'=>'الدوري الايطالي','type'=>'0','logo'=>'https://semedia.filgoal.com/Photos/Championship/Medium/1147.png'],
-        '1139'=>['id'=>1139,'name'=>'الدوري الانجليزي','type'=>'0','logo'=>'https://semedia.filgoal.com/Photos/Championship/Medium/1139.png'],
+        '1139'=>['id'=>1139,'name'=>'الدوري الإنجليزي','type'=>'0','logo'=>'https://semedia.filgoal.com/Photos/Championship/Medium/1139.png'],
         '1146'=>['id'=>1146,'name'=>'الدوري الاسباني','type'=>'0','logo'=>'https://semedia.filgoal.com/Photos/Championship/Medium/1146.png'],
         '1178'=>['id'=>1178,'name'=>'دوري أبطال أوروبا','type'=>'1','logo'=>'https://semedia.filgoal.com/Photos/Championship/medium/1178.png'],
         '1184'=>['id'=>1184,'name'=>'الدوري البرتغالي ','type'=>'0','logo'=>'https://semedia.filgoal.com/Photos/Championship/Medium/1184.png'],
+        '1179'=>['id'=>1179,'name'=>'الدوري الاوروبي ','type'=>'1','logo'=>'https://semedia.filgoal.com/Photos/Championship/Medium/1179.png'],
         '1167'=>['id'=>1167,'name'=>'الدوري السعودي للمحترفين','type'=>'0','logo'=>'https://semedia.filgoal.com/Photos/Championship/Medium/1167.png'],
 
         '1079'=>['id'=>1079,'name'=>'الدوري المصري','type'=>'0','logo'=>'https://semedia.filgoal.com/Photos/Championship/Medium/1079.png'],
@@ -75,12 +76,12 @@ function posts($key,$value){
         return \App\Models\Post::orderBy('views','DESC')->get();
 
     }else{
-        return \App\Models\Post::orderBy('created_at','DESC')->where($key,'like','%'.$value.'%')->get();
+        return \App\Models\Post::orderBy('created_at','DESC')->where($key,$value)->get();
 
     }
 }
 function category($value){
-    return \App\Models\Category::where('name','like','%'.$value.'%')->first()->id ?? 0;
+    return \App\Models\Category::where('name','like','%'.$value.'%')->first()->id ?? null;
 }
 
 

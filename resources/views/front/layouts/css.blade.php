@@ -40,4 +40,10 @@
         margin-bottom: 10px;
     }
 
+
+    .toast.toast-success{
+        background-color: #00a8fd;
+    }
+
+
 </style>

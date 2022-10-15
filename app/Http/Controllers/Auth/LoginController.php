@@ -70,4 +70,16 @@ class LoginController extends Controller
         }
 
     }
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->to('/')
+            ->with(['message' => 'تم تسجيل الخروج بنجاح ', 'alert-type' => 'success']);
+    }
 }

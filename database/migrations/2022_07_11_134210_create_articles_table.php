@@ -20,7 +20,7 @@ return new class extends Migration
             $table->longText('details');
             $table->string('slug');
             $table->string('status')->default('معلق');
-            $table->integer('views')->nullable();
+            $table->integer('views')->default(0);
 
             $table->foreign('user_id')
                 ->references('id')->on('users')

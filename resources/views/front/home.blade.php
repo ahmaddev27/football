@@ -68,6 +68,7 @@
                                     <!-- Item post -->
 
                                     @php $p=posts('category_id',category('اوروبي'))->first() @endphp
+                                    @if($p)
                                     <div class="m-b-30">
                                         <a href="{{route('post',$p->slug)}}" class="wrap-pic-w hov1 trans-03">
                                             <img src="{{asset($p->image)}}" alt="{{$p->title}}">
@@ -91,11 +92,13 @@
                                         </span>
                                         </div>
                                     </div>
+                                        @endif
                                 </div>
 
                                 <div class="col-sm-6 p-r-25 p-r-15-sr991">
                                     <!-- Item post -->
                                     @foreach(posts('category_id',category('اوروبي'))->skip(1)->take(3) as $key=>$x)
+                                        @if($p)
                                     <div class="flex-wr-sb-s m-b-30">
                                         <a href="{{route('post',$x->slug)}}" class="size-w-1 wrap-pic-w hov1 trans-03">
                                             <img src="{{asset($x->image)}}"
@@ -121,6 +124,7 @@
 
 
                                     </div>
+                                        @endif
                                     @endforeach
 
                                 </div>
@@ -147,6 +151,7 @@
 
                             @php $p2=posts('category_id',category('أسيوي'))->first() @endphp
                                 <!-- Main Item post -->
+                                @if($p2)
                                 <div class="m-b-30">
                                     <a href="{{route('post',$p2->slug)}}" class="wrap-pic-w hov1 trans-03">
                                         <img src="{{asset($p2->image)}}" alt="{{$p2->image}}">
@@ -158,8 +163,6 @@
                                                 {{str_limit($p2->title,60)}} </a>
                                         </h5>
 
-
-
                                         <span class="cl8">
                                             <span class="f1-s-3">{{$p2->created_at->format('H:i')}}</span>
 
@@ -170,7 +173,9 @@
                                         </span>
                                     </div>
                                 </div>
+                                @endif
 
+                                @if($p2)
                                 @foreach(posts('category_id',category('أسيوي'))->skip(1)->take(3) as $key=>$x)
                                     <div class="flex-wr-sb-s m-b-30">
                                         <a href="{{route('post',$x->slug)}}" class="size-w-1 wrap-pic-w hov1 trans-03">
@@ -198,6 +203,7 @@
 
                                     </div>
                                 @endforeach
+                                @endif
 
                             </div>
 
@@ -216,6 +222,8 @@
 
 
                             @php $p3=posts('category_id',category('لاتيني'))->first() @endphp
+
+                                @if($p3)
                             <!-- Main Item post -->
                                 <div class="m-b-30">
                                     <a href="{{route('post',$p3->slug)}}" class="wrap-pic-w hov1 trans-03">
@@ -241,6 +249,8 @@
                                     </div>
                                 </div>
 
+                                    @endif
+                                @if($p3)
                                 @foreach(posts('category_id',category('لاتيني'))->skip(1)->take(3) as $key=>$x)
                                     <div class="flex-wr-sb-s m-b-30">
                                         <a href="{{route('post',$x->slug)}}" class="size-w-1 wrap-pic-w hov1 trans-03">
@@ -269,6 +279,7 @@
                                     </div>
                                 @endforeach
 
+                                @endif
                             </div>
 
                         </div>
@@ -295,6 +306,8 @@
                                     <!-- Item post -->
 
                                     @php $p4=posts('category_id',category('افريقي'))->first() @endphp
+
+                                    @if($p4)
                                     <div class="m-b-30">
                                         <a href="{{route('post',$p4->slug)}}" class="wrap-pic-w hov1 trans-03">
                                             <img src="{{asset($p4->image)}}" alt="{{$p4->title}}">
@@ -318,8 +331,10 @@
                                         </span>
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
 
+                                @if($p4)
                                 <div class="col-sm-6 p-r-25 p-r-15-sr991">
                                     <!-- Item post -->
                                     @foreach(posts('category_id',category('افريقي'))->skip(1)->take(3) as $key=>$x)
@@ -351,6 +366,7 @@
                                     @endforeach
 
                                 </div>
+                                @endif
                             </div>
 
 
@@ -553,7 +569,7 @@
                             {{--                                    كأس العالم--}}
                             {{--                                </a>--}}
 
-                            <a href="{{route('search')}}/?search=الدوري الانجليزي"
+                            <a href="{{route('search')}}/?search=الدوري الإنجليزي"
                                class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
                                 الانجليزي
                             </a>
