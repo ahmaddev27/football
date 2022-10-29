@@ -5,7 +5,7 @@
 
 
 
-    <section class="bg0 p-b-140 p-t-10">
+    <section class="bg0  p-t-10">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-10 col-lg-8 p-b-30">
@@ -51,56 +51,11 @@
 
 
 
-                            <!-- Tag -->
-                            <div class="flex-s-s p-t-12 p-b-15">
-								<span class="f1-s-12 cl5 m-r-8">
-								تاجات :
-								</span>
-
-                                @php  $tags=explode(",",$post->tags);@endphp
-
-                                <div class="flex-wr-s-s size-w-0">
-                                    @foreach($tags as $tag)
-
-                                    <a target="_blank" href="{{route('search')}}?search={{$tag}}" class="f1-s-12 cl8 hov-link1 m-r-12">
-                                        {{$tag}}
-                                        @endforeach
-                                    </a>
-
-                                </div>
-                            </div>
-
-                            <!-- Share -->
-                            <div class="flex-s-s">
-								<span class="f1-s-12 cl5 p-t-1 m-r-15">
-                                    مشاركة :
-								</span>
-
-                                <div class="flex-wr-s-s size-w-0">
-                                    <a href="#" class="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-                                        <i class="fab fa-facebook-f m-r-7"></i>
-                                        Facebook
-                                    </a>
-
-                                    <a href="#" class="dis-block f1-s-13 cl0 bg-twitter borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-                                        <i class="fab fa-twitter m-r-7"></i>
-                                        Twitter
-                                    </a>
-
-                                    <a href="#" class="dis-block f1-s-13 cl0 bg-google borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-                                        <i class="fab fa-google-plus-g m-r-7"></i>
-                                        Google+
-                                    </a>
-
-                                    <a href="#" class="dis-block f1-s-13 cl0 bg-pinterest borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-                                        <i class="fab fa-pinterest-p m-r-7"></i>
-                                        Pinterest
-                                    </a>
-                                </div>
-                            </div>
                         </div>
 
                     </div>
+
+
                 </div>
 
                 <!-- Sidebar -->
@@ -131,6 +86,8 @@
 
                         <!-- Popular Posts -->
                         <div class="p-b-30">
+
+
                             <div class="how2 how2-cl4 flex-s-c">
                                 <h3 class="f1-m-2 cl3 tab01-title">
                                     الأكثر مشاهدة
@@ -220,8 +177,73 @@
                     </div>
                 </div>
             </div>
+            <hr>
+
+
         </div>
     </section>
+
+    <section class="bg0 ">
+        <div class="container">
+
+
+                <div class="col-md-10 col-lg-8 p-b-30">
+                    <div class="p-r-10 p-r-0-sr991">
+        <!-- Tag -->
+        <div class="flex-s-s p-t-12 p-b-15">
+								<span class="f1-s-12 cl5 m-r-8">
+								تاجات :
+								</span>
+
+            @php  $tags=explode(",",$post->tags);@endphp
+
+            <div class="flex-wr-s-s size-w-0">
+                @foreach($tags as $tag)
+
+                    <a target="_blank" href="{{route('search')}}?search={{$tag}}" class="f1-s-12 cl8 hov-link1 m-r-12">
+                        {{$tag}}
+                        @endforeach
+                    </a>
+
+            </div>
+        </div>
+
+        <!-- Share -->
+        <div class="flex-s-s">
+								<span class="f1-s-12 cl5 p-t-1 m-r-15">
+                                    مشاركة :
+								</span>
+
+            <div class="flex-wr-s-s size-w-0">
+                <a href="#" class="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
+                    <i class="fab fa-facebook-f m-r-7"></i>
+                    Facebook
+                </a>
+
+                <a href="#" class="dis-block f1-s-13 cl0 bg-twitter borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
+                    <i class="fab fa-twitter m-r-7"></i>
+                    Twitter
+                </a>
+
+                <a href="#" class="dis-block f1-s-13 cl0 bg-google borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
+                    <i class="fab fa-google-plus-g m-r-7"></i>
+                    Google+
+                </a>
+
+                <a href="#" class="dis-block f1-s-13 cl0 bg-pinterest borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
+                    <i class="fab fa-pinterest-p m-r-7"></i>
+                    Pinterest
+                </a>
+            </div>
+        </div>
+
+                    </div>
+
+                    </div>
+                    </div>
+
+    </section>
+
 
 
 @stop

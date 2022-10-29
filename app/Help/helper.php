@@ -18,7 +18,7 @@ function championship($id){
         '1179'=>['id'=>1179,'name'=>'الدوري الاوروبي ','type'=>'1','logo'=>'https://semedia.filgoal.com/Photos/Championship/Medium/1179.png'],
         '1167'=>['id'=>1167,'name'=>'الدوري السعودي للمحترفين','type'=>'0','logo'=>'https://semedia.filgoal.com/Photos/Championship/Medium/1167.png'],
 
-        '1079'=>['id'=>1079,'name'=>'الدوري المصري','type'=>'0','logo'=>'https://semedia.filgoal.com/Photos/Championship/Medium/1079.png'],
+        '1182'=>['id'=>1182,'name'=>'الدوري المصري','type'=>'0','logo'=>'https://semedia.filgoal.com/Photos/Championship/Medium/1182.png'],
         '1144'=>['id'=>1144,'name'=>'دوري نجوم قطر ','type'=>'0','logo'=>'https://semedia.filgoal.com/Photos/Championship/medium/1144.png'],
         '1142'=>['id'=>1142,'name'=>'الدوري الهولندي','type'=>'0','logo'=>'https://semedia.filgoal.com/Photos/Championship/Medium/1142.png'],
 
@@ -76,7 +76,7 @@ function posts($key,$value){
         return \App\Models\Post::orderBy('views','DESC')->get();
 
     }else{
-        return \App\Models\Post::orderBy('created_at','DESC')->where($key,$value)->get();
+        return \App\Models\Post::orderBy('created_at','DESC')->where($key,'like','%'.$value.'%')->get();
 
     }
 }

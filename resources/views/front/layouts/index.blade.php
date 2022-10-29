@@ -17,6 +17,26 @@
 @include('front.layouts.champions-slider')
 
 
+@if ($errors->any())
+
+    <div role="alert" class="m-alert m-alert--icon m-alert--air m-alert--square alert alert-danger alert-dismissible fade show">
+        <div class="m-alert__text">
+            <strong>يوجد خطأ !</strong>
+            <div class="card-body">
+                @foreach ($errors->all() as $error)
+                    <strong>  {{ $error }} </strong> <br>
+                @endforeach
+            </div>
+
+        </div>
+        <div class="m-alert__close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            </button>
+        </div>
+    </div>
+
+@endif
+
 
 
 @yield('main')

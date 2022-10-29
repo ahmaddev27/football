@@ -142,14 +142,14 @@
                                         أسيوي
                                     </h3>
 
-                                    <a href="{{route('search')}}/?search={{(category('أسيوي'))}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+                                    <a href="{{route('search')}}/?search={{(category('اسيوي'))}}" class="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
                                         المزيد
                                         <i class="fs-12 m-l-5 fa fa-caret-left"></i>
                                     </a>
                                 </div>
 
 
-                            @php $p2=posts('category_id',category('أسيوي'))->first() @endphp
+                            @php $p2=posts('category_id',category('اسيوي'))->first() @endphp
                                 <!-- Main Item post -->
                                 @if($p2)
                                 <div class="m-b-30">
@@ -176,7 +176,7 @@
                                 @endif
 
                                 @if($p2)
-                                @foreach(posts('category_id',category('أسيوي'))->skip(1)->take(3) as $key=>$x)
+                                @foreach(posts('category_id',category('اسيوي'))->skip(1)->take(3) as $key=>$x)
                                     <div class="flex-wr-sb-s m-b-30">
                                         <a href="{{route('post',$x->slug)}}" class="size-w-1 wrap-pic-w hov1 trans-03">
                                             <img src="{{asset($x->image)}}"
@@ -526,7 +526,7 @@
 
                                 <div class="p-t-16">
                                     <h5 class="p-b-5">
-                                        <a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
+                                        <a href="{{route('view.article',$article->slug)}}" class="f1-m-3 cl2 hov-cl10 trans-03">
                                             {{$article->title}}
                                         </a>
                                     </h5>
@@ -564,10 +564,10 @@
                                 ابطال اوروبا
                             </a>
 
-                            {{--                                <a href="{{route('search')}}/?search=كأس العالم"--}}
-                            {{--                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">--}}
-                            {{--                                    كأس العالم--}}
-                            {{--                                </a>--}}
+                                                            <a href="{{route('search')}}/?search=كأس العالم"
+                                                               class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
+                                                                كأس العالم
+                                                            </a>
 
                             <a href="{{route('search')}}/?search=الدوري الإنجليزي"
                                class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">

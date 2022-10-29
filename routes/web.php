@@ -26,11 +26,10 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/',  'home')->name('home');
     Route::get('/post/{slug}',  'post')->name('post');
     Route::get('/matches', 'matches')->name('matches');
-
     Route::get('search',  'search')->name('search');
-
     Route::get('pages/{id}',  'pages')->name('pages');
     Route::post('contact',  'contact')->name('contact.store');
+    Route::get('/article/{slug}',  'article')->name('view.article');
 
 
 });
@@ -61,6 +60,7 @@ Route::controller(ProfileController::class)->group(function () {
     Route::get('/profile','profile')->name('profile');
     Route::get('/article','article')->name('article');
     Route::post('/article','articlePost')->name('article');
+    Route::post('/profile','updateProfile')->name('update.profile');
 
 });
 

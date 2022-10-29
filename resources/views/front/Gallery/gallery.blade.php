@@ -63,11 +63,12 @@
                     <div class="row p-t-35">
                         @foreach(galleries('championship',$gallery->championship) as $g)
 
+                            @if($g->id !=$gallery->id)
                         <div class="col-sm-6 p-r-25 p-r-15-sr991">
                             <!-- Item latest -->
                             <div class="m-b-45">
                                 <a href="{{route('gallery',$g->slug)}}" class="wrap-pic-w hov1 trans-03">
-                                    <img src="{{$g->images[0]->image}}" alt="IMG">
+                                    <img width="80px" src="{{$g->images[0]->image}}" alt="IMG">
                                 </a>
 
                                 <div class="p-t-16">
@@ -80,6 +81,7 @@
                                 </div>
                             </div>
                         </div>
+                            @endif
                         @endforeach
                     </div>
 

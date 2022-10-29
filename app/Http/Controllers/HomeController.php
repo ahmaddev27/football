@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\NewNotification;
 use App\Models\Admin;
+use App\Models\Article;
 use App\Models\inbox;
 use App\Models\Page;
 use App\Models\Post;
@@ -11,6 +12,7 @@ use App\Notifications\ContactNotification;
 use App\Notifications\NewPage;
 use Goutte\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Http;
 
@@ -170,13 +172,21 @@ class HomeController extends Controller
 
 
     public function post($slug){
+
         $post=Post::where('slug',$slug)->first();
-        if (!Cookie::get('post_view_'.$post->id)) {
-            Cookie::queue('post_view_' . $post->id, 30);
-            $post->increment('views', 1);
+        if ($post){
+            if (!Cookie::get('post_view_'.$post->id)) {
+                Cookie::queue('post_view_'. $post->id, 30);
+                $post->increment('views', 1);
+
+                return view('front.post',['post'=>$post]);
+        }else{
+                return view('front.post',['post'=>$post]);
         }
 
-        return view('front.post',['post'=>$post]);
+
+        }
+
     }
 
 
@@ -218,5 +228,32 @@ class HomeController extends Controller
         return response()->json(['message' => 'تم ارسال رسالتك بنجاح  سيتم الرد قريبا شكرا لتواصلك معنا', 'status' => true], 200);
 
     }
+
+
+    public function article($slug){
+
+
+        if(Auth::guard('admin')->check()){
+             $article=Article::where('slug',$slug)->first();
+            return view('front.article',['article'=>$article]);
+
+        }else{
+            $article=Article::where('slug',$slug)->first();
+            auth()->id()==$article->user_id?$article=Article::where('slug',$slug)->first(): $article=Article::where('slug',$slug)->where('status','منشور')->first();
+
+            if ($article){
+                if (!Cookie::get('article_view_'.$article->id)) {
+                    Cookie::queue('article_view_' . $article->id, 30);
+                    $article->increment('views', 1);
+                }
+
+                return view('front.article',['article'=>$article]);
+            }else{
+                return  redirect()->route('home');
+            }
+        }
+
+    }
+
 
 }

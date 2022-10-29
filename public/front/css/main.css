@@ -1432,6 +1432,13 @@ span.carousel-control-next-icon {
 }
 
 /*---------------------------------------------*/
+
+.size-a-100 {
+    width: 95%;
+    height: 292px;
+}
+
+
 .size-a-12 {
   width: 100%;
   height: 292px;

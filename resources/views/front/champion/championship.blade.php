@@ -212,7 +212,7 @@ ksort($arr, SORT_NUMERIC);
                         <!--  -->
                         <div class="flex-c-s p-t-8 p-b-65">
                             <a href="#">
-                                <img class="max-w-full" src="{{asset('front/images/banner-02.jpg')}}" alt="IMG">
+                                <img class="max-w-full" src="{{asset(setting('banner_three'))}}" alt="IMG">
                             </a>
                         </div>
 

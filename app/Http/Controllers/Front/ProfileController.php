@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Article;
 use App\Models\Post;
+use App\Models\User;
 use App\Notifications\CreatePost;
 use App\Notifications\NewArticle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -32,6 +34,11 @@ class ProfileController extends Controller
     }
 
     public function articlePost (Request $request){
+        $request->validate([
+            'title' => 'required',
+            'details' => 'required',
+
+        ]);
 
         $article= Article::create([
             'title' => $request->title,
@@ -57,6 +64,27 @@ class ProfileController extends Controller
         event(new NewNotification($data));
 
         return Redirect()->route('home')->with(['message' => 'تمت اضافة المقالة بنجاح سيتم مراجعتها من قبل الادارة', 'alert-type' => 'success']);
+
+    }
+
+    public function updateProfile(Request $request){
+        $user= User::findOrFail(auth()->id());
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => ['confirmed'],
+        ]);
+
+        if ($request->password){
+            $user->update(['password'=> Hash::make($request->password)]+$request->except('password'));
+        }
+        else{
+            $user->update($request->except('password'));
+
+        }
+
+        return Redirect()->route('home')->with(['message' => 'تم حفظ البيانات بنجاح', 'alert-type' => 'success']);
+
 
     }
 
