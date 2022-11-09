@@ -53,15 +53,7 @@
 
                         </a>
                     </div>
-                    <div class="size-h-2 ">
 
-                        <a href="#">
-                            <h5 class="f1-m-7 cl0">
-                                الانتقالات
-                            </h5>
-
-                        </a>
-                    </div>
                     <div class="size-h-2 ">
                         <a href="{{route('matches')}}">
                         <h5 class="f1-m-7 cl0">

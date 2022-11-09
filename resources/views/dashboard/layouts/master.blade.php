@@ -158,6 +158,10 @@
 
 
 
+<!-- charts morris -->
+<script src="{{asset('dashboard/js/morris.init.js')}}"></script>
+
+
 
 <!-- custom -->
 <script src="{{asset('dashboard/js/custom.js')}}"></script>

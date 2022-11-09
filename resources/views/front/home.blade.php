@@ -21,9 +21,9 @@
 
                                     <h6  class="f1-s-10 cl2 hov-cl10 trans-03">
                                     {{$x['team1']}}
-                                     <img style="width:50px" src="{{$x['img1']}}">
+                                     <img loading="lazy" style="width:50px" src="{{$x['img1']}}">
                                          {{ $x['team1_result'] }} : {{ $x['team2_result'] }}
-                                    <img style="width:50px" src="{{$x['img2']}}">{{$x['team2']}}
+                                    <img  loading="lazy" style="width:50px" src="{{$x['img2']}}">{{$x['team2']}}
                                 </h6>
 
 
@@ -71,7 +71,7 @@
                                     @if($p)
                                     <div class="m-b-30">
                                         <a href="{{route('post',$p->slug)}}" class="wrap-pic-w hov1 trans-03">
-                                            <img src="{{asset($p->image)}}" alt="{{$p->title}}">
+                                            <img  loading="lazy" src="{{asset($p->image)}}" alt="{{$p->title}}">
                                         </a>
 
 
@@ -101,7 +101,7 @@
                                         @if($p)
                                     <div class="flex-wr-sb-s m-b-30">
                                         <a href="{{route('post',$x->slug)}}" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                            <img src="{{asset($x->image)}}"
+                                            <img loading="lazy"  src="{{asset($x->image)}}"
                                                  alt="{{$x->title}}">
                                         </a>
 
@@ -154,7 +154,7 @@
                                 @if($p2)
                                 <div class="m-b-30">
                                     <a href="{{route('post',$p2->slug)}}" class="wrap-pic-w hov1 trans-03">
-                                        <img src="{{asset($p2->image)}}" alt="{{$p2->image}}">
+                                        <img loading="lazy" src="{{asset($p2->image)}}" alt="{{$p2->image}}">
                                     </a>
 
                                     <div class="p-t-20">
@@ -179,7 +179,7 @@
                                 @foreach(posts('category_id',category('اسيوي'))->skip(1)->take(3) as $key=>$x)
                                     <div class="flex-wr-sb-s m-b-30">
                                         <a href="{{route('post',$x->slug)}}" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                            <img src="{{asset($x->image)}}"
+                                            <img  loading="lazy" src="{{asset($x->image)}}"
                                                  alt="{{$x->image}}">
                                         </a>
 
@@ -227,7 +227,7 @@
                             <!-- Main Item post -->
                                 <div class="m-b-30">
                                     <a href="{{route('post',$p3->slug)}}" class="wrap-pic-w hov1 trans-03">
-                                        <img src="{{asset($p3->image)}}" alt="{{$p3->title}}">
+                                        <img  loading="lazy" src="{{asset($p3->image)}}" alt="{{$p3->title}}">
                                     </a>
 
                                     <div class="p-t-20">
@@ -254,7 +254,7 @@
                                 @foreach(posts('category_id',category('لاتيني'))->skip(1)->take(3) as $key=>$x)
                                     <div class="flex-wr-sb-s m-b-30">
                                         <a href="{{route('post',$x->slug)}}" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                            <img src="{{asset($x->image)}}"
+                                            <img loading="lazy" src="{{asset($x->image)}}"
                                                  alt="{{$x->title}}">
                                         </a>
 
@@ -310,7 +310,7 @@
                                     @if($p4)
                                     <div class="m-b-30">
                                         <a href="{{route('post',$p4->slug)}}" class="wrap-pic-w hov1 trans-03">
-                                            <img src="{{asset($p4->image)}}" alt="{{$p4->title}}">
+                                            <img loading="lazy"  src="{{asset($p4->image)}}" alt="{{$p4->title}}">
                                         </a>
 
 
@@ -340,7 +340,7 @@
                                     @foreach(posts('category_id',category('افريقي'))->skip(1)->take(3) as $key=>$x)
                                         <div class="flex-wr-sb-s m-b-30">
                                             <a href="{{route('post',$x->slug)}}" class="size-w-1 wrap-pic-w hov1 trans-03">
-                                                <img src="{{asset($x->image)}}"
+                                                <img  loading="lazy" src="{{asset($x->image)}}"
                                                      alt="{{$x->title}}">
                                             </a>
 
@@ -376,7 +376,7 @@
                         <div class=" justify-content-center ">
                             <div class="flex-c-c">
                                 <a href="#">
-                                    <img class="max-w-full" src="{{asset(setting('banner_two'))}}" alt="IMG">
+                                    <img  loading="lazy" class="max-w-full" src="{{asset(setting('banner_two'))}}" alt="IMG">
                                 </a>
                             </div>
                         </div>
@@ -392,7 +392,7 @@
                     <div class="p-l-10 p-rl-0-sr991 p-b-20">
                         <div class="flex-c-s p-t-8 p-b-65">
                             <a href="#">
-                                <img class="max-w-full"  src="{{asset(setting('banner'))}} " alt="IMG">
+                                <img  loading="lazy" class="max-w-full"  src="{{asset(setting('banner'))}} " alt="IMG">
                             </a>
                         </div>
 
@@ -407,7 +407,7 @@
                             </div>
 
                             <ul class="p-t-35">
-                          @foreach(posts(null,null)->take(6) as $post)
+                          @foreach(posts('views',null)->take(6) as $post)
                                 <li class="flex-wr-sb-s p-b-22">
                                     <div class="size-a-8 flex-c-c borad-45 size-a-8 bg9 f1-m-4 cl0 m-b-6">
                                         <i class="fa fa-eye"></i>
@@ -437,7 +437,7 @@
 
                                         @foreach(galleries(null,null) as $key=>$g)
                                             <div class="carousel-item {{$key==0?'active':''}} size-h-4">
-                                                <img class="d-block w-100 wrap-pic-w hov1 "  src="{{asset($g->images[0]->image)}}"
+                                                <img loading="lazy" class="d-block w-100 wrap-pic-w hov1 "  src="{{asset($g->images[0]->image)}}"
                                                     alt="First slide">
 
                                                 <div class="p-tb-16 p-rl-25 bg3">
@@ -519,7 +519,7 @@
                     </div>
                     <div class="row p-t-35">
 
-                        @foreach(articles()->take(10) as $article)
+                        @foreach(articles(null)->take(10) as $article)
                         <div class="col-sm-6 p-r-25 p-r-15-sr991">
                             <!-- Item latest -->
                             <div class="m-b-45">
@@ -559,15 +559,15 @@
                         </div>
 
                         <div class="flex-wr-s-s m-rl--5">
-                            <a href="{{route('search')}}/?search=ابطال اوروبا"
+                            <a href="{{route('search')}}/?search=دوري أبطال أوروبا"
                                class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
                                 ابطال اوروبا
                             </a>
 
-                                                            <a href="{{route('search')}}/?search=كأس العالم"
-                                                               class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                                                                كأس العالم
-                                                            </a>
+                            {{--                                <a href="{{route('search')}}/?search=كأس العالم"--}}
+                            {{--                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">--}}
+                            {{--                                    كأس العالم--}}
+                            {{--                                </a>--}}
 
                             <a href="{{route('search')}}/?search=الدوري الإنجليزي"
                                class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
@@ -616,7 +616,7 @@
                                         @foreach(videos(null,null) as $key=>$v)
 
                                         <div class="carousel-item {{$key==0?'active':''}}">
-                                            <img class="d-block w-100 wrap-pic-w hov1 "  src="{{asset($v->image)}}"
+                                            <img loading="lazy" class="d-block w-100 wrap-pic-w hov1 "  src="{{asset($v->image)}}"
                                                  alt="First slide">
 
                                             <div class="p-tb-16 p-rl-25 bg3">

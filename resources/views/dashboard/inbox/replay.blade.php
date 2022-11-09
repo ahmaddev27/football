@@ -21,9 +21,9 @@
                         <div class="mb-4 d-block">
                             <h4 class="d-inline-block">{{$inbox->title}} </h4>
                             @if($inbox->is_replay==1)
-                            <span class="badge badge-pill badge-secondary ml-3"> تم الرد مسبقا </span>
+                            <span class="badge badge-pill badge-info ml-3"> تم الرد مسبقا </span>
                             @else
-                                <span class="badge badge-pill badge-success ml-3"> رسالة جديدة </span>
+                                <span class="badge badge-pill badge-warning ml-3"> لم يتم الرد  </span>
 
                             @endif
 

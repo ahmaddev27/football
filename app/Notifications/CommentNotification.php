@@ -2,31 +2,28 @@
 
 namespace App\Notifications;
 
-use App\Models\Article;
-use App\Models\inbox;
-use App\Models\Page;
-use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Carbon;
 
-class ContactNotification extends Notification
+class CommentNotification extends Notification
 {
     use Queueable;
 
-    private $inbox,$time,$date;
+    private $comment,$time,$date;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(inbox $inbox)
+    public function __construct(Comment $comment)
     {
-        $this->inbox=$inbox;
+        $this->comment=$comment;
         $this->date = date("Y-m-d", strtotime(Carbon::now()));
         $this->time = date("h:i A", strtotime(Carbon::now()));
     }
-
 
     /**
      * Get the notification's delivery channels.
@@ -45,13 +42,6 @@ class ContactNotification extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-//    public function toMail($notifiable)
-//    {
-//        return (new MailMessage)
-//                    ->line('The introduction to the notification.')
-//                    ->action('Notification Action', url('/'))
-//                    ->line('Thank you for using our application!');
-//    }
 
     /**
      * Get the array representation of the notification.
@@ -63,12 +53,12 @@ class ContactNotification extends Notification
     {
         return [
 
-            'id'=>$this->inbox->id,
+            'id'=>$this->comment->id,
             'time'=>$this->time,
             'date'=>$this->date,
-            'title'=> 'رسالة جديدة : '.str_limit($this->inbox->title,50),
-            'created_at'=> $this->inbox->created_at,
-            'url'=> '../dashboard/inbox/show'.$this->inbox->id,
+            'title'=> 'تعليق جديد : '.str_limit($this->comment->body,50),
+            'created_at'=> $this->comment->created_at,
+            'url'=> '../dashboard/comment',
 
         ];
     }

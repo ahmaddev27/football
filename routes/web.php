@@ -30,6 +30,8 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('pages/{id}',  'pages')->name('pages');
     Route::post('contact',  'contact')->name('contact.store');
     Route::get('/article/{slug}',  'article')->name('view.article');
+    Route::post('/comment',  'comment')->name('comment.store');
+    Route::post('/comment/delete',  'commentdelete')->name('comment.delete');
 
 
 });

@@ -138,7 +138,7 @@
                         <!--  -->
                         <div class="flex-c-s p-t-8 p-b-65">
                             <a href="#">
-                                <img class="max-w-full" src="{{asset('front/images/banner-02.jpg')}}" alt="IMG">
+                                <img class="max-w-full" src="{{asset(setting('banner_three'))}}" alt="IMG">
                             </a>
                         </div>
 
@@ -148,49 +148,29 @@
                                 مكتبة الصور
                             </h3>
                         </div>
+
+
                         <div class="flex-wr-sb-s p-t-20 p-b-15 how-bor2">
                             <div class="flex-c-s">
                                 <div id="carousel2" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img class="d-block w-100" src="{{asset('front/images/post-11.jpg')}}"
-                                                 alt="First slide">
 
-                                            <div class="carousel-caption d-none d-lg-block">
-                                                <h5 class="p-t-300 text-white">
-                                                    <a href="blog-detail-01.html"
-                                                       class=" p-t-12 text-white f1-m-1 cl2 hov-cl10 trans-03 respon2">
-                                                        موسيماني في الأهلي..المبالغة فوق الجميع
-                                                    </a>
-                                                </h5>
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item ">
-                                            <img class="d-block w-100" src="{{asset('front/images/post-11.jpg')}}"
-                                                 alt="First slide">
+                                        @foreach(galleries(null,null) as $key=>$g)
+                                            <div class="carousel-item {{$key==0?'active':''}} size-h-4">
+                                                <img class="d-block w-100 wrap-pic-w hov1 "  src="{{asset($g->images[0]->image)}}"
+                                                     alt="First slide">
 
-                                            <div class="carousel-caption d-none d-lg-block">
-                                                <h5 class="p-t-300 text-white">
-                                                    <a href="blog-detail-01.html"
-                                                       class=" p-t-12 text-white f1-m-1 cl2 hov-cl10 trans-03 respon2">
-                                                        موسيماني في الأهلي..المبالغة فوق الجميع
-                                                    </a>
-                                                </h5>
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item ">
-                                            <img class="d-block w-100" src="{{asset('front/images/post-11.jpg')}}"
-                                                 alt="First slide">
+                                                <div class="p-tb-16 p-rl-25 bg3">
+                                                    <h5 class="p-b-5">
+                                                        <a href="{{route('gallery',$g->slug)}}" class="f1-m-3 cl0 hov-cl10 trans-03">
+                                                            {{str_limit($g->description,80)}}
+                                                        </a>
+                                                    </h5>
 
-                                            <div class="carousel-caption d-none d-lg-block">
-                                                <h5 class="p-t-300 text-white">
-                                                    <a href="blog-detail-01.html"
-                                                       class=" p-t-12 text-white f1-m-1 cl2 hov-cl10 trans-03 respon2">
-                                                        موسيماني في الأهلي..المبالغة فوق الجميع
-                                                    </a>
-                                                </h5>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endforeach
+
 
                                     </div>
                                     <a class="carousel-control-prev" href="#carousel2" role="button" data-slide="prev">
@@ -201,7 +181,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <!-- Subscribe -->
                         <div class="bg10 p-rl-35 p-t-28 p-b-35 m-b-55">

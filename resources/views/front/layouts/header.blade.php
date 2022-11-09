@@ -201,10 +201,6 @@
 
                         </li>
 
-                        {{--                        <li class="main-menu-item">--}}
-                        {{--                            <a href="category-02.html">الانتقالات </a>--}}
-
-                        {{--                        </li>--}}
 
                         <li class="main-menu-item">
                             <a href="{{route('galleries')}}">الصور</a>
@@ -220,141 +216,104 @@
                         </li>
 
 
+
+
+
                         <li class="mega-menu-item">
-                            <a href="category-01.html">البطولات</a>
+                            <a href="#">البطولات </a>
 
                             <div class="sub-mega-menu">
+                                <div class="nav flex-column nav-pills" role="tablist">
+                                    <a class="nav-link active" data-toggle="pill" href="#enter-1" role="tab" aria-expanded="false">الدوريات</a>
+                                    <a class="nav-link" data-toggle="pill" href="#enter-2" role="tab" aria-expanded="false">الكؤوس</a>
+                                    <a class="nav-link " data-toggle="pill" href="#enter-3" role="tab" aria-expanded="true">الجميع</a>
+                                </div>
 
                                 <div class="tab-content">
-                                    <div class="tab-pane show active" id="life-1" role="tabpanel">
+
+
+
+
+                                    <div class="tab-pane active" id="enter-1" role="tabpanel" aria-expanded="false">
                                         <div class="row">
-                                            <div class="col-3">
-                                                <!-- Item post -->
-                                                <div>
-                                                    <a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-                                                        <img src="images/post-25.jpg" alt="IMG">
-                                                    </a>
+                                            @foreach(championship(null) as $i => $value)
+                                               @if($value['type']==0)
+                                                <div class="col-2">
+                                                    <!-- Item post -->
+                                                    <div>
+                                                        <a href="{{route('standing',$i)}}" class="wrap-pic-w hov1 trans-03">
+                                                            <img src="{{@$value['logo']}}" alt="IMG">
+                                                        </a>
 
-                                                    <div class="p-t-10">
-                                                        <h5 class="p-b-5">
-                                                            <a href="blog-detail-01.html"
-                                                               class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                                Donec metus orci, malesuada et lectus vitae
-                                                            </a>
-                                                        </h5>
+                                                        <div class="p-t-10">
+                                                            <h5 class="p-b-5">
+                                                                <a href="{{route('standing',$i)}}"
+                                                                   class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                                    {{$value['name']}}
+                                                                </a>
+                                                            </h5>
 
-                                                        <span class="cl8">
-																<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-																	Music
-																</a>
-
-																<span class="f1-s-3 m-rl-3">
-																	-
-																</span>
-
-																<span class="f1-s-3">
-																	Feb 18
-																</span>
-															</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
 
-                                            <div class="col-3">
-                                                <!-- Item post -->
-                                                <div>
-                                                    <a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-                                                        <img src="images/post-27.jpg" alt="IMG">
-                                                    </a>
 
-                                                    <div class="p-t-10">
-                                                        <h5 class="p-b-5">
-                                                            <a href="blog-detail-01.html"
-                                                               class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                                Donec metus orci, malesuada et lectus vitae
+
+                                    <div class="tab-pane" id="enter-2" role="tabpanel" aria-expanded="false">
+                                        <div class="row">
+                                            @foreach(championship(null) as $i => $value)
+                                                @if($value['type']==1)
+                                                    <div class="col-2">
+                                                        <!-- Item post -->
+                                                        <div>
+                                                            <a href="{{route('standing',$i)}}" class="wrap-pic-w hov1 trans-03">
+                                                                <img src="{{@$value['logo']}}" alt="IMG">
                                                             </a>
-                                                        </h5>
 
-                                                        <span class="cl8">
-																<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-																	Music
-																</a>
+                                                            <div class="p-t-10">
+                                                                <h5 class="p-b-5">
+                                                                    <a href="{{route('standing',$i)}}"
+                                                                       class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                                        {{$value['name']}}
+                                                                    </a>
+                                                                </h5>
 
-																<span class="f1-s-3 m-rl-3">
-																	-
-																</span>
-
-																<span class="f1-s-3">
-																	Jan 20
-																</span>
-															</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
 
-                                            <div class="col-3">
-                                                <!-- Item post -->
-                                                <div>
-                                                    <a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-                                                        <img src="images/post-26.jpg" alt="IMG">
-                                                    </a>
+                                    <div class="tab-pane " id="enter-3" role="tabpanel" aria-expanded="true">
+                                        <div class="row">
+                                            @foreach(championship(null) as $i => $value)
 
-                                                    <div class="p-t-10">
-                                                        <h5 class="p-b-5">
-                                                            <a href="blog-detail-01.html"
-                                                               class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                                Donec metus orci, malesuada et lectus vitae
+                                                    <div class="col-2">
+                                                        <!-- Item post -->
+                                                        <div>
+                                                            <a href="{{route('standing',$i)}}" class="wrap-pic-w hov1 trans-03">
+                                                                <img src="{{@$value['logo']}}" alt="IMG">
                                                             </a>
-                                                        </h5>
 
-                                                        <span class="cl8">
-																<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-																	Music
-																</a>
+                                                            <div class="p-t-10">
+                                                                <h5 class="p-b-5">
+                                                                    <a href="{{route('standing',$i)}}"
+                                                                       class="f1-s-5 cl3 hov-cl10 trans-03">
+                                                                        {{$value['name']}}
+                                                                    </a>
+                                                                </h5>
 
-																<span class="f1-s-3 m-rl-3">
-																	-
-																</span>
-
-																<span class="f1-s-3">
-																	Feb 12
-																</span>
-															</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
 
-                                            <div class="col-3">
-                                                <!-- Item post -->
-                                                <div>
-                                                    <a href="blog-detail-01.html" class="wrap-pic-w hov1 trans-03">
-                                                        <img src="images/post-34.jpg" alt="IMG">
-                                                    </a>
-
-                                                    <div class="p-t-10">
-                                                        <h5 class="p-b-5">
-                                                            <a href="blog-detail-01.html"
-                                                               class="f1-s-5 cl3 hov-cl10 trans-03">
-                                                                Donec metus orci, malesuada et lectus vitae
-                                                            </a>
-                                                        </h5>
-
-                                                        <span class="cl8">
-																<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-																	Music
-																</a>
-
-																<span class="f1-s-3 m-rl-3">
-																	-
-																</span>
-
-																<span class="f1-s-3">
-																	Jan 15
-																</span>
-															</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>

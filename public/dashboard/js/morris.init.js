@@ -4,7 +4,7 @@ Template:  Webmin - Bootstrap 4 & Angular 5 Admin Dashboard Template
 Author: potenzaglobalsolutions.com
 Design and Developed by: potenzaglobalsolutions.com
 
-NOTE: 
+NOTE:
 
 */
 
@@ -14,7 +14,7 @@ NOTE:
 $(document).ready(function() {
  /*************************
      Line chart
-*************************/ 
+*************************/
 if ($('#morris-line').exists()) {
     Morris.Line({
       element: 'morris-line',
@@ -45,7 +45,7 @@ if ($('#morris-line').exists()) {
 }
   /*************************
      Bar chart
-*************************/    
+*************************/
 if ($('#morris-bar').exists()) {
     Morris.Bar({
         element: 'morris-bar',
@@ -72,7 +72,7 @@ if ($('#morris-bar').exists()) {
 
   /*************************
      Area chart
-*************************/   
+*************************/
 if ($('#morris-area').exists()) {
     Morris.Area({
             element: 'morris-area',
@@ -98,7 +98,7 @@ if ($('#morris-area').exists()) {
 }
 /*************************
      Bar chart stacked
-*************************/  
+*************************/
 if ($('#morris-bar-stacked').exists()) {
     Morris.Bar({
             element: 'morris-bar-stacked',
@@ -124,7 +124,7 @@ if ($('#morris-bar-stacked').exists()) {
     }
 /*************************
     Area chart with point
-*************************/  
+*************************/
 if ($('#morris-area-dotted').exists()) {
     Morris.Area({
             element: 'morris-area-dotted',
@@ -153,18 +153,18 @@ if ($('#morris-area-dotted').exists()) {
 }
 /*************************
     Donut chart
-*************************/  
-if ($('#morris-donut').exists()) {
-        Morris.Donut({
-                element: 'morris-donut',
-                data: [
-                    {label: "FINANCIAL", value: 65},
-                    {label: "MARKETS", value: 150},
-                    {label: "ELECTRICITY", value: 120}
-                ],
-                resize: true,
-                colors: ['#84ba3f', '#17a2b8', "#ffc107"]
-            });
-}
+*************************/
+// if ($('#morris-donut').exists()) {
+//         Morris.Donut({
+//                 element: 'morris-donut',
+//                 data: [
+//                     {label: "FINANCIAL", value: 65},
+//                     {label: "MARKETS", value: 150},
+//                     {label: "ELECTRICITY", value: 120}
+//                 ],
+//                 resize: true,
+//                 colors: ['#84ba3f', '#17a2b8', "#ffc107"]
+//             });
+// }
 });
 })(jQuery);

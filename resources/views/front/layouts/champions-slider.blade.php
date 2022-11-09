@@ -67,9 +67,14 @@
             <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
                 <div class="MultiCarousel-inner">
 
+
+                    @php $x=0; @endphp
+
                     @foreach(championship(null) as $i => $value)
 
+                        @if($x<7)
                         <div class="item">
+
                             <div class="pad15" style="background-color:#f1f1f1;">
                                 <a href="{{route('standing',$i)}}" style="color: #1B1C1D;text-decoration: none">
                                     <p class="lead"><img src=" {{@$value['logo']}}"style="width:60px"></p>
@@ -78,7 +83,14 @@
                                 </a>
                             </div>
                         </div>
-                    @endforeach
+                        @endif
+
+                      @php $x++; @endphp
+
+
+                        @endforeach
+
+
 
                 </div>
                 <button class="btn btn-primary rightLst  mr-5 "> > </button>

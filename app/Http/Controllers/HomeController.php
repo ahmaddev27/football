@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Events\NewNotification;
 use App\Models\Admin;
 use App\Models\Article;
+use App\Models\Comment;
 use App\Models\inbox;
 use App\Models\Page;
 use App\Models\Post;
+use App\Notifications\CommentNotification;
 use App\Notifications\ContactNotification;
-use App\Notifications\NewPage;
 use Goutte\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,6 +69,8 @@ class HomeController extends Controller
         $p= Http::get('https://www.filgoal.com/matches/ajaxlist?championshipId='.request()->champion.'&date='. date('Y-m-d'));
         $x= json_decode($p);
         $collection = collect($x);
+
+
 
         $list = [];
         foreach($collection as $item) {
@@ -207,15 +210,13 @@ class HomeController extends Controller
 
     public function contact(Request $request){
 
-
-
       $inbox=inbox::create($request->all());
 
         $data=[
             'title'=>'رسالة جديدة : '.str_limit($inbox->title,50),
             'created_at'=>$inbox->created_at,
             'sound'=>'https://assets.mixkit.co/sfx/download/mixkit-software-interface-start-2574.wav',
-            'url_route'=>'../dashboard/inbox/'.$inbox->id,
+            'url_route'=>'../dashboard/inbox/show'.$inbox->id,
         ];
 
         $admins = Admin::all();
@@ -256,4 +257,41 @@ class HomeController extends Controller
     }
 
 
+    public function comment(Request $request){
+
+
+        $comment= Comment::create([
+           'body'=>$request->comment,
+            'article_id'=>$request->article_id ,
+            'user_id'=>auth()->id(),
+            ]);
+
+
+        $article=Article::where('id',$request->article_id)->first();
+
+        $data=[
+            'title'=>'تم اضافة تعليق جديد : '.str_limit($comment->body,50),
+            'created_at'=>$comment->created_at,
+            'sound'=>'https://assets.mixkit.co/sfx/download/mixkit-software-interface-start-2574.wav',
+            'url_route'=>'../article/'.$article->slug,
+        ];
+
+        $admins = Admin::all();
+        foreach ($admins as $admin) {
+            $admin->notify(new CommentNotification($comment));
+        }
+
+        event(new NewNotification($data));
+
+        return response()->json(['message' => 'تم اضافة التعليق بنجاح شكرا لك', 'status' => true], 200);
+
+
+    }
+
+
+    public function commentdelete(Request $request){
+        $comment=Comment::findOrFail($request->id);
+        $comment->delete();
+        return response()->json(['message'=>'تم الحذف بنجاح','status'=>true],200);
+    }
 }

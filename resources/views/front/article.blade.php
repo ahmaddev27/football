@@ -7,11 +7,11 @@
 
 
         @auth('web')
-        @if(auth('web')->id()==$article->user->id)
-            <div class="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
-                <div class="f2-s-1 p-r-30 m-tb-6">
-                    <p class="breadcrumb-item f1-s-3 cl9">
-                        حالة المقال الخاص بك  :
+            @if(auth('web')->id()==$article->user->id)
+                <div class="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
+                    <div class="f2-s-1 p-r-30 m-tb-6">
+                        <p class="breadcrumb-item f1-s-3 cl9">
+                            حالة المقال الخاص بك  :
 
                         @if($article->status=='منشور')
                             <span class="text-center  size-a-10 bg19 borad-5 f1-s-12 cl0 hov-btn1 ">تم النشر</span>
@@ -26,8 +26,9 @@
 
             </div>
         @endif
+        @endauth
 
-    @else
+                @auth('admin')
             <div class="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
                 <div class="f2-s-1 p-r-30 m-tb-6">
 
@@ -83,13 +84,14 @@
         </div>
 
         <!-- Detail -->
-        <div class="container p-t-82">
+        <div class="container p-t-30">
             <div class="row justify-content-center">
                 <div class="col-md-10 col-lg-8 p-b-100">
                     <div class="p-r-10 p-r-0-sr991">
                         <!-- Blog Detail -->
-                        <div class="p-b-70">
-                            <p class="f1-s-11 cl6 p-b-25">
+                        <div class="bg0">
+
+                        <p class="f1-s-11 cl6 p-b-25">
 
                                 {!! $article->details !!}
 
@@ -131,6 +133,62 @@
                             </div>
                         </div>
 
+
+
+
+                        <div class=" p-t-50">
+
+                        <h4 class="f1-l-4 cl3 p-b-12">
+                               التعليقات
+                            </h4>
+
+
+                            @foreach($article->comments as $commetn)
+                            <div class="size-w-11">
+                                <h6 class="p-b-4">
+                                <a href="" class="f1-s-5 cl3 hov-cl10 trans-03">
+                                    {{$commetn->body}}
+                                </a>
+                            </h6>
+
+                            <span class="cl8 txt-center p-b-24">
+											<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
+												{{$commetn->user->name}}
+											</a>
+
+											<span class="f1-s-3 m-rl-3">
+												-
+											</span>
+
+											<span class="f1-s-3">
+												{{$commetn->created_at->diffforhumans()}}
+											</span>
+
+
+											<span class="f1-s-3 float-l">
+
+                                                @if($commetn->user_id == auth()->id() || auth('admin')->check())
+                                                <button title="حذف" id="delete" route="{{route('comment.delete')}}" model_id="{{$commetn->id}}" class=" float-l size-a-10 bg15 borad-3 f1-s-6 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
+                                              <i class="fa fa-trash"></i>
+                                                </button>
+                                                    @endif
+											</span>
+
+										</span>
+
+                        </div>
+
+                                <span class="f1-s-3 m-rl-3">
+										<hr>
+
+											</span>
+                        @endforeach
+
+                        </div>
+
+
+
+
                     @auth('web')
                         <!-- Leave a comment -->
                         <div>
@@ -140,20 +198,27 @@
 
                             <form id="form">
 
-                                <textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="comment" placeholder="تعليق ..."></textarea>
+                                <textarea  id="comment" class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="comment" placeholder="تعليق ..."></textarea>
 
                                 <button id="submit" class=" float-l size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
                                    نشر التعليق
                                 </button>
+
+                                <input id="article_id" name="article_id" type="hidden" value="{{$article->id}}">
+
                             </form>
 
                         </div>
-
+                        @else
+                            تعليق على المقال؟
+                            <a href="{{route('login')}}" id="" class="  hov-btn1 trans-03 p-rl-15 m-t-10">
+                                 تسجيل الدخول </a>
                         @endauth
                     </div>
                 </div>
 
                 <div class="col-md-10 col-lg-4 p-b-100">
+
                     <div class="p-l-10 p-rl-0-sr991">
                         <!-- Banner -->
                         <div class="flex-c-s">
@@ -162,136 +227,241 @@
                             </a>
                         </div>
                     </div>
+
+
+                    <div class="p-l-10 p-rl-0-sr991 p-t-30">
+                        <div class="how2 how2-cl6 flex-s-c">
+                            <h3 class="f1-m-2 cl18 tab01-title">
+                                المقالات الاكثر قراءة
+                            </h3>
+                        </div>
+
+                        <ul class="p-t-35">
+                            @foreach(articles(null,null)->take(6) as $post)
+                                <li class="flex-wr-sb-s p-b-22">
+                                    <div class="size-a-8 flex-c-c borad-45 size-a-8 bg9 f1-m-4 cl0 m-b-6">
+                                        <i class="fa fa-eye"></i>
+                                    </div>
+
+                                    <a href="{{route('post',$post->slug)}}" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
+                                        {{str_limit($post->title,50)}}
+                                    </a>
+                                </li>
+                            @endforeach
+
+                        </ul>
+                    </div>
+
+                    <div class="how2 how2-cl21 flex-s-c">
+                        <a href="{{route('videos')}}">
+                            <h3 class="f1-m-2 cl21 tab01-title">
+                                مكتبة الفيديوهات
+                            </h3>
+                        </a>
+                    </div>
+                    <div class="flex-wr-sb-s p-t-20 p-b-15 how-bor2">
+                        <div class="flex-c-s">
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+
+                                    @foreach(videos(null,null) as $key=>$v)
+
+                                        <div class="carousel-item {{$key==0?'active':''}}">
+                                            <img class="d-block w-100 wrap-pic-w hov1 "  src="{{asset($v->image)}}"
+                                                 alt="First slide">
+
+                                            <div class="p-tb-16 p-rl-25 bg3">
+                                                <h5 class="p-b-5">
+                                                    <a href="#" class="f1-m-3 cl0 hov-cl10 trans-03">
+
+                                                        <button id="view" class="s-full ab-t-l flex-c-c fs-32 cl0 hov-cl10 trans-03"   data-toggle="modal" data-target="#modal-video-01" model_id="{{$v->id}}">
+                                                            <span class="fab fa-youtube"></span><div></div>
+                                                        </button>
+                                                        {{str_limit($v->title,80)}}
+                                                    </a>
+                                                </h5>
+
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                                </div>
+
                 </div>
             </div>
         </div>
+        </div>
+        </div>
     </section>
 
+
+    <!-- Modal Video 01-->
+    <div class="modal fade" id="modal-video-01" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document" data-dismiss="modal">
+            <div class="close-mo-video-01 trans-0-4" data-dismiss="modal" aria-label="Close">&times;</div>
+
+            <div class="wrap-video-mo-01">
+                <div class="video-mo-01">
+                    <iframe id="link-video" src="" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 @stop
-
-
-
-
-{{--<div class="col-md-10 col-lg-4 p-b-30">--}}
-{{--    <div class="p-l-10 p-rl-0-sr991 p-t-70">--}}
-{{--        <!-- Category -->--}}
-{{--        <div class="p-b-60">--}}
-{{--            <div class="how2 how2-cl4 flex-s-c">--}}
-{{--                <h3 class="f1-m-2 cl3 tab01-title">--}}
-{{--                    التصنيفات--}}
-{{--                </h3>--}}
-{{--            </div>--}}
-
-{{--            <ul class="p-t-35">--}}
-
-{{--                @foreach(categories() as $c)--}}
-{{--                    <li class="how-bor3 p-rl-4">--}}
-{{--                        <a href="{{route('search')}}/?search={{$c}}" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">--}}
-{{--                            {{$c->name}}--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                @endforeach--}}
-
-{{--            </ul>--}}
-{{--        </div>--}}
-
-
-
-{{--        <!-- Popular Posts -->--}}
-{{--        <div class="p-b-30">--}}
-{{--            <div class="how2 how2-cl4 flex-s-c">--}}
-{{--                <h3 class="f1-m-2 cl3 tab01-title">--}}
-{{--                    الأكثر مشاهدة--}}
-{{--                </h3>--}}
-{{--            </div>--}}
-
-{{--            <ul class="p-t-35">--}}
-{{--                @foreach(posts(null,null)->take(3) as $x)--}}
-{{--                    <li class="flex-wr-sb-s p-b-30">--}}
-{{--                        <a href="{{route('post',$x->slug)}}" class="size-w-10 wrap-pic-w hov1 trans-03">--}}
-{{--                            <img src="{{asset($x->image)}}" alt="IMG">--}}
-{{--                        </a>--}}
-
-{{--                        <div class="size-w-11">--}}
-{{--                            <h6 class="p-b-4">--}}
-{{--                                <a href="{{route('post',$x->slug)}}" class="f1-s-5 cl3 hov-cl10 trans-03">--}}
-{{--                                    {{str_limit($x->title,50)}}--}}
-{{--                                </a>--}}
-{{--                            </h6>--}}
-
-{{--                            <span class="cl8 txt-center p-b-24">--}}
-{{--                                            <span class="f1-s-3 " >{{$x->created_at->format('H:i')}}</span>--}}
-
-{{--											<span class="f1-s-3 m-rl-3">--}}
-{{--												---}}
-{{--											</span>--}}
-
-{{--											<span class="f1-s-3">--}}
-{{--                                                {{$x->created_at->diffforhumans()}}--}}
-
-{{--											</span>--}}
-{{--										</span>--}}
-{{--                        </div>--}}
-{{--                    </li>--}}
-
-{{--                @endforeach--}}
-
-{{--            </ul>--}}
-{{--        </div>--}}
-
-{{--        <!-- Tag -->--}}
-{{--        <div class="p-b-55">--}}
-{{--            <div class="how2 how2-cl4 flex-s-c m-b-30">--}}
-{{--                <h3 class="f1-m-2 cl3 tab01-title">--}}
-{{--                    تاجات--}}
-{{--                </h3>--}}
-{{--            </div>--}}
-
-{{--            <div class="flex-wr-s-s m-rl--5">--}}
-{{--                <a href="{{route('search')}}/?search=ابطال اوروبا"--}}
-{{--                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">--}}
-{{--                    ابطال اوروبا--}}
-{{--                </a>--}}
-
-{{--                --}}{{--                                <a href="{{route('search')}}/?search=كأس العالم"--}}
-{{--                --}}{{--                                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">--}}
-{{--                --}}{{--                                    كأس العالم--}}
-{{--                --}}{{--                                </a>--}}
-
-{{--                <a href="{{route('search')}}/?search=الدوري الانجليزي"--}}
-{{--                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">--}}
-{{--                    الانجليزي--}}
-{{--                </a>--}}
-
-{{--                <a href="{{route('search')}}/?search=الدوري الاسباني"--}}
-{{--                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">--}}
-{{--                    الاسباني--}}
-{{--                </a>--}}
-{{--                <a href="{{route('search')}}/?search=الدوري الايطالي"--}}
-{{--                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">--}}
-{{--                    الايطالي--}}
-{{--                </a>--}}
-
-{{--                <a href="{{route('search')}}/?search=الدوري الالماني"--}}
-{{--                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">--}}
-{{--                    الالماني--}}
-{{--                </a>--}}
-
-{{--                <a href="{{route('search')}}/?search=الدوري الفرنسي"--}}
-{{--                   class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">--}}
-{{--                    الفرنسي--}}
-{{--                </a>--}}
-
-
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
 
 
 @push('js')
 
 
 
+    <script>
+        $(document).on('click', '#view', function(){
+            var id = $(this).attr("model_id");
+            $.ajax({
+                url:"{{route('video.ajax.data')}}",
+                method:'get',
+                data:{id:id},
+                dataType:'json',
+                success:function(data)
+                {
+                    $('#link-video').attr('src',data.link);
 
-@endpush
+                }
+            })
+        });
+    </script>
+
+
+    <script src="{{asset('dashboard/js/sweetalert2.all.js')}}"
+            type="text/javascript"></script>
+
+    <script src="{{asset('dashboard/js/jquery-validation/dist/jquery.validate.js')}}"
+            type="text/javascript"></script>
+
+    <script src="{{asset('dashboard/js/jquery-validation/dist/localization/messages_ar.js')}}"
+            type="text/javascript"></script>
+
+
+    <script>
+
+         $(function() {
+             $("#form").validate({
+                 rules: {
+                     comment: {
+                         required: true,
+                     },
+                 },
+
+                 submitHandler: function(form){
+                     let comment = $('#comment').val();
+                     let article_id = $('#article_id').val();
+
+                     $.ajax({
+                         data: {
+                             "_token": "{{ csrf_token() }}",
+                             comment:comment,
+                             article_id:article_id,
+
+
+                         },
+                         url: "{{route('comment.store')}}",
+                         type: "post",
+                         dataType: "JSON",
+
+                         success: function (data) {
+                             swal("تم", data.message, "success");
+
+
+                             setTimeout(function()
+                             {
+                                 window.location.reload();
+                             }, 1000);
+                         },
+
+
+                         error: function (data) {
+                             swal("خطأ!",'فشل ارسال الرسالة البيانات', "error");
+                         },
+                     });
+
+                 }
+             });
+
+         });
+
+     </script>
+
+
+
+
+    <script>
+
+        $(document).on("click",'#delete',function (e){
+            e.preventDefault();
+            var model_id = $(this).attr('model_id');
+            var route = $(this).attr('route');
+
+            swal({
+                title: 'هل انت متأكد من الحذف ?',
+                text: "بمجرد التأكيد سيتم الحذف نهائيا!",
+                type: 'warning',
+                confirmButtonText: 'نعم , احذف',
+                confirmButtonColor: '#ef4343',
+                showCancelButton: true,
+                cancelButtonText: 'لا , الغاء',
+                cancelButtonColor: '#343a40',
+            }).then(function(result){
+                if (result.value) {
+
+                    $.ajax({
+
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            'id': model_id,
+                        },
+                        url: route,
+                        type: "json",
+                        method: "post",
+
+
+                        success: function (data) {
+                            swal(
+                                'تم الحذف !',
+                                data.message,
+                                'success'
+
+                            )
+
+                            setTimeout(function()
+                            {
+                                window.location.reload();
+                            }, 1000);
+
+                        },
+                    })
+
+                } else if (result.dismiss === 'cancel') {
+                    swal(
+                        'تم الالغاء',
+                        'لم يتم الحذف',
+                        'error',
+
+                    )
+                }
+            });
+        });
+
+    </script>
+
+
+
+
+
+
+
+    @endpush
+
+

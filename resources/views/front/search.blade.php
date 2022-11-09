@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="flex-wr-s-s m-rl--5">
-                                <a href="{{route('search')}}/?search=ابطال اوروبا"
+                                <a href="{{route('search')}}/?search=دوري أبطال أوروبا"
                                    class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
                                     ابطال اوروبا
                                 </a>
@@ -79,7 +79,7 @@
                                 {{--                                    كأس العالم--}}
                                 {{--                                </a>--}}
 
-                                <a href="{{route('search')}}/?search=الدوري الانجليزي"
+                                <a href="{{route('search')}}/?search=الدوري الإنجليزي"
                                    class="flex-c-c size-h-2 bo-1-rad-10 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
                                     الانجليزي
                                 </a>

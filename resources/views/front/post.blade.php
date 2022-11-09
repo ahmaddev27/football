@@ -73,7 +73,7 @@
 
                                 @foreach(categories() as $c)
                                 <li class="how-bor3 p-rl-4">
-                                    <a href="{{route('search')}}/?search={{$c}}" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
+                                    <a href="{{route('search')}}/?search={{$c->id}}" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
                                         {{$c->name}}
                                     </a>
                                 </li>
